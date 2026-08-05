@@ -388,7 +388,7 @@ Emergency Route Membership is used for descriptive stratification, corridor scre
 
 ### Estimands and Evidence Chain
 
-The primary accessibility estimand is the scenario change in population-weighted Timely Access Status after combining Dispatch Travel Time and Hospital Transport Time. The primary road estimand is Road Shapley Value for Medical Corridor ID within a scenario-specific screened restoration game. The hospital estimand is Hospital Shapley Value for the Operational Hospital Set. Road-Hospital Shapley Value identifies which screened corridors support timely access to each hospital.
+The primary accessibility estimand is the scenario change in population-weighted Timely Access Status after combining Dispatch Travel Time and Hospital Transport Time. For Critical Medical Corridors, the primary road estimand is an exact path-dependency Road Shapley Value for Medical Corridor ID that allocates each lost mesh population across the disrupted corridors on its deterministic baseline two-stage shortest chain. Full-rerouting direct Monte Carlo Road Shapley Value is retained as a reduced-set validation rather than the prefecture-wide mapping estimator. The hospital estimand is Hospital Shapley Value for the Operational Hospital Set. Road-Hospital Shapley Value identifies which screened corridors support timely access to each hospital.
 
 | research question | identifying contrast or allocation | principal variables | planned evidence | interpretation |
 |---|---|---|---|---|
@@ -404,7 +404,7 @@ The primary accessibility estimand is the scenario change in population-weighted
 - Assumed Speed (km/h) represents routing impedance and excludes dispatch delay, vehicle availability, on-scene time, congestion, and emergency driving behaviour not represented in the data.
 - Hospital Role Weight and Hospital Capacity Weight do not measure clinical emergency capacity. The unweighted Operational Hospital Set is primary; weighted results are labelled sensitivity analyses.
 - Older-population outcomes use their disclosure-group analysis units. They are not imputed to 125 m meshes, so fine-scale total-population and older-population results have different spatial support.
-- Road Shapley Value is conditional on the screened Medical Corridor ID game. A non-converged estimate cannot support a definitive priority ranking.
+- The path-dependency Road Shapley Value is conditional on the deterministic baseline shortest chain and does not represent all coalition-induced rerouting. A ranking remains provisional until the highest-ranked corridors receive full-rerouting validation.
 - Restoration Budget remains non-final because repair cost and duration are unavailable. Planned budget-labelled outputs must be implemented and interpreted using Restoration Scale unless valid cost evidence is added later.
 
 ## 6. Main Estimation Framework
@@ -487,6 +487,26 @@ L_{s,\tau}(m) = \sum_i p_i I_{i,0,\tau}(m)\left[1-I_{i,s,\tau}(m)\right].
 
 Here, \(L_{s,\tau}(m)\) is Population Losing Timely Access relative to baseline scenario \(0\). Older Population Losing Timely Access uses the same expression on disclosure-group analysis units with Population Age 65+, Population Age 75+, or Population Age 85+ replacing \(p_i\). Municipality-level estimates sum the corresponding unit-level quantities by Municipality Name.
 
+The primary specification for Municipal Emergency Accessibility Loss uses the Central disruption scenario and the 30-minute timely-access threshold. Its first panel reports the municipality-specific, Total Population-weighted mean Access Time Increase among 125 m mesh units with finite baseline and Central-scenario paths:
+
+\[
+\overline{\Delta T}_{j,C} =
+\frac{\sum_{i \in \mathcal{F}_{j,C}} p_i [T_{i,C}(1.0)-T_{i,0}(1.0)]}
+{\sum_{i \in \mathcal{F}_{j,C}} p_i}.
+\]
+
+Here, \(j\) indexes the 49 Municipality Code units and Municipality Label supplies the published label, \(C\) denotes the Central disruption scenario, and \(\mathcal{F}_{j,C}\) is the set of municipality \(j\) mesh units with finite Total Emergency Access Time in both the baseline and Central scenarios. This preserves the five Kumamoto City wards as separate planned units rather than merging their shared Municipality Name. Newly disconnected units are excluded from this finite-time mean and remain represented in coverage loss.
+
+The second panel reports the share of baseline-covered Population Age 65+ that loses 30-minute timely access in the Central scenario:
+
+\[
+Q^{65+}_{j,C,30} =
+\frac{\sum_{i \in j} p_i^{65+} I_{i,0,30}(1.0)[1-I_{i,C,30}(1.0)]}
+{\sum_{i \in j} p_i^{65+} I_{i,0,30}(1.0)}.
+\]
+
+Here, \(p_i^{65+}\) is Population Age 65+ on disclosure-group analysis units. Central-scenario disconnections have Timely Access Status equal to zero and therefore enter the numerator when they had baseline 30-minute access. Municipalities with no baseline-covered Population Age 65+ have an undefined rate and are shown as not estimated. Low and High scenarios and the 15- and 45-minute thresholds remain robustness specifications reported in planned tables.
+
 ### 6.4 Hospital Catchments, Alternatives, and Hospital Value
 
 For hospital \(h\), its scenario catchment population is
@@ -504,6 +524,14 @@ K_{i,s,\tau}(m) = \sum_{h \in H_s} \mathbf{1}\left\{D_{i,s}(m)+q_i(m)+d_s(i,h;m)
 \]
 
 Here, \(K_{i,s,\tau}(m)\) is Alternative Hospital Count after excluding Assigned Hospital when timely access is achieved. Negative values are set to zero.
+
+Hospital Catchment and Demand Reallocation uses the Central disruption scenario, \(\tau=30\) minutes, and \(m=1.0\) as its primary specification. Panel a classifies each mesh-demand unit as retaining the same Assigned Hospital, being reassigned to another eligible hospital, losing the complete dispatch-to-demand-to-hospital chain, or lacking a complete chain at baseline. Panel b reports the unweighted total-population catchment change
+
+\[
+\Delta C_{h,C}(1.0) = C_{h,C}(1.0)-C_{h,0}(1.0).
+\]
+
+Here, \(\Delta C_{h,C}(1.0)\) is the Central-versus-baseline Hospital Demand Change for hospital \(h\). Total Beds controls point size descriptively, while Tertiary Emergency Hospital and Rotation Hospital determine marker shape; none of these attributes alters the primary population count. Panel c maps \(K_{i,C,30}(1.0)\). A demand unit without a finite complete chain in Central receives zero alternative hospitals. Low and High disruption scenarios and the 15- and 45-minute thresholds remain robustness specifications for the hospital tables.
 
 The primary hospital analysis assigns equal Hospital Role Weight to every hospital. A declared sensitivity analysis may replace equal weights with Hospital Capacity Weight or an explicitly prespecified role rule, but weighted coverage is reported separately and never substituted for the primary population count. Missing Hospital Capacity Weight is not imputed; the complete-case hospital set and omitted hospitals must be reported.
 
@@ -535,27 +563,61 @@ when \(L_{s,\tau}(m)>0\). Here, \(Q_{s,\tau}(S;m)\) is Coverage Recovery. Margin
 
 The primary portfolio constraint is Restoration Scale. Portfolios are evaluated after restoring \(1\), \(5\), \(10\), \(20\), \(50\), and \(100\) corridors, or all candidates when fewer are available. Restoration Rank is based on the primary Road Shapley Value, while a greedy direct-marginal portfolio is retained as a comparator. No ratio using Restoration Budget is reported without repair-cost or repair-duration evidence.
 
-### 6.6 Direct Monte Carlo Shapley Estimation
+### 6.6 Path-Dependency Shapley Estimation and Direct Validation
 
-For road corridor \(j \in N_s\), direct Monte Carlo Road Shapley Value is
+The primary Critical Medical Corridors estimator uses the deterministic baseline two-stage shortest chain at \(m=1.0\) and \(\tau=30\). Define the scenario-specific set of mesh units losing timely access as
 
 \[
-\widehat{\phi}_{j,s,\tau} = \frac{1}{M}\sum_{r=1}^{M}\left[v_{s,\tau}\left(P_r(j)\cup\{j\};1.0\right)-v_{s,\tau}\left(P_r(j);1.0\right)\right].
+\mathcal{L}_{s,30} = \left\{i : I_{i,0,30}(1.0)=1,\ I_{i,s,30}(1.0)=0\right\}.
 \]
 
-Here, \(\widehat{\phi}_{j,s,\tau}\) is Road Shapley Value, \(M\) is Monte Carlo Permutations, \(r\) indexes a uniformly sampled player ordering, and \(P_r(j)\) is the set of corridors preceding \(j\) in ordering \(r\). The bracketed quantity is the permutation-level marginal contribution \(\Delta_{j,r}\).
+Here, \(\mathcal{L}_{s,30}\) is the set of baseline-timely mesh units that are not timely in disruption scenario \(s\). For each \(i \in \mathcal{L}_{s,30}\), let \(R_{i,s}\) be the nonempty set of scenario-unavailable Medical Corridor ID values traversed by, or supplying an external connector to, its deterministic baseline dispatch-to-demand-to-hospital shortest chain.
+
+The path-dependency Road Shapley Value for corridor \(j\) is
+
+\[
+\phi^{\mathrm{path}}_{j,s,30} = \sum_{i \in \mathcal{L}_{s,30}} p_i \frac{\mathbf{1}\left\{j \in R_{i,s}\right\}}{|R_{i,s}|}.
+\]
+
+Here, \(\phi^{\mathrm{path}}_{j,s,30}\) is the exact Shapley value of the additive fixed-chain unanimity game, \(|R_{i,s}|\) is the number of disrupted corridors required by unit \(i\)'s baseline chain, and all other symbols retain their prior definitions. Deterministic identifier ordering resolves equal-length path ties. Its efficiency identity is
+
+\[
+\sum_{j \in N_s} \phi^{\mathrm{path}}_{j,s,30} = \sum_{i \in \mathcal{L}_{s,30}: |R_{i,s}|>0} p_i.
+\]
+
+Here, \(N_s\) is the set of scenario-unavailable Medical Corridor ID players represented on at least one traced lost-demand chain. Population in \(\mathcal{L}_{s,30}\) with an empty or untraceable \(R_{i,s}\) is reported separately and excluded from the efficiency total. Critical Medical Corridors maps \(\phi^{\mathrm{path}}_{j,s,30}\) for Low, Central, and High scenarios using Total Population. Older-population path values remain a support-consistent robustness analysis rather than being imputed to meshes.
+
+Let \(h_i^0\) be the Assigned Hospital on mesh unit \(i\)'s deterministic baseline hospital-transport chain. The hospital-specific path-dependency Road-Hospital Shapley Value is
+
+\[
+\phi^{\mathrm{path}}_{j,h,s,30} = \sum_{i \in \mathcal{L}_{s,30}} p_i \mathbf{1}\left\{h_i^0=h\right\} \frac{\mathbf{1}\left\{j \in R_{i,s}\right\}}{|R_{i,s}|}.
+\]
+
+Here, \(\phi^{\mathrm{path}}_{j,h,s,30}\) is corridor \(j\)'s path-dependency contribution to the baseline timely-access population assigned to Hospital Node ID \(h\); \(h_i^0\) is the newly defined baseline Assigned Hospital and all other symbols retain their prior definitions. It is an exact hospital decomposition of the primary corridor value:
+
+\[
+\sum_h \phi^{\mathrm{path}}_{j,h,s,30} = \phi^{\mathrm{path}}_{j,s,30}.
+\]
+
+Road-Hospital Shapley Value Matrix computes this quantity for all eligible hospitals and all positive-valued corridors. For readable presentation, it displays the 20 corridors with the largest maximum total path-dependency Road Shapley Value across Low, Central, and High, and the 15 hospitals with the largest summed hospital-specific contribution to those corridors across the three scenarios. The three scenario panels use identical row and column order, a common logarithmic positive-value scale, and white cells for zero. This display screen does not alter the complete underlying decomposition.
+
+The path-dependency estimator measures reliance on the baseline shortest chain; it does not recompute all alternative routes for every restoration coalition. For a reduced validation set drawn from the highest path-dependency values, the full-rerouting direct Monte Carlo estimator remains
+
+\[
+\widehat{\phi}^{\mathrm{direct}}_{j,s,30} = \frac{1}{M}\sum_{r=1}^{M}\left[v_{s,30}\left(P_r(j)\cup\{j\};1.0\right)-v_{s,30}\left(P_r(j);1.0\right)\right].
+\]
+
+Here, \(\widehat{\phi}^{\mathrm{direct}}_{j,s,30}\) is the validation Road Shapley Value, \(M\) is Monte Carlo Permutations, \(r\) indexes a uniformly sampled player ordering, and \(P_r(j)\) is the set of validation corridors preceding \(j\) in ordering \(r\). The bracketed quantity is the permutation-level marginal contribution \(\Delta_{j,r}\).
 
 Its Monte Carlo standard error is
 
 \[
-\widehat{SE}_{j} = \left[\frac{1}{M(M-1)}\sum_{r=1}^{M}\left(\Delta_{j,r}-\widehat{\phi}_{j,s,\tau}\right)^2\right]^{1/2}.
+\widehat{SE}_{j} = \left[\frac{1}{M(M-1)}\sum_{r=1}^{M}\left(\Delta_{j,r}-\widehat{\phi}^{\mathrm{direct}}_{j,s,30}\right)^2\right]^{1/2}.
 \]
 
-Here, \(\widehat{SE}_{j}\) is Shapley Standard Error. Permutations are processed in batches of \(250\), with at least \(2{,}000\) and at most \(20{,}000\) permutations. Shapley Convergence Status is met only when, across three consecutive batches, the top-20 set has Jaccard overlap of at least \(0.90\), every top-20 estimate has relative standard error at most \(0.05\) when nonzero or absolute standard error at most \(0.001\) of baseline covered population when near zero, and no top-20 rank changes by more than two positions. Estimates that reach the cap without meeting all criteria are labelled non-converged and cannot support a definitive top-20 claim.
+Here, \(\widehat{SE}_{j}\) is Shapley Standard Error. Validation permutations are processed in batches of \(250\), with at least \(2{,}000\) and at most \(20{,}000\) permutations. Shapley Convergence Status is met only when, across three consecutive batches, the top-20 validation set has Jaccard overlap of at least \(0.90\), every estimate has relative standard error at most \(0.05\) when nonzero or absolute standard error at most \(0.001\) of baseline covered population when near zero, and no rank changes by more than two positions. Estimates that reach the cap without meeting all criteria are labelled non-converged.
 
-If more than \(2{,}000\) disrupted corridors are available, screening retains at most \(2{,}000\) corridors using the union of positive single-corridor Restored Population, baseline or disrupted shortest-path use, Emergency Route Membership, and direct single-corridor Travel Time Reduction, ordered primarily by Restored Population and then Travel Time Reduction. Road Shapley Value is explicitly interpreted as conditional on this screened game.
-
-Hospital Shapley Value uses the same estimator with hospitals as players and timely coverage from the active hospital coalition as the value function. For Road-Hospital Shapley Value, the value function counts population with timely two-stage access to a specified hospital \(h\), so each road estimate is hospital-specific.
+Hospital Shapley Value continues to use the full coalition estimator with hospitals as players and timely coverage from the active hospital coalition as the value function. The hospital-specific path-dependency estimator above is the scalable primary implementation for Road-Hospital Shapley Value Matrix; reduced-set full-rerouting validation remains required before treating the resulting corridor-hospital associations as definitive restoration priorities.
 
 ### 6.7 Surrogate Validation and Robustness
 
@@ -568,11 +630,11 @@ Required robustness and failure-mode analyses are:
 - Total Population versus Population Age 65+, Population Age 75+, and Population Age 85+ weighting on their valid analysis units.
 - Primary unweighted Operational Hospital Set versus clearly labelled hospital-role and complete-case Hospital Capacity Weight sensitivities.
 - Low, Central, and High disruption severity and separate reporting by Network Component ID and Municipality Name.
-- Medical Corridor ID screening and a constituent Road Edge ID ablation for the highest-ranked corridors.
-- Direct Monte Carlo batch convergence, Shapley Standard Error, Scenario Priority Rank, and Priority Selection Frequency.
+- Medical Corridor ID path tracing and a constituent Road Edge ID ablation for the highest-ranked corridors.
+- Exact path-dependency efficiency, full-rerouting direct-validation convergence, Shapley Standard Error, Scenario Priority Rank, and Priority Selection Frequency.
 - Explicit counts and population totals for failed network snaps, baseline disconnections, and scenario-induced disconnections.
 
-The framework fails to support priority claims if baseline routing is not stable, disruption scenarios yield negligible differences, speed sensitivity reverses principal conclusions, the screened game omits essential connectors, direct Shapley estimates do not converge, or surrogate validation fails when surrogate results are used.
+The framework fails to support priority claims if baseline routing is not stable, disruption scenarios yield negligible differences, speed sensitivity reverses principal conclusions, path tracing omits essential connectors, the path-dependency efficiency identity fails materially, full-rerouting validation contradicts the primary ranking, direct validation does not converge, or surrogate validation fails when surrogate results are used.
 
 ## 7. Analytical Workflow
 
@@ -581,11 +643,11 @@ The framework fails to support priority claims if baseline routing is not stable
 | 1. Validate network and study population | Road Edge ID, From Node ID, To Node ID, Network Component ID, Network Analysis Eligible, Network Snap Distance (m), Candidate Dispatch Base, Eligible Emergency Hospital, Total Population, Population Age 65+ | Graph, component, connector-threshold, and completeness checks in Section 6.1 | Emergency Care Network and Population Demand; Data and Network Descriptive Summary | The complete ambulance chain can be represented on a usable baseline network. | Inconclusive until topology, snap failures, and baseline disconnections are reported. |
 | 2. Estimate baseline two-stage access | Baseline Edge Travel Time (min), Dispatch Base Node ID, Demand Node ID, Hospital Node ID, Dispatch Travel Time, Hospital Transport Time, Total Emergency Access Time | Section 6.2 shortest-path equations with \(m=1.0\) | Baseline Two-Stage Emergency Travel Time; Baseline Emergency Accessibility by Municipality | Baseline geographic access can be decomposed into dispatch and hospital-transport stages. | Supported only if paths are reproducible and disconnected population is acceptably small and explicit. |
 | 3. Construct nested disruption scenarios | Disruption Scenario, Road Available, Hazard Exposure Class, Road State, Emergency Route Membership | Section 5 nested Low, Central, and High rules and Section 6.1 graph construction | Emergency Access under Road Disruption Scenarios; Accessibility Loss by Disruption Scenario | Increasing road stress reduces emergency accessibility through the network mechanism. | Inconclusive; negligible or non-monotone changes weaken the mechanism. |
-| 4. Estimate timely coverage and distributional loss | Timely Access Threshold (min), Timely Access Status, Access Time Increase, Population Losing Timely Access, Older Population Losing Timely Access, Total Population, Population Age 65+, Population Age 75+, Population Age 85+, Municipality Name | Section 6.3 coverage and loss equations | Population Losing Timely Emergency Access; Municipal Emergency Accessibility Loss; Vulnerable Population Accessibility Loss | Road disruption has heterogeneous demographic and municipal consequences. | Supported only when rankings are reasonably stable across thresholds and valid spatial supports. |
-| 5. Estimate hospital catchments and redundancy | Operational Hospital Set, Assigned Hospital, Hospital Catchment Population, Hospital Demand Change, Alternative Hospital Count, Hospital Role Weight, Hospital Capacity Weight | Section 6.4 catchment and alternative-hospital equations | Hospital Catchment and Demand Reallocation; Hospital Catchment Reallocation Estimates | Network disruption reallocates potential hospital demand and changes substitution options. | Partially supported if catchments are stable but role or capacity sensitivity is not. |
+| 4. Estimate timely coverage and distributional loss | Timely Access Threshold (min), Timely Access Status, Access Time Increase, Population Losing Timely Access, Older Population Losing Timely Access, Total Population, Population Age 65+, Population Age 75+, Population Age 85+, Municipality Code, Municipality Name, Municipality Label | Section 6.3 coverage and loss equations; Central-scenario and 30-minute primary municipal-map specification | Population Losing Timely Emergency Access; Municipal Emergency Accessibility Loss; Vulnerable Population Accessibility Loss | Road disruption has heterogeneous demographic and municipal consequences. | Supported only when rankings are reasonably stable across thresholds and valid spatial supports. |
+| 5. Estimate hospital catchments and redundancy | Operational Hospital Set, Assigned Hospital, Hospital Catchment Population, Hospital Demand Change, Alternative Hospital Count, Hospital Role Weight, Hospital Capacity Weight | Section 6.4 catchment and alternative-hospital equations; Central-scenario and 30-minute primary catchment-map specification | Hospital Catchment and Demand Reallocation; Hospital Catchment Reallocation Estimates | Network disruption reallocates potential hospital demand and changes substitution options. | Partially supported if catchments are stable but role or capacity sensitivity is not. |
 | 6. Estimate hospital marginal value | Hospital Shapley Value, Shapley Standard Error, Monte Carlo Permutations, Shapley Convergence Status | Section 6.6 hospital-player Monte Carlo Shapley estimator | Hospital Emergency Accessibility Value | Hospital value depends on location and substitution, not bed count alone. | Supported only for converged estimates robust to Operational Hospital Set rules. |
-| 7. Screen medical-corridor players | Medical Corridor ID, Road Edge ID, Emergency Route Membership, Hazard Exposure Class, Restored Population, Travel Time Reduction | Section 6.6 candidate-screening rule, capped at 2,000 players | Data and Network Descriptive Summary | A computationally feasible road game retains corridors with plausible emergency-access relevance. | Partially supported because all later road values are conditional on the screen. |
-| 8. Estimate road and road-hospital contributions | Road Shapley Value, Road-Hospital Shapley Value, Shapley Standard Error, Shapley Convergence Status, Hospital Name | Section 6.6 road and hospital-specific value functions | Critical Medical Corridors; Road-Hospital Shapley Value Matrix; Priority Medical Roads | Complementary and substitutable roads have scenario- and hospital-specific marginal value. | Supported only for converged direct estimates; otherwise inconclusive. |
+| 7. Trace medical-corridor dependencies | Medical Corridor ID, Road Edge ID, Emergency Route Membership, Hazard Exposure Class, Timely Access Status, Total Population | Section 6.6 deterministic baseline-chain tracing and lost-demand set | Data and Network Descriptive Summary | Baseline emergency chains reveal which scenario-unavailable corridors block timely access. | Partially supported because path dependence is conditional on the deterministic baseline chain. |
+| 8. Estimate road and road-hospital contributions | Road Shapley Value, Road-Hospital Shapley Value, Shapley Standard Error, Shapley Convergence Status, Hospital Name | Section 6.6 exact path-dependency Road Shapley estimator, exact baseline-Assigned-Hospital decomposition, and reduced-set full-rerouting validation | Critical Medical Corridors; Road-Hospital Shapley Value Matrix; Priority Medical Roads | Complementary baseline-chain dependencies and scenario-specific corridor-to-hospital support can be identified, subject to rerouting validation. | The mapped path-dependency values and their hospital decomposition are analytical; definitive priority claims require supportive full-rerouting validation. |
 | 9. Build and compare restoration portfolios | Restoration Scale, Restored Population, Restored Older Population, Travel Time Reduction, Coverage Recovery, Marginal Restoration Benefit, Restoration Rank, Connected Hospital Count, Network Redundancy Value | Section 6.5 restoration value, capped-time, and coverage-recovery equations | Emergency Access Recovery by Restoration Budget; Restoration Portfolio Performance | Ordered restoration recovers emergency coverage and can reveal diminishing returns. | Supports scale-based prioritization only; cost-effectiveness remains unsupported. |
 | 10. Evaluate robustness and surrogate scaling | Scenario Priority Rank, Priority Selection Frequency, Surrogate Prediction Error, Direct-Surrogate Rank Difference, Shapley Standard Error | Section 6.7 sensitivity and surrogate acceptance rules | Road Priority Robustness across Scenarios | Priority corridors remain stable across plausible assumptions, and a surrogate is usable only when it reproduces direct results. | Supported only if direct convergence and both surrogate thresholds are met. |
 
@@ -595,7 +657,7 @@ The framework fails to support priority claims if baseline routing is not stable
 2. Scenario checkpoint: treat the disruption mechanism as weak if nested scenarios do not produce ordered changes in Total Emergency Access Time or timely coverage.
 3. Equity checkpoint: report total- and older-population results on their own valid analysis units; do not claim fine-grid older-population precision.
 4. Hospital checkpoint: retain unweighted coverage as primary if Hospital Capacity Weight or hospital-role sensitivity materially changes rankings.
-5. Shapley checkpoint: do not publish definitive corridor or hospital ranks when Shapley Convergence Status is not met.
+5. Shapley checkpoint: verify the path-dependency efficiency identity and do not publish definitive corridor ranks when reduced-set full-rerouting validation contradicts the mapped ordering or fails to converge; do not publish definitive hospital ranks when Shapley Convergence Status is not met.
 6. Surrogate checkpoint: do not use surrogate results for scaling when Surrogate Prediction Error or Direct-Surrogate Rank Difference fails the Section 6.7 rule.
 7. Decision checkpoint: report Restoration Scale as the actionable constraint; defer monetary or time-budget claims until Restoration Budget becomes a final, evidence-supported variable.
 
@@ -605,13 +667,13 @@ The framework fails to support priority claims if baseline routing is not stable
 
 | title | what it expresses | figure type | subpanels | key variables | status |
 |---|---|---|---|---|---|
-| Emergency Care Network and Population Demand | Shows the spatial structure of population demand, candidate ambulance dispatch bases, eligible emergency hospitals, and the road network. | map | 3 | Geometry, Total Population, Population Age 65+, Candidate Dispatch Base, Eligible Emergency Hospital, Emergency Road Class | pending |
-| Baseline Two-Stage Emergency Travel Time | Decomposes baseline ambulance dispatch, hospital transport, and total two-stage emergency travel time. | map | 3 | Geometry, Candidate Dispatch Base, Eligible Emergency Hospital, Road Type, Width Category | pending |
-| Emergency Access under Road Disruption Scenarios | Compares total emergency travel time under baseline, Low, Central, and High road-disruption scenarios. | map | 4 | Geometry, Road State, Hazard Type, Warning Zone Class | pending |
-| Population Losing Timely Emergency Access | Compares total and older populations losing 15-, 30-, and 45-minute emergency access across disruption scenarios. | stacked_bar | 3 | Total Population, Population Age 65+, Population Age 75+ | pending |
-| Municipal Emergency Accessibility Loss | Shows municipal variation in emergency travel-time increases and population coverage losses. | map | 2 | Geometry, Municipality Name, Total Population, Population Age 65+ | pending |
-| Hospital Catchment and Demand Reallocation | Shows changes in hospital catchments, potential demand, and alternative-hospital availability after road disruption. | map | 3 | Geometry, Hospital Name, Eligible Emergency Hospital, Tertiary Emergency Hospital, Rotation Hospital, Total Beds | pending |
-| Critical Medical Corridors | Maps scenario-specific Road Shapley Value estimates for corridors that preserve fire-station-to-incident-to-hospital connectivity and population emergency coverage. | map | 3 | Geometry, Route Name, Emergency Road Class, Road Type, Total Population, Population Age 65+ | pending |
+| Emergency Care Network and Population Demand | Shows the spatial structure of population demand, candidate ambulance dispatch bases, eligible emergency hospitals, and the road network. | map | 3 | Geometry, Total Population, Population Age 65+, Candidate Dispatch Base, Eligible Emergency Hospital, Emergency Road Class | done |
+| Baseline Two-Stage Emergency Travel Time | Decomposes baseline ambulance dispatch, hospital transport, and total two-stage emergency travel time. | map | 3 | Geometry, Candidate Dispatch Base, Eligible Emergency Hospital, Road Type, Width Category | done |
+| Emergency Access under Road Disruption Scenarios | Compares total emergency travel time under baseline, Low, Central, and High road-disruption scenarios. | map | 4 | Geometry, Road State, Hazard Type, Warning Zone Class | done |
+| Population Losing Timely Emergency Access | Compares total and older populations losing 15-, 30-, and 45-minute emergency access across disruption scenarios. | stacked_bar | 3 | Total Population, Population Age 65+, Population Age 75+ | done |
+| Municipal Emergency Accessibility Loss | Maps Central-scenario variation across 49 Municipality Code units in Total Population-weighted mean access-time increase and the share of baseline-covered Population Age 65+ losing 30-minute access, using Municipality Label for display. | map | 2 | Geometry, Municipality Code, Municipality Name, Municipality Label, Total Population, Population Age 65+, Access Time Increase, Timely Access Status | done |
+| Hospital Catchment and Demand Reallocation | Maps Central-scenario mesh-demand units retaining, changing, or losing their Assigned Hospital; hospital-level Total Population catchment change from baseline; and the number of other eligible hospitals within 30-minute complete two-stage access. | map | 3 | Geometry, Assigned Hospital, Hospital Catchment Population, Hospital Demand Change, Alternative Hospital Count, Eligible Emergency Hospital, Tertiary Emergency Hospital, Rotation Hospital, Total Beds | done |
+| Critical Medical Corridors | Maps scenario-specific Road Shapley Value estimates for corridors that preserve fire-station-to-incident-to-hospital connectivity and population emergency coverage. | map | 3 | Geometry, Route Name, Emergency Road Class, Road Type, Total Population, Population Age 65+ | done |
 | Road-Hospital Shapley Value Matrix | Shows the marginal contribution of each candidate medical corridor to the emergency accessibility value of each eligible hospital under Low, Central, and High disruption scenarios. | heatmap | 3 | Route Name, Hospital Name, Eligible Emergency Hospital, Total Population, Population Age 65+ | pending |
 | Emergency Access Recovery by Restoration Budget | Compares cumulative emergency-coverage recovery and travel-time benefits across restoration scales or budgets. | line | 2 | Total Population, Population Age 65+ | pending |
 
