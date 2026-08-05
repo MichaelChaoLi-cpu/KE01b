@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Road-Hospital Shapley Value Matrix.
 
-Plan: Compare hospital-specific corridor path-dependency values across disruption scenarios.
-Framework: Section 6.6 exact baseline-Assigned-Hospital decomposition and Section 7 Step 8.
+Plan: Map total corridor values and compare their hospital-specific decompositions.
+Framework: Section 6.6 exact path and hospital decomposition and Section 7 Step 8.
 """
 
 from __future__ import annotations
@@ -18,8 +18,11 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from matplotlib.colors import LinearSegmentedColormap, LogNorm
+from matplotlib.lines import Line2D
 from matplotlib.ticker import LogFormatter, LogLocator
 
+from emergency_routing import scenario_availability_mask
+from figure_critical_medical_corridors import corridor_width, style_map
 from medical_corridor_path_shapley import (
     PathShapleyResult,
     build_baseline_path_context,
@@ -38,6 +41,7 @@ OUTPUT = (
 )
 FIGURE_DPI = 300
 MAP_CRS = "EPSG:6670"
+GEOGRAPHIC_CRS = "EPSG:6668"
 PRIMARY_THRESHOLD = 30
 SCENARIOS = ["Low", "Central", "High"]
 ROAD_VALUE = "Path-Dependency Road Shapley Value"
@@ -183,64 +187,34 @@ def modal_nonmissing(values: pd.Series) -> str | None:
 
 def corridor_labels(selected_corridors: list[str]) -> dict[str, str]:
     """Build concise route-first labels for selected medical corridors."""
-    edges = gpd.read_parquet(
+    edges = pd.read_parquet(
         PROCESSED / "kumamoto_routable_road_edges_preprocessed.parquet",
         columns=[
             "Medical Corridor ID",
+            "Route Name",
             "Emergency Route Membership",
             "Road Category",
-            "Geometry",
         ],
     )
-    edges = edges.loc[edges["Medical Corridor ID"].isin(selected_corridors)].to_crs(
-        MAP_CRS
-    )
+    edges = edges.loc[edges["Medical Corridor ID"].isin(selected_corridors)]
     attributes = (
         edges.groupby("Medical Corridor ID", sort=False)
         .agg(
             {
+                "Route Name": first_nonmissing,
                 "Emergency Route Membership": first_nonmissing,
                 "Road Category": modal_nonmissing,
             }
         )
         .reset_index()
     )
-    dissolved = edges[["Medical Corridor ID", "Geometry"]].dissolve(
-        by="Medical Corridor ID", as_index=False
-    )
-
-    routes = gpd.read_parquet(
-        PROCESSED / "kumamoto_emergency_transport_roads_2024_preprocessed.parquet",
-        columns=["Route Name", "Geometry"],
-    ).to_crs(MAP_CRS)
-    routes["Route Name"] = routes["Route Name"].map(valid_text)
-    routes = routes.loc[routes["Route Name"].notna()].copy()
-    nearest = gpd.sjoin_nearest(
-        dissolved,
-        routes,
-        how="left",
-        max_distance=40.0,
-        distance_col="_Route Distance",
-    )
-    nearest = (
-        nearest.sort_values(
-            ["Medical Corridor ID", "_Route Distance", "Route Name"],
-            na_position="last",
-            kind="stable",
-        )
-        .drop_duplicates("Medical Corridor ID", keep="first")
-        [["Medical Corridor ID", "Route Name"]]
-    )
-    attributes = attributes.merge(
-        nearest, on="Medical Corridor ID", how="left", validate="one_to_one"
-    )
 
     labels: dict[str, str] = {}
     for row in attributes.itertuples(index=False):
         corridor_id = str(row[0])
-        emergency_membership = row[1]
-        road_category = row[2]
-        route_name = row[3]
+        route_name = valid_text(row[1])
+        emergency_membership = valid_text(row[2])
+        road_category = valid_text(row[3])
         descriptor = None
         translated_route = english_route_name(route_name)
         if translated_route is not None:
@@ -370,10 +344,94 @@ def main() -> None:
     if selected_positive.size == 0:
         raise RuntimeError("No positive Road-Hospital Shapley values in the display set")
 
-    hospitals = pd.read_parquet(
-        PROCESSED / "kumamoto_hospital_network_access_preprocessed.parquet",
-        columns=["Hospital Node ID", "Facility Name", "Eligible Emergency Hospital"],
+    roads = gpd.read_parquet(
+        PROCESSED / "kumamoto_routable_road_edges_preprocessed.parquet",
+        columns=[
+            "Medical Corridor ID",
+            "Road Category",
+            "Width Category",
+            "Road Available",
+            "Network Analysis Eligible",
+            "Hazard Exposure Class",
+            "Road State",
+            "Geometry",
+        ],
+    ).to_crs(MAP_CRS)
+    municipalities = gpd.read_parquet(
+        PROCESSED / "kumamoto_administrative_areas_preprocessed.parquet",
+        columns=["Municipality Code", "Geometry"],
+    ).to_crs(MAP_CRS)
+    major_mask = roads["Road Category"].isin(
+        {"National Expressway or Equivalent", "National Highway", "Prefectural Road"}
+    ) | roads["Width Category"].isin(
+        {"5.5 to Under 13 m", "13 to Under 19.5 m", "19.5 m or More"}
     )
+    selected_geometry = roads.loc[
+        roads["Medical Corridor ID"].isin(selected_corridors),
+        ["Medical Corridor ID", "Geometry"],
+    ].dissolve(by="Medical Corridor ID", as_index=False)
+    if len(selected_geometry) != len(selected_corridors):
+        raise RuntimeError(
+            "Not every displayed Medical Corridor ID has map geometry: "
+            f"{len(selected_geometry)} of {len(selected_corridors)}"
+        )
+    selected_map_positive = np.concatenate(
+        [
+            result.values.loc[
+                result.values["Medical Corridor ID"].isin(selected_corridors), ROAD_VALUE
+            ].to_numpy(dtype=float)
+            for result in results
+        ]
+    )
+    selected_map_positive = selected_map_positive[selected_map_positive > 0]
+    if selected_map_positive.size == 0:
+        raise RuntimeError("No positive total Road Shapley values in the display set")
+    map_minimum = float(selected_map_positive.min())
+    map_maximum = float(selected_map_positive.max())
+    map_norm = LogNorm(vmin=map_minimum, vmax=map_maximum)
+    map_panels = []
+    for result in results:
+        available = scenario_availability_mask(roads, result.scenario)
+        available_all = roads.loc[available]
+        available_major = roads.loc[available & major_mask]
+        unavailable = roads.loc[
+            roads["Network Analysis Eligible"].fillna(False) & ~available
+        ]
+        selected = selected_geometry.merge(
+            result.values[["Medical Corridor ID", ROAD_VALUE]],
+            on="Medical Corridor ID",
+            how="left",
+            validate="one_to_one",
+        )
+        selected[ROAD_VALUE] = selected[ROAD_VALUE].fillna(0.0)
+        positive_selected = selected.loc[selected[ROAD_VALUE].gt(0)].copy()
+        zero_selected = selected.loc[selected[ROAD_VALUE].le(0)].copy()
+        if len(positive_selected):
+            positive_selected["Line Width"] = corridor_width(
+                positive_selected[ROAD_VALUE].to_numpy(dtype=float),
+                map_minimum,
+                map_maximum,
+            )
+        map_panels.append(
+            (
+                result,
+                available_all,
+                available_major,
+                unavailable,
+                positive_selected,
+                zero_selected,
+            )
+        )
+
+    hospitals = gpd.read_parquet(
+        PROCESSED / "kumamoto_hospital_network_access_preprocessed.parquet",
+        columns=[
+            "Hospital Node ID",
+            "Facility Name",
+            "Eligible Emergency Hospital",
+            "Geometry",
+        ],
+    ).to_crs(MAP_CRS)
     eligible_hospital_count = int(hospitals["Eligible Emergency Hospital"].fillna(False).sum())
     hospital_names = hospital_english_names(
         hospitals[["Hospital Node ID", "Facility Name"]]
@@ -382,35 +440,212 @@ def main() -> None:
     if missing_names:
         raise RuntimeError(f"Missing names for selected hospitals: {missing_names}")
     corridor_names = corridor_labels(selected_corridors)
+    displayed_hospitals = hospitals.loc[
+        hospitals["Hospital Node ID"].astype(str).isin(selected_hospitals)
+    ]
 
     sns.set_theme(context="paper", style="white", font_scale=0.95)
     mpl.rcParams["font.family"] = ["Arial", "DejaVu Sans"]
-    color_map = LinearSegmentedColormap.from_list(
+    heat_color_map = LinearSegmentedColormap.from_list(
         "blue_green_yellow_red",
         ["#2166ac", "#1a9850", "#fee08b", "#d73027"],
         N=256,
     )
-    color_map.set_bad("white")
-    color_norm = LogNorm(
+    heat_color_map.set_bad("white")
+    heat_norm = LogNorm(
         vmin=float(selected_positive.min()),
         vmax=float(selected_positive.max()),
     )
 
-    fig = plt.figure(figsize=(24.0, 10.4), constrained_layout=True)
-    grid = fig.add_gridspec(2, 3, height_ratios=[1.0, 0.045], hspace=0.03, wspace=0.10)
-    axes = np.array([fig.add_subplot(grid[0, column]) for column in range(3)])
-    colorbar_ax = fig.add_subplot(grid[1, :])
+    bounds = tuple(municipalities.total_bounds)
+    geographic_bounds = tuple(municipalities.to_crs(GEOGRAPHIC_CRS).total_bounds)
+    fig = plt.figure(figsize=(24.0, 17.2), constrained_layout=True)
+    grid = fig.add_gridspec(
+        4,
+        3,
+        height_ratios=[0.82, 0.038, 1.0, 0.042],
+        hspace=0.055,
+        wspace=0.10,
+    )
+    map_axes = np.array([fig.add_subplot(grid[0, column]) for column in range(3)])
+    map_colorbar_ax = fig.add_subplot(grid[1, :])
+    heat_axes = np.array([fig.add_subplot(grid[2, column]) for column in range(3)])
+    heat_colorbar_ax = fig.add_subplot(grid[3, :])
+
+    for panel_label, ax, panel in zip(
+        "abc", map_axes, map_panels, strict=True
+    ):
+        (
+            result,
+            available_all,
+            available_major,
+            unavailable,
+            positive_selected,
+            zero_selected,
+        ) = panel
+        municipalities.plot(
+            ax=ax,
+            color="#f3f2ee",
+            edgecolor="#62696d",
+            linewidth=0.32,
+            zorder=1,
+        )
+        available_all.plot(
+            ax=ax,
+            color="#a6dba0",
+            linewidth=0.08,
+            alpha=0.42,
+            rasterized=True,
+            zorder=2.7,
+        )
+        available_major.plot(
+            ax=ax,
+            color="#1b7837",
+            linewidth=0.24,
+            alpha=0.88,
+            rasterized=True,
+            zorder=3,
+        )
+        unavailable.plot(
+            ax=ax,
+            color="#0072b2",
+            linewidth=0.30,
+            alpha=0.88,
+            rasterized=True,
+            zorder=4,
+        )
+        if len(zero_selected):
+            zero_selected.plot(
+                ax=ax,
+                color="white",
+                linewidth=1.55,
+                alpha=0.96,
+                zorder=5.8,
+            )
+            zero_selected.plot(
+                ax=ax,
+                color="#4d4d4d",
+                linewidth=0.82,
+                linestyle=(0, (3.0, 2.0)),
+                alpha=0.96,
+                zorder=6,
+            )
+        if len(positive_selected):
+            positive_selected.plot(
+                ax=ax,
+                color="white",
+                linewidth=positive_selected["Line Width"] + 0.95,
+                alpha=0.98,
+                zorder=6.5,
+            )
+            positive_selected.plot(
+                ax=ax,
+                column=ROAD_VALUE,
+                cmap="YlOrRd",
+                norm=map_norm,
+                linewidth=positive_selected["Line Width"],
+                alpha=0.99,
+                zorder=7,
+            )
+        displayed_hospitals.plot(
+            ax=ax,
+            marker="^",
+            color="#762a83",
+            edgecolor="white",
+            linewidth=0.38,
+            markersize=15,
+            alpha=0.98,
+            zorder=8,
+        )
+        municipalities.boundary.plot(
+            ax=ax,
+            color="#424a4f",
+            linewidth=0.38,
+            alpha=0.90,
+            zorder=9,
+        )
+        style_map(ax, bounds, geographic_bounds)
+        ax.set_xlabel(
+            f"{result.scenario} scenario — total corridor value across all hospitals",
+            fontsize=9.0,
+            labelpad=14,
+        )
+        ax.text(
+            -0.04,
+            1.02,
+            panel_label,
+            transform=ax.transAxes,
+            fontsize=12,
+            fontweight="bold",
+            va="top",
+            ha="left",
+            clip_on=False,
+        )
+
+    map_axes[0].legend(
+        handles=[
+            Line2D(
+                [0], [0], color="#a6dba0", linewidth=1.2,
+                label="Assumed available road"
+            ),
+            Line2D(
+                [0], [0], color="#1b7837", linewidth=1.5,
+                label="Assumed available major road"
+            ),
+            Line2D(
+                [0], [0], color="#0072b2", linewidth=1.4,
+                label="Assumed unavailable road"
+            ),
+            Line2D(
+                [0], [0], color="#4d4d4d", linewidth=1.2,
+                linestyle=(0, (3.0, 2.0)), label="Displayed corridor with zero value"
+            ),
+            Line2D(
+                [0], [0], color="#d7301f", linewidth=2.6,
+                label="Displayed corridor with positive value"
+            ),
+            Line2D(
+                [0], [0], marker="^", color="none", markerfacecolor="#762a83",
+                markeredgecolor="white", markersize=6, label="Displayed hospital"
+            ),
+        ],
+        loc="upper left",
+        bbox_to_anchor=(0.015, 0.985),
+        borderaxespad=0.0,
+        frameon=True,
+        framealpha=0.94,
+        facecolor="white",
+        edgecolor="#bdbdbd",
+        fontsize=6.7,
+    )
+
+    map_scalar = mpl.cm.ScalarMappable(norm=map_norm, cmap="YlOrRd")
+    map_colorbar = fig.colorbar(
+        map_scalar,
+        cax=map_colorbar_ax,
+        orientation="horizontal",
+        extend="neither",
+    )
+    map_colorbar.locator = LogLocator(base=10, subs=(1.0, 2.0, 5.0))
+    map_colorbar.formatter = LogFormatter(base=10, labelOnlyBase=False)
+    map_colorbar.update_ticks()
+    map_colorbar.ax.tick_params(labelsize=7.2, length=2.5)
+    map_colorbar.set_label(
+        "Path-dependency Road Shapley Value "
+        "(people across all 75 eligible hospitals; logarithmic positive-value scale)",
+        fontsize=9.1,
+    )
 
     row_labels = [corridor_names[corridor] for corridor in selected_corridors]
     column_labels = [hospital_names[hospital] for hospital in selected_hospitals]
     for panel_label, scenario, matrix, ax in zip(
-        "abc", SCENARIOS, matrices, axes, strict=True
+        "def", SCENARIOS, matrices, heat_axes, strict=True
     ):
         masked = np.ma.masked_equal(matrix.to_numpy(dtype=float), 0.0)
         ax.imshow(
             masked,
-            cmap=color_map,
-            norm=color_norm,
+            cmap=heat_color_map,
+            norm=heat_norm,
             interpolation="nearest",
             aspect="auto",
         )
@@ -445,18 +680,18 @@ def main() -> None:
             clip_on=False,
         )
 
-    scalar_mappable = mpl.cm.ScalarMappable(norm=color_norm, cmap=color_map)
-    colorbar = fig.colorbar(
-        scalar_mappable,
-        cax=colorbar_ax,
+    heat_scalar = mpl.cm.ScalarMappable(norm=heat_norm, cmap=heat_color_map)
+    heat_colorbar = fig.colorbar(
+        heat_scalar,
+        cax=heat_colorbar_ax,
         orientation="horizontal",
         extend="neither",
     )
-    colorbar.locator = LogLocator(base=10, subs=(1.0, 2.0, 5.0))
-    colorbar.formatter = LogFormatter(base=10, labelOnlyBase=False)
-    colorbar.update_ticks()
-    colorbar.ax.tick_params(labelsize=7.2, length=2.5)
-    colorbar.set_label(
+    heat_colorbar.locator = LogLocator(base=10, subs=(1.0, 2.0, 5.0))
+    heat_colorbar.formatter = LogFormatter(base=10, labelOnlyBase=False)
+    heat_colorbar.update_ticks()
+    heat_colorbar.ax.tick_params(labelsize=7.2, length=2.5)
+    heat_colorbar.set_label(
         "Path-dependency Road-Hospital Shapley Value "
         "(people; logarithmic positive-value scale; white = 0)",
         fontsize=9.2,
