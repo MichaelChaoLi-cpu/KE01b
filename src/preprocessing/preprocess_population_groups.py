@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_population_groups
+preprocess_population_groups()

@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_emergency_hospital_roles
+preprocess_emergency_hospital_roles()

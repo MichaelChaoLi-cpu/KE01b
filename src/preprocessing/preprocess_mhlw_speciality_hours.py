@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_mhlw_speciality_hours
+preprocess_mhlw_speciality_hours()

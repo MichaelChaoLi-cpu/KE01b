@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_landslide_zones
+preprocess_landslide_zones()

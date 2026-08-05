@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_emergency_transport_roads
+preprocess_emergency_transport_roads()

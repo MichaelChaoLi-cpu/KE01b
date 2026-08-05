@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_evacuation_facilities
+preprocess_evacuation_facilities()

@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_road_centerlines
+preprocess_road_centerlines()

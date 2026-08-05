@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_prefecture_hospital_registry
+preprocess_prefecture_hospital_registry()

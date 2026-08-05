@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_mhlw_hospitals
+preprocess_mhlw_hospitals()

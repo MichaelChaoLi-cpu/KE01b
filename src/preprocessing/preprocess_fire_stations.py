@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_fire_stations
+preprocess_fire_stations()

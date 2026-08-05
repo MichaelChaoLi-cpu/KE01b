@@ -1,0 +1,2 @@
+from emergency_access_common import preprocess_fdma_validation
+preprocess_fdma_validation()
