@@ -19,10 +19,11 @@ README = EXP / "README.md"
 LOGICAL_PREFIX = "logical:analysis_"
 
 ROAD_STRUCTURE = [
-    "Road Edge ID", "From Node ID", "To Node ID", "Network Component ID", "Medical Corridor ID",
+    "Road Edge ID", "Road Failure Unit ID", "From Node ID", "To Node ID", "Network Component ID",
     "Road Length (m)", "Assumed Speed (km/h)", "Baseline Edge Travel Time (min)",
     "Hazard Exposure Class", "Emergency Route Membership", "Road Available", "Network Analysis Eligible",
 ]
+ROAD_REFERENCE = ["Route ID", "Route Name"]
 NETWORK_ACCESS = [
     "Analysis Unit ID", "Demand Node ID", "Dispatch Base Node ID", "Hospital Node ID",
     "Network Snap Distance (m)", "Operational Hospital Set", "Hospital Role Weight", "Hospital Capacity Weight",
@@ -33,17 +34,13 @@ ACCESSIBILITY = [
     "Alternative Hospital Count", "Hospital Catchment Population", "Hospital Demand Change",
     "Population Losing Timely Access", "Older Population Losing Timely Access",
 ]
-RESTORATION = [
-    "Restored Population", "Restored Older Population", "Travel Time Reduction", "Connected Hospital Count",
-    "Network Redundancy Value", "Restoration Scale", "Restoration Budget", "Coverage Recovery",
-    "Marginal Restoration Benefit", "Restoration Rank", "Scenario Priority Rank", "Priority Selection Frequency",
+MONTE_CARLO = [
+    "Failure Rate", "Simulation Replicate", "Road Failure Indicator", "Random Failure Model",
+    "Timely Access Probability", "P90 Emergency Access Time", "Hospital Assignment Probability",
+    "Road Failure Importance", "Road Importance Standard Error", "Confidence Interval",
+    "Rank Stability", "Monte Carlo Convergence Status",
 ]
-SHAPLEY = [
-    "Road Shapley Value", "Hospital Shapley Value", "Road-Hospital Shapley Value", "Shapley Standard Error",
-    "Monte Carlo Permutations", "Shapley Convergence Status", "Surrogate Prediction Error",
-    "Direct-Surrogate Rank Difference",
-]
-APPROVED_VARIABLES = ROAD_STRUCTURE + NETWORK_ACCESS + ACCESSIBILITY + RESTORATION + SHAPLEY
+APPROVED_VARIABLES = ROAD_STRUCTURE + NETWORK_ACCESS + ACCESSIBILITY + MONTE_CARLO
 REFERENCE_FIELDS = ["Network Node ID", "Network Snap Accepted", "Access Road Edge ID", "Access Edge Fraction"]
 GROUP_REFERENCE_FIELD = "Representative Mesh Code"
 
@@ -65,7 +62,7 @@ def item(source: str, output: str | None, script: str | None, names: list[str], 
         "output": output,
         "script": script,
         "materialization_stage": stage,
-        "variables": [variable(name, final=name != "Restoration Budget") for name in names],
+        "variables": [variable(name) for name in names],
     }
 
 
@@ -79,7 +76,7 @@ def extend_decisions() -> dict[str, object]:
             "Derived from confirmed Standard Road centerlines, emergency routes, and landslide zones",
             "data/processed/kumamoto_routable_road_edges_preprocessed.parquet",
             "src/preprocessing/preprocess_routable_road_network.py",
-            ROAD_STRUCTURE,
+            ROAD_STRUCTURE + ROAD_REFERENCE,
             "preprocessing",
         ),
         "logical:analysis_routable_road_nodes": item(
@@ -121,7 +118,7 @@ def extend_decisions() -> dict[str, object]:
             "Approved variables to be computed during accessibility, restoration, and Shapley estimation",
             None,
             None,
-            ACCESSIBILITY + RESTORATION + SHAPLEY,
+            ACCESSIBILITY + MONTE_CARLO,
             "estimation",
         ),
     })
@@ -130,11 +127,19 @@ def extend_decisions() -> dict[str, object]:
         for entry in dataset["variables"]:
             if entry["readable_name"] in REFERENCE_FIELDS + [GROUP_REFERENCE_FIELD]:
                 entry["is_final_variable"] = "no"
+    road_entries = datasets["logical:analysis_routable_road_edges"]["variables"]
+    for entry in road_entries:
+        if entry["readable_name"] == "Road Failure Unit ID":
+            entry["preprocessing"] = [
+                "Preserve true same-level road intersections and grade separation.",
+                "Split every topological road edge into pieces no longer than 100 m.",
+                "Assign one deterministic Road Failure Unit ID to each resulting piece.",
+            ]
     payload["schema_version"] = 2
     payload["confirmed_analysis_variable_count"] = len(APPROVED_VARIABLES)
     payload["notes"] = [
-        "The 53 approved analysis variables are defined here; accessibility, restoration, and Shapley outcomes are not estimated during preprocessing.",
-        "Restoration Budget is retained as a non-final reference until empirical repair cost or duration data are available.",
+        f"The {len(APPROVED_VARIABLES)} approved analysis variables are defined here; Monte Carlo outcomes are not estimated during preprocessing.",
+        "Road-failure variables define the confirmed analysis contract for the 100-replicate pilot and the target 1,000-replicate experiment.",
     ]
     DECISIONS.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return payload
@@ -193,11 +198,11 @@ def update_readme(payload: dict[str, object]) -> None:
     block = (
         f"{marker_start}\n{rows}\n{marker_end}\n\n"
         "### Second-stage network preprocessing\n\n"
-        "- Confirmed analysis-facing variables: 53 (road structure, network access, accessibility, restoration, and Shapley validation).\n"
+        f"- Confirmed analysis-facing variables: {len(APPROVED_VARIABLES)} (road structure, network access, accessibility, and Monte Carlo reliability).\n"
         "- Ambulance routing uses Standard Road centerlines only; endpoints and same-level intersections are snapped/noded on a 1 m grid in EPSG:6670.\n"
         "- All valid Standard Road components remain eligible so island and remote-area demand is not silently deleted; component IDs preserve disconnected-network status.\n"
         "- Facility access is accepted within 150 m and population access within 250 m; rejected snaps remain in the files with an explicit flag.\n"
-        "- Medical corridors are connected road-category subnetworks within secondary meshes; Shapley screening remains capped at 2,000 candidate corridors.\n"
+        "- Road Failure Unit ID defines deterministic pieces no longer than 100 m while retaining true network intersections and grade separation.\n"
         "- Accessibility, restoration, and Shapley outputs are schema contracts at this stage and have not been estimated.\n"
         "- Older-population disclosure groups use their source-defined aggregation-destination mesh centroid; group counts are not duplicated or proportionally imputed to 125 m meshes.\n"
     )

@@ -66,7 +66,9 @@ def main() -> None:
     assert set(edges["From Node ID"]).issubset(node_ids)
     assert set(edges["To Node ID"]).issubset(node_ids)
     assert nodes["Network Node ID"].is_unique
-    assert edges["Medical Corridor ID"].notna().all()
+    assert edges["Road Failure Unit ID"].notna().all()
+    assert edges["Road Failure Unit ID"].is_unique
+    assert (edges["Road Length (m)"] <= 100.0 + 1e-6).all()
     for frame in [edges, nodes]:
         _assert_ascii_columns(frame)
         assert frame.geometry.notna().all() and frame.geometry.is_valid.all()
@@ -76,7 +78,8 @@ def main() -> None:
         "nodes": len(nodes),
         "components": int(edges["Network Component ID"].nunique()),
         "largest_component_edges": int(edges["Network Component ID"].value_counts().iloc[0]),
-        "medical_corridors": int(edges["Medical Corridor ID"].nunique()),
+        "road_failure_units": int(edges["Road Failure Unit ID"].nunique()),
+        "maximum_failure_unit_length_m": float(edges["Road Length (m)"].max()),
         "self_loop_edges": int((edges["From Node ID"] == edges["To Node ID"]).sum()),
     }
 
@@ -96,6 +99,9 @@ def main() -> None:
         assert frame.loc[~accepted, id_column].isna().all()
         assert (frame.loc[accepted, "Network Snap Distance (m)"] <= threshold + 1e-8).all()
         assert (frame.loc[~accepted, "Network Snap Distance (m)"] > threshold).all()
+        assert set(frame.loc[accepted, "Access Road Edge ID"]).issubset(
+            set(edges["Road Edge ID"])
+        )
         access_report[label] = {
             "rows": len(frame),
             "accepted": int(accepted.sum()),
@@ -111,13 +117,12 @@ def main() -> None:
             continue
         for entry in dataset["variables"]:
             analysis_entries.setdefault(entry["readable_name"], []).append(entry)
-    assert len(APPROVED_VARIABLES) == 53 and len(set(APPROVED_VARIABLES)) == 53
+    assert len(APPROVED_VARIABLES) == len(set(APPROVED_VARIABLES))
     assert set(APPROVED_VARIABLES).issubset(analysis_entries)
     for name in APPROVED_VARIABLES:
         assert name.isascii()
         statuses = {entry["is_final_variable"] for entry in analysis_entries[name]}
-        expected = {"no"} if name == "Restoration Budget" else {"yes"}
-        assert statuses == expected, f"Unexpected final status for {name}: {statuses}"
+        assert statuses == {"yes"}, f"Unexpected final status for {name}: {statuses}"
     checks["decision_dictionary"] = {
         "status": "pass",
         "logical_datasets": len(decisions["datasets"]),
@@ -132,8 +137,7 @@ def main() -> None:
     assert "TBD" not in section_text
     assert "data/raw" not in section_text and "source_dataset" not in section_text
     for name in APPROVED_VARIABLES:
-        if name != "Restoration Budget":
-            assert f"| {name} |" in section_text
+        assert f"| {name} |" in section_text
     checks["anasop_section_4"] = {
         "status": "pass",
         "final_variable_rows": section_text.count("\n| ") - 1,

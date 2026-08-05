@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-from collections import defaultdict
 from pathlib import Path
 
 import geopandas as gpd
@@ -11,6 +10,7 @@ import numpy as np
 import pandas as pd
 import shapely
 from shapely import MultiLineString, STRtree
+from shapely.ops import substring
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -19,6 +19,8 @@ CALC_CRS = "EPSG:6670"
 OUTPUT_CRS = "EPSG:6668"
 SNAP_GRID_M = 1.0
 EMERGENCY_ROUTE_TOLERANCE_M = 30.0
+MAX_FAILURE_UNIT_LENGTH_M = 100.0
+FAILURE_UNIT_SPLIT_TARGET_M = 98.0
 
 ROAD_COLUMNS = [
     "Road Category",
@@ -44,6 +46,14 @@ WIDTH_CAP = {
     "13 to Under 19.5 m": 60.0,
     "19.5 m or More": 80.0,
     "Unknown": 20.0,
+}
+ROUTE_TYPE_TO_ROAD_CATEGORY = {
+    "National Expressway": "National Expressway or Equivalent",
+    "National Highway": "National Highway",
+    "Major Prefectural": "Prefectural Road",
+    "General Prefectural": "Prefectural Road",
+    "Municipal Road": "Municipal Road or Equivalent",
+    "Major Designated-City": "Municipal Road or Equivalent",
 }
 
 
@@ -113,19 +123,96 @@ def _node_group(group: gpd.GeoDataFrame) -> list[dict[str, object]]:
     return records
 
 
-def _assign_emergency_routes(edges: gpd.GeoDataFrame) -> pd.Series:
+def _assign_emergency_routes(edges: gpd.GeoDataFrame) -> pd.DataFrame:
+    """Match compatible emergency routes without assigning crossing road classes."""
     routes = gpd.read_parquet(
         PROCESSED / "kumamoto_emergency_transport_roads_2024_preprocessed.parquet"
     ).to_crs(CALC_CRS)
     route_geometries = np.asarray(routes.geometry.array, dtype=object)
     tree = STRtree(route_geometries)
     midpoints = shapely.line_interpolate_point(np.asarray(edges.geometry.array, dtype=object), 0.5, normalized=True)
-    pairs, distances = tree.query_nearest(midpoints, all_matches=False, return_distance=True)
+    pairs = tree.query(
+        midpoints,
+        predicate="dwithin",
+        distance=EMERGENCY_ROUTE_TOLERANCE_M,
+    )
+    route_category = routes["Road Type"].map(ROUTE_TYPE_TO_ROAD_CATEGORY)
+    compatible = (
+        edges["Road Category"].fillna("Unknown").astype(str).to_numpy()[pairs[0]]
+        == route_category.fillna("Unmatchable").astype(str).to_numpy()[pairs[1]]
+    )
+    edge_positions = pairs[0][compatible]
+    route_positions = pairs[1][compatible]
+    if len(edge_positions):
+        distances = shapely.distance(
+            midpoints[edge_positions], route_geometries[route_positions]
+        )
+        candidates = pd.DataFrame(
+            {
+                "_Edge Position": edge_positions,
+                "_Route Position": route_positions,
+                "_Distance": distances,
+                "_Route ID": routes["Route ID"].astype("string").to_numpy()[route_positions],
+            }
+        ).sort_values(
+            ["_Edge Position", "_Distance", "_Route ID", "_Route Position"],
+            kind="stable",
+        )
+        chosen = candidates.drop_duplicates("_Edge Position", keep="first")
+    else:
+        chosen = pd.DataFrame(columns=["_Edge Position", "_Route Position"])
+
     membership = np.full(len(edges), "None", dtype=object)
-    route_class = routes["Emergency Road Class"].fillna("Other or Unspecified").astype(str).to_numpy()
-    accepted = distances <= EMERGENCY_ROUTE_TOLERANCE_M
-    membership[pairs[0][accepted]] = route_class[pairs[1][accepted]]
-    return pd.Series(membership, index=edges.index, dtype="string")
+    route_ids = np.full(len(edges), pd.NA, dtype=object)
+    route_names = np.full(len(edges), pd.NA, dtype=object)
+    if len(chosen):
+        edge_position = chosen["_Edge Position"].to_numpy(dtype=int)
+        route_position = chosen["_Route Position"].to_numpy(dtype=int)
+        membership[edge_position] = (
+            routes["Emergency Road Class"]
+            .fillna("Other or Unspecified")
+            .astype(str)
+            .to_numpy()[route_position]
+        )
+        route_ids[edge_position] = routes["Route ID"].astype("string").to_numpy()[
+            route_position
+        ]
+        route_names[edge_position] = routes["Route Name"].astype("string").to_numpy()[
+            route_position
+        ]
+    return pd.DataFrame(
+        {
+            "Emergency Route Membership": pd.Series(membership, dtype="string"),
+            "Route ID": pd.Series(route_ids, dtype="string"),
+            "Route Name": pd.Series(route_names, dtype="string"),
+        },
+        index=edges.index,
+    )
+
+
+def _split_long_edges(edges: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    """Split every topological edge into road-failure units no longer than 100 m."""
+    records: list[dict[str, object]] = []
+    columns = list(edges.columns)
+    geometry_column = edges.geometry.name
+    for values in edges.itertuples(index=False, name=None):
+        record = dict(zip(columns, values, strict=True))
+        geometry = record.pop(geometry_column)
+        piece_count = max(1, int(np.ceil(geometry.length / FAILURE_UNIT_SPLIT_TARGET_M)))
+        if piece_count == 1:
+            record[geometry_column] = geometry
+            records.append(record)
+            continue
+        boundaries = np.linspace(0.0, float(geometry.length), piece_count + 1)
+        for start, end in zip(boundaries[:-1], boundaries[1:], strict=True):
+            piece = shapely.set_precision(
+                substring(geometry, float(start), float(end)), SNAP_GRID_M
+            )
+            if not piece.is_empty and piece.length > 0:
+                piece_record = record.copy()
+                piece_record[geometry_column] = piece
+                records.append(piece_record)
+    return gpd.GeoDataFrame(records, geometry=geometry_column, crs=edges.crs)
 
 
 def _assign_hazard_exposure(edges: gpd.GeoDataFrame) -> pd.Series:
@@ -191,42 +278,6 @@ def _assign_components(edges: gpd.GeoDataFrame) -> tuple[gpd.GeoDataFrame, gpd.G
     return edges, nodes
 
 
-def _assign_corridors(edges: gpd.GeoDataFrame) -> pd.Series:
-    # A Shapley player is a connected road-category subnetwork within one
-    # secondary mesh. This preserves spatially coherent restoration units while
-    # reducing 390k edge players to a screenable corridor universe. Hazard and
-    # width attributes remain edge-level scenario inputs and do not fragment a
-    # corridor merely because their classification changes along it.
-    corridor_for_edge = np.empty(len(edges), dtype=object)
-    corridor_number = 0
-    for _, group in edges.groupby(["Secondary Mesh Code", "Road Category"], dropna=False, sort=True):
-        positions = group.index.to_list()
-        endpoints = {
-            position: (edges.at[position, "From Node ID"], edges.at[position, "To Node ID"])
-            for position in positions
-        }
-        adjacency: dict[str, list[int]] = defaultdict(list)
-        for position, (left, right) in endpoints.items():
-            adjacency[left].append(position)
-            adjacency[right].append(position)
-        remaining = set(positions)
-        while remaining:
-            corridor_number += 1
-            corridor_id = f"CORR-{corridor_number:07d}"
-            seed = min(remaining)
-            stack = [seed]
-            remaining.remove(seed)
-            while stack:
-                position = stack.pop()
-                corridor_for_edge[position] = corridor_id
-                for node in endpoints[position]:
-                    for neighbour in adjacency[node]:
-                        if neighbour in remaining:
-                            remaining.remove(neighbour)
-                            stack.append(neighbour)
-    return pd.Series(corridor_for_edge, index=edges.index, dtype="string")
-
-
 def main() -> None:
     roads = gpd.read_parquet(PROCESSED / "kumamoto_road_centerlines_2024_preprocessed.parquet")
     roads = roads.loc[roads["Road Centerline Type"].eq("Standard Road"), ROAD_COLUMNS + ["Geometry"]].to_crs(CALC_CRS)
@@ -247,12 +298,16 @@ def main() -> None:
         print(f"Excluded {int(self_loops.sum()):,} closed self-loop lines that do not connect distinct network nodes")
         edges = edges.loc[~self_loops].reset_index(drop=True)
 
+    edges = _split_long_edges(edges)
+    edges = edges.loc[~edges.geometry.is_empty & (edges.geometry.length > 0)].reset_index(drop=True)
     edges["Road Length (m)"] = edges.geometry.length
     category_speed = edges["Road Category"].map(BASE_SPEED).fillna(20.0).astype(float)
     width_speed = edges["Width Category"].map(WIDTH_CAP).fillna(20.0).astype(float)
     edges["Assumed Speed (km/h)"] = np.minimum(category_speed, width_speed)
     edges["Baseline Edge Travel Time (min)"] = edges["Road Length (m)"] / (edges["Assumed Speed (km/h)"] * 1000.0 / 60.0)
-    edges["Emergency Route Membership"] = _assign_emergency_routes(edges)
+    route_attributes = _assign_emergency_routes(edges)
+    for column in route_attributes.columns:
+        edges[column] = route_attributes[column]
     edges["Hazard Exposure Class"] = _assign_hazard_exposure(edges)
     edges["Road Available"] = True
     edges, nodes = _assign_components(edges)
@@ -260,12 +315,15 @@ def main() -> None:
     order_columns = ["Network Component ID", "From Node ID", "To Node ID", "Road Category", "Road Length (m)"]
     edges = edges.sort_values(order_columns, kind="stable").reset_index(drop=True)
     edges["Road Edge ID"] = [f"EDGE-{position + 1:07d}" for position in range(len(edges))]
-    edges["Medical Corridor ID"] = _assign_corridors(edges)
+    edges["Road Failure Unit ID"] = [
+        f"RFU-{position + 1:07d}" for position in range(len(edges))
+    ]
 
     edge_columns = [
-        "Road Edge ID", "From Node ID", "To Node ID", "Network Component ID", "Medical Corridor ID",
+        "Road Edge ID", "Road Failure Unit ID", "From Node ID", "To Node ID", "Network Component ID",
         "Road Length (m)", "Assumed Speed (km/h)", "Baseline Edge Travel Time (min)",
         "Hazard Exposure Class", "Emergency Route Membership", "Road Available", "Network Analysis Eligible",
+        "Route ID", "Route Name",
         "Road Category", "Road State", "Vertical Level", "Width Category", "Toll Category", "Secondary Mesh Code", "Geometry",
     ]
     edge_output = edges[edge_columns].to_crs(OUTPUT_CRS)
@@ -279,7 +337,8 @@ def main() -> None:
     largest_component_edges = int(edge_output["Network Component ID"].value_counts().iloc[0])
     print(
         f"Analysis-eligible edges: {int(edge_output['Network Analysis Eligible'].sum()):,}; "
-        f"largest component edges: {largest_component_edges:,}; corridors: {edge_output['Medical Corridor ID'].nunique():,}"
+        f"largest component edges: {largest_component_edges:,}; "
+        f"100 m road-failure units: {edge_output['Road Failure Unit ID'].nunique():,}"
     )
 
 
