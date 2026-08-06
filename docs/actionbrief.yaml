@@ -681,7 +681,7 @@ tableDictionary:
     tableAim: Describe geographic heterogeneity without asserting ordinal rank stability.
     tableExplanation: Reports municipality-specific population, older population, access probability, P90 time,
       coverage loss, uncertainty, and disconnection without interpreting display order as a formal rank.
-    tableSuitableSection: Municipal heterogeneity results
+    tableSuitableSection: "Appendix A: Municipal Emergency-Access Reliability"
   table_hospital_service_reliability:
     tableId: table_hospital_service_reliability
     tablePath: data/results/tables/Table_hospital_service_reliability.xlsx
@@ -689,7 +689,7 @@ tableDictionary:
     tableAim: Quantify potential service-population stability for the fixed eligible-hospital set.
     tableExplanation: Reports all 75 eligible hospitals across four severities, including fixed role, baseline and
       simulated catchments, assignment probability, demand change, uncertainty quantiles, and zero-catchment frequency.
-    tableSuitableSection: Hospital reliability results
+    tableSuitableSection: "Appendix A: Hospital Service Reliability"
   table_road_section_loss_by_network_characteristics:
     tableId: table_road_section_loss_by_network_characteristics
     tablePath: data/results/tables/Table_road_section_loss_by_network_characteristics.xlsx
@@ -711,6 +711,11 @@ figureDictionary:
     figureId: fig_emergency_care_network_and_population_demand
     figurePath: data/results/figures/Figure_emergency_care_network_and_population_demand.png
     figureCaption: Population demand and emergency-care network across Kumamoto
+    figurePanelCount: 3
+    figureNote: >-
+      Panel a maps total population by 125 m mesh on a logarithmic scale. Panel b maps the population age 65 and
+      older at disclosure-group support on a logarithmic scale. Panel c shows the standard road network, primary
+      and secondary emergency roads, candidate dispatch bases, and eligible emergency hospitals.
     figureAim: Describe the spatial support of demand, dispatch bases, eligible hospitals, and emergency roads.
     figureExplanation: Maps total population at 125 m resolution, older population at disclosure-group support,
       and the road, dispatch-base, hospital, and emergency-route network used by the study.
@@ -719,6 +724,11 @@ figureDictionary:
     figureId: fig_baseline_two_stage_emergency_travel_time
     figurePath: data/results/figures/Figure_baseline_two_stage_emergency_travel_time.png
     figureCaption: Baseline dispatch, hospital transport, and total emergency travel times
+    figurePanelCount: 3
+    figureNote: >-
+      Panel a maps travel time from the nearest candidate dispatch base to each population mesh. Panel b maps travel
+      time from each mesh to the nearest eligible emergency hospital. Panel c maps total two-stage travel time, the
+      sum of dispatch and hospital-transport time. Grey meshes are not estimated; all times are in minutes.
     figureAim: Establish baseline travel impedance for both stages of emergency access.
     figureExplanation: Shows that baseline access is the sum of nearest-dispatch and nearest-eligible-hospital travel
       times, while grey units remain explicitly not estimated.
@@ -727,6 +737,12 @@ figureDictionary:
     figureId: fig_failure_severity_response
     figurePath: data/results/figures/Figure_failure_severity_response.png
     figureCaption: Emergency-access response to increasing failed road length
+    figurePanelCount: 3
+    figureNote: >-
+      Panel a reports the population retaining baseline 30-minute access. Panel b reports the population losing
+      baseline 30-minute access, and panel c reports the newly disconnected population. Lines show means and shaded
+      bands show P5-P95 across 100 calibration replicates; open circles, filled circles, and diamonds denote
+      calibration, main, and stress severities, respectively.
     figureAim: Calibrate interpretable main and stress failure severities.
     figureExplanation: The calibration shows monotone decline in 30-minute coverage and increasing access loss and
       disconnection as expected failed road length rises; shaded bands are P5-P95 across 100 replicates.
@@ -735,6 +751,12 @@ figureDictionary:
     figureId: fig_nested_length_dependent_road_failure_realizations
     figurePath: data/results/figures/Figure_nested_length_dependent_road_failure_realizations.png
     figureCaption: Nested road-failure realizations across main and stress severities
+    figurePanelCount: 4
+    figureNote: >-
+      Panels a-d show one paired nested realization at expected failed-road-length levels of 1%, 3%, 5%, and 10%,
+      respectively. Red sections have failed, green sections remain available, and dark-green lines identify
+      available major roads. Each annotation reports the number of failed sections and the realized failed-length
+      share.
     figureAim: Demonstrate paired, length-dependent, nested failure assignment.
     figureExplanation: One paired replicate visualizes how failed sections expand from 1% through 10%, with realized
       failed length close to each calibrated expectation.
@@ -743,6 +765,12 @@ figureDictionary:
     figureId: fig_grid_emergency_access_loss_probability
     figurePath: data/results/figures/Figure_grid_emergency_access_loss_probability.png
     figureCaption: Grid probability of losing baseline 30-minute emergency access
+    figurePanelCount: 3
+    figureNote: >-
+      Panels a-c map the probability that a represented population grid loses baseline 30-minute emergency access
+      under expected failed-road-length levels of 1%, 3%, and 5%, respectively. Color is shown on a logarithmic
+      probability scale; zero-probability grids and grids without represented population are retained as separate
+      classes. Insets report affected-grid counts and expected population loss.
     figureAim: Locate population grids with fragile timely emergency access.
     figureExplanation: Maps the expanding spatial footprint and probability of losing baseline 30-minute access
       under the 1%, 3%, and 5% main scenarios, retaining zero-probability grids explicitly.
@@ -751,6 +779,12 @@ figureDictionary:
     figureId: fig_population_coverage_under_length_dependent_road_failure
     figurePath: data/results/figures/Figure_population_coverage_under_length_dependent_road_failure.png
     figureCaption: Population coverage retained across failure severity and thresholds
+    figurePanelCount: 3
+    figureNote: >-
+      Panels a-c report the percentage of baseline-covered population retaining access within 15, 30, and 45
+      minutes, respectively, as expected failed road length increases. Blue and orange series represent total and
+      age-65-plus populations; shaded bands show P5-P95, diamonds mark the 10% stress scenario, and the dashed line
+      marks baseline coverage.
     figureAim: Compare total and older-population reliability across thresholds and severities.
     figureExplanation: Total and age-65-plus population coverage decline at all thresholds as severity increases;
       older-population coverage is consistently slightly less reliable on its valid disclosure-group support.
@@ -759,6 +793,12 @@ figureDictionary:
     figureId: fig_hospital_service_reliability_under_road_failure
     figurePath: data/results/figures/Figure_hospital_service_reliability_under_road_failure.png
     figureCaption: Hospital catchment reliability under increasing road failure
+    figurePanelCount: 3
+    figureNote: >-
+      Panels a-c map hospital catchment reliability at expected failed-road-length levels of 1%, 3%, and 5%,
+      respectively. Color shows mean catchment change from baseline on a signed-log scale, symbol size shows mean
+      catchment population, outline width shows zero-catchment frequency, and symbol shape distinguishes
+      disaster-base hospitals from other eligible emergency hospitals.
     figureAim: Show road-supported changes in potential hospital service populations.
     figureExplanation: Hospital catchment sizes, changes from baseline, and zero-catchment frequencies become more
       variable as failed road length increases, conditional on the fixed unweighted hospital set.
@@ -767,6 +807,12 @@ figureDictionary:
     figureId: fig_road_section_accessibility_consequence_and_expected_risk
     figurePath: data/results/figures/Figure_road_section_accessibility_consequence_and_expected_risk.png
     figureCaption: Road-section accessibility consequence and expected risk surfaces
+    figurePanelCount: 6
+    figureNote: >-
+      Panels a-c map potential population loss after single-section removal for 15-, 30-, and 45-minute timely-access
+      thresholds, respectively. Panels d-f map 30-minute expected risk, defined as failure probability multiplied by
+      potential population loss, at expected failed-road-length levels of 1%, 3%, and 5%, respectively. Both color
+      scales are logarithmic; zero-value sections remain outlined.
     figureAim: Map every road section by potential access consequence and scenario risk.
     figureExplanation: Maps nonzero leave-one-section-out population consequences for three thresholds and 30-minute
       probability-weighted expected risk for all eligible sections at the three main severities.
@@ -775,6 +821,12 @@ figureDictionary:
     figureId: fig_monte_carlo_convergence_and_stress_sensitivity
     figurePath: data/results/figures/Figure_monte_carlo_convergence_and_stress_sensitivity.png
     figureCaption: Monte Carlo convergence, stress severity, and speed sensitivity
+    figurePanelCount: 4
+    figureNote: >-
+      Panel a shows running mean 30-minute coverage with running P5-P95 intervals at simulation checkpoints. Panel b
+      shows the corresponding Monte Carlo standard errors and the 5-percentage-point stability classification.
+      Panel c compares population losing baseline 30-minute access and newly disconnected population across failure
+      severities. Panel d shows 30-minute coverage under uniform assumed-speed multipliers of 0.8, 1.0, and 1.2.
     figureAim: Assess simulation precision and declared stress and speed sensitivities.
     figureExplanation: Running estimates stabilize, Monte Carlo standard errors fall, all severities pass the declared
       convergence rule after the reference checkpoint, and stress and speed sensitivities preserve the expected
