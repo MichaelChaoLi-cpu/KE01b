@@ -1,0 +1,933 @@
+doc_type: actionbrief
+version: 1.0.0
+datasetDictionary:
+  population_census_2020:
+    datasetSourceName: 2020 Population Census T001231 and e-Stat Kumamoto mesh geography
+    datasetDescription: Resident population and older-age counts used for mesh demand and disclosure-group equity
+      analysis.
+    datasetAttribute: other
+    datasetProvider: Statistics Bureau of Japan (e-Stat)
+    datasetGenerationInfo: Official census tabulation joined to official 125 m mesh geography; suppressed older-age
+      values remain represented at disclosure-group support.
+    datasetPeriod: 2020 census reference year
+    datasetScale: 62,945 populated meshes and 36,657 disclosure groups across Kumamoto Prefecture
+    datasetSpatialResolution: Populated 125 m mesh and official disclosure group
+    datasetTemporalResolution: Single census reference year
+    datasetPreprocessingInfo: Inherited from the KE01 project, standardized to JGD2011, and retained without reallocating
+      disclosure-group older-population counts to fine meshes.
+  administrative_areas_2025:
+    datasetSourceName: MLIT National Land Numerical Information N03 administrative areas
+    datasetDescription: Municipality boundaries and names used for map context and municipal reliability aggregation.
+    datasetAttribute: geojson
+    datasetProvider: Ministry of Land, Infrastructure, Transport and Tourism
+    datasetGenerationInfo: Official N03 municipality polygons for Kumamoto Prefecture.
+    datasetPeriod: 2025-01-01 reference
+    datasetScale: 49 municipality or designated-city ward units
+    datasetSpatialResolution: Municipality polygon
+    datasetTemporalResolution: Single reference date
+    datasetPreprocessingInfo: Standardized to JGD2011, cleaned municipality codes and labels, and dissolved multipart
+      records by municipality code.
+  road_centerlines_2024:
+    datasetSourceName: MLIT National Land Numerical Information N13 road centerlines
+    datasetDescription: Standard-road geometry and attributes used to construct the grade-aware routable network.
+    datasetAttribute: geojson
+    datasetProvider: Ministry of Land, Infrastructure, Transport and Tourism
+    datasetGenerationInfo: Official N13 road-centerline features from five first-order mesh packages intersecting
+      Kumamoto.
+    datasetPeriod: 2024 reference
+    datasetScale: 430,201 retained centerline features from five source mesh packages
+    datasetSpatialResolution: Road centerline segment
+    datasetTemporalResolution: Single reference year
+    datasetPreprocessingInfo: Selected Standard Road features, standardized codes and labels, removed exact duplicates,
+      noded same-level intersections, and retained cross-boundary links needed for routing.
+  emergency_transport_roads_2024:
+    datasetSourceName: MLIT National Land Numerical Information N10 emergency transport roads
+    datasetDescription: Official emergency-road routes used for map context and compatible route-membership attributes.
+    datasetAttribute: geojson
+    datasetProvider: Ministry of Land, Infrastructure, Transport and Tourism
+    datasetGenerationInfo: Official N10 emergency transport road lines for Kumamoto Prefecture.
+    datasetPeriod: 2024 reference
+    datasetScale: 264 route features
+    datasetSpatialResolution: Emergency transport route line
+    datasetTemporalResolution: Single reference year
+    datasetPreprocessingInfo: Standardized route codes and classes; matched to compatible routable road categories
+      within 30 metres.
+  landslide_zones_2025:
+    datasetSourceName: MLIT National Land Numerical Information A33 landslide warning zones
+    datasetDescription: Warning-zone polygons used only to describe hazard exposure of routable road sections.
+    datasetAttribute: geojson
+    datasetProvider: Ministry of Land, Infrastructure, Transport and Tourism
+    datasetGenerationInfo: Official A33 landslide warning and special-warning polygons for Kumamoto Prefecture.
+    datasetPeriod: 2025 reference
+    datasetScale: 56,424 warning-zone polygons
+    datasetSpatialResolution: Hazard-zone polygon
+    datasetTemporalResolution: Single reference year
+    datasetPreprocessingInfo: Standardized zone codes and dates; assigned the highest intersected warning class
+      to each routable edge and aggregated it to road sections.
+  fire_stations_2012:
+    datasetSourceName: MLIT National Land Numerical Information P17 fire stations
+    datasetDescription: Fire stations, branches, and outposts used as candidate ambulance dispatch bases.
+    datasetAttribute: shapefile
+    datasetProvider: Ministry of Land, Infrastructure, Transport and Tourism
+    datasetGenerationInfo: Official P17 fire-facility points for Kumamoto Prefecture.
+    datasetPeriod: 2012 reference
+    datasetScale: 94 fire facilities, including 81 candidate dispatch-base records
+    datasetSpatialResolution: Fire-facility point
+    datasetTemporalResolution: Single reference year
+    datasetPreprocessingInfo: Standardized facility types and municipality codes, selected stations and branches
+      or outposts, and snapped candidates to eligible road edges within 150 metres.
+  medical_facilities_2020:
+    datasetSourceName: MLIT National Land Numerical Information P04 medical facilities
+    datasetDescription: Hospital points and emergency or disaster-base designations used to define the fixed eligible
+      hospital set.
+    datasetAttribute: geojson
+    datasetProvider: Ministry of Land, Infrastructure, Transport and Tourism
+    datasetGenerationInfo: Official P04 medical-facility points and designations for Kumamoto Prefecture.
+    datasetPeriod: 2020 reference
+    datasetScale: 2,561 medical facilities; 75 eligible hospitals retained in the network model
+    datasetSpatialResolution: Medical-facility point
+    datasetTemporalResolution: Single reference year
+    datasetPreprocessingInfo: Standardized facility and designation codes, selected hospitals with emergency or
+      core/regional disaster-base designation, and snapped them to eligible roads within 150 metres.
+  mhlw_hospital_names_2026:
+    datasetSourceName: MHLW hospital facility open data
+    datasetDescription: Current hospital-name roster used only to provide unique English or Romanized labels for
+      final hospital outputs.
+    datasetAttribute: table
+    datasetProvider: Ministry of Health, Labour and Welfare
+    datasetGenerationInfo: National hospital facility open-data extract filtered to Kumamoto hospitals.
+    datasetPeriod: 2026-06-01 extract
+    datasetScale: 198 Kumamoto hospital records
+    datasetSpatialResolution: Hospital record
+    datasetTemporalResolution: Single extract date
+    datasetPreprocessingInfo: Filtered to Kumamoto, standardized identifiers and text, and linked deterministically
+      to the 75 network hospitals with reviewed English-name overrides where needed.
+  derived_network_access:
+    datasetSourceName: Kumamoto routable network, road sections, and emergency-access connectors
+    datasetDescription: Analysis-ready graph, junction-to-junction road sections, and demand, dispatch-base, and
+      hospital connector layers.
+    datasetAttribute: other
+    datasetProvider: Generated by this study
+    datasetGenerationInfo: Derived from the retained road centerlines and actual study inputs using grade-aware
+      noding, one-metre endpoint snapping, junction-chain assembly, assumed speeds, and nearest-edge connectors.
+    datasetPeriod: Cross-sectional simulation baseline
+    datasetScale: 390,234 edges; 314,391 nodes; 343,844 road sections; 62,945 mesh, 36,657 disclosure-group, 81
+      dispatch-base, and 75 hospital connector records
+    datasetSpatialResolution: Road edge, road node, road section, or virtual network connector
+    datasetTemporalResolution: Static baseline
+    datasetPreprocessingInfo: Built the full eligible graph, preserved disconnected components, calculated edge
+      and section impedance, attached route and hazard descriptors, and recorded rejected connectors explicitly.
+  severity_calibration_results:
+    datasetSourceName: Length-weighted road-failure severity calibration
+    datasetDescription: Calibration results used to select main and stress expected-failed-length scenarios.
+    datasetAttribute: table
+    datasetProvider: Generated by this study
+    datasetGenerationInfo: One hundred paired full-network Monte Carlo replicates at 0.5%, 1%, 2%, 3%, 5%, and 10%
+      expected failed road length.
+    datasetPeriod: Simulation experiment
+    datasetScale: 600 severity-replicate observations
+    datasetSpatialResolution: Prefecture-wide road network per replicate and severity
+    datasetTemporalResolution: 100 replicates at six severity levels
+    datasetPreprocessingInfo: Calibrated length-dependent section probabilities, reused paired section scores across
+      severities, fully rerouted both emergency stages, and summarized mean and P5-P95 responses.
+  formal_monte_carlo_results:
+    datasetSourceName: Formal length-weighted emergency-access Monte Carlo results
+    datasetDescription: Primary grid, population, municipality, hospital, nested-failure, and convergence results.
+    datasetAttribute: table
+    datasetProvider: Generated by this study
+    datasetGenerationInfo: One thousand paired full-network replicates at 1%, 3%, 5%, and 10% expected failed road
+      length.
+    datasetPeriod: Simulation experiment
+    datasetScale: 4,000 scenario-replicate metrics; 251,780 grid-scenario rows; 146,628 older-population rows; 300
+      hospital-scenario rows; 180,000 municipality-replicate rows
+    datasetSpatialResolution: Grid, disclosure group, municipality, hospital, road section, and prefecture-wide
+      replicate
+    datasetTemporalResolution: 1,000 replicates at four severity levels
+    datasetPreprocessingInfo: Applied nested length-dependent failures, fully rerouted dispatch and hospital stages,
+      retained unreachable outcomes, and computed reliability, uncertainty, catchment, and convergence summaries.
+  speed_sensitivity_results:
+    datasetSourceName: Emergency-access travel-speed sensitivity results
+    datasetDescription: Sensitivity results for uniform 0.8, 1.0, and 1.2 multipliers on assumed road speeds.
+    datasetAttribute: table
+    datasetProvider: Generated by this study
+    datasetGenerationInfo: Repeated the formal paired failure states under three uniform speed multipliers and three
+      timely-access thresholds.
+    datasetPeriod: Simulation sensitivity experiment
+    datasetScale: 36,000 replicate-severity-speed-threshold observations
+    datasetSpatialResolution: Prefecture-wide replicate, severity, speed multiplier, and threshold
+    datasetTemporalResolution: 1,000 replicates for each declared specification
+    datasetPreprocessingInfo: Reused the formal failure draws, rescaled network impedance uniformly, rerouted the
+      full emergency chain, and summarized timely coverage and loss.
+  road_section_consequence_results:
+    datasetSourceName: Road-section accessibility consequence and expected-risk results
+    datasetDescription: Network-wide leave-one-section-out accessibility losses and probability-weighted expected
+      risks.
+    datasetAttribute: table
+    datasetProvider: Generated by this study
+    datasetGenerationInfo: Removed each eligible road section from the otherwise available baseline graph and recomputed
+      population coverage at 15, 30, and 45 minutes.
+    datasetPeriod: Cross-sectional network intervention screen
+    datasetScale: 343,844 eligible road-section records
+    datasetSpatialResolution: Junction-to-junction road section
+    datasetTemporalResolution: Static baseline consequence with 1%, 3%, and 5% scenario weights
+    datasetPreprocessingInfo: Computed nonnegative single-section potential loss, multiplied 30-minute loss by calibrated
+      section failure probabilities, retained zeros, audited the positive upper tail, and independently recomputed
+      48 sections.
+variableDictionary:
+  analysis_unit_id:
+    variableNameInDataset: derived:Analysis Unit ID
+    variableNameInArticle: Analysis Unit Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of the population mesh or disclosure group represented by an access point.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 62945
+  assigned_hospital:
+    variableNameInDataset: derived:Assigned Hospital
+    variableNameInArticle: Assigned Hospital
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Hospital minimizing the feasible second-stage transport objective for an analysis unit.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 300
+  assumed_speed_km_h:
+    variableNameInDataset: derived:Assumed Speed (km/h)
+    variableNameInArticle: Assumed Speed (km/h)
+    variableAttribute: continuous
+    variableUnit: kilometres per hour
+    variableDescription: Scenario-neutral assumed ambulance travel speed for an edge in kilometres per hour.
+    variableSource: derived_network_access
+    observationNumber: 343844
+  baseline_edge_travel_time_min:
+    variableNameInDataset: derived:Baseline Edge Travel Time (min)
+    variableNameInArticle: Baseline Edge Travel Time (min)
+    variableAttribute: continuous
+    variableUnit: minutes
+    variableDescription: Baseline traversal time of an edge in minutes.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 390234
+  baseline_section_travel_time_min:
+    variableNameInDataset: derived:Baseline Section Travel Time (min)
+    variableNameInArticle: Baseline Section Travel Time (min)
+    variableAttribute: continuous
+    variableUnit: minutes
+    variableDescription: Total baseline traversal time of a road section in minutes.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  candidate_dispatch_base:
+    variableNameInDataset: derived:dispatch-base flag
+    variableNameInArticle: Candidate Dispatch Base
+    variableAttribute: boolean
+    variableUnit: unitless
+    variableDescription: Indicator equal to one for a fire station, branch, or outpost considered as a candidate
+      ambulance dispatch base.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 81
+  demand_node_id:
+    variableNameInDataset: derived:Demand Node ID
+    variableNameInArticle: Demand Node Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of the virtual road-network connector for a demand unit.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 62945
+  dispatch_base_node_id:
+    variableNameInDataset: derived:Dispatch Base Node ID
+    variableNameInArticle: Dispatch Base Node Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of the virtual road-network connector for a candidate ambulance dispatch base.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 81
+  dispatch_travel_time:
+    variableNameInDataset: derived:Dispatch Travel Time
+    variableNameInArticle: Dispatch Travel Time
+    variableAttribute: continuous
+    variableUnit: minutes
+    variableDescription: Shortest network travel time from an available dispatch base to a demand unit.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 251780
+  eligible_emergency_hospital:
+    variableNameInDataset: derived:eligibility flag
+    variableNameInArticle: Eligible Emergency Hospital
+    variableAttribute: boolean
+    variableUnit: unitless
+    variableDescription: Indicator equal to one for a hospital with emergency designation or core/regional disaster-base
+      designation.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 75
+  emergency_road_class:
+    variableNameInDataset: derived:emergency-road label
+    variableNameInArticle: Emergency Road Class
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Road-segment classification or network descriptor used for routing and corridor prioritization.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 264
+  emergency_route_membership:
+    variableNameInDataset: derived:Emergency Route Membership
+    variableNameInArticle: Emergency Route Membership
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Emergency transport road class associated with a compatible route alignment.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  expected_failed_road_length_share:
+    variableNameInDataset: derived:Expected Failed Road Length Share
+    variableNameInArticle: Expected Failed Road Length Share
+    variableAttribute: continuous
+    variableUnit: proportion from 0 to 1
+    variableDescription: Target expected share of total road-section length unavailable in a Monte Carlo state.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  failure_intensity_per_metre:
+    variableNameInDataset: derived:Failure Intensity per Metre
+    variableNameInArticle: Failure Intensity per Metre
+    variableAttribute: continuous
+    variableUnit: per metre
+    variableDescription: Length-scaled failure intensity used to generate section probabilities.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  from_node_id:
+    variableNameInDataset: derived:From Node ID
+    variableNameInArticle: From Node Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of the first endpoint node of a routable edge.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 390234
+  geometry:
+    variableNameInDataset: geometry
+    variableNameInArticle: Geometry
+    variableAttribute: other
+    variableUnit: JGD2011 geometry
+    variableDescription: Point, line, or polygon geometry represented in JGD2011.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  grid_access_loss_probability:
+    variableNameInDataset: derived:Grid Access Loss Probability
+    variableNameInArticle: Grid Access Loss Probability
+    variableAttribute: continuous
+    variableUnit: proportion from 0 to 1
+    variableDescription: Probability that a population grid loses baseline timely emergency access under a declared
+      severity level.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 251780
+  hazard_exposure_class:
+    variableNameInDataset: derived:Hazard Exposure Class
+    variableNameInArticle: Hazard Exposure Class
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Highest landslide warning-zone class intersected by a road edge.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  hospital_assignment_probability:
+    variableNameInDataset: derived:Hospital Assignment Probability
+    variableNameInArticle: Hospital Assignment Probability
+    variableAttribute: continuous
+    variableUnit: proportion from 0 to 1
+    variableDescription: Probability that an eligible hospital is the replicate-specific Assigned Hospital for a
+      demand unit or represented population.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 300
+  hospital_catchment_population:
+    variableNameInDataset: derived:Hospital Catchment Population
+    variableNameInArticle: Hospital Catchment Population
+    variableAttribute: count
+    variableUnit: people
+    variableDescription: Population assigned to a hospital under a specified scenario.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 300
+  hospital_demand_change:
+    variableNameInDataset: derived:Hospital Demand Change
+    variableNameInArticle: Hospital Demand Change
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Change in assigned hospital catchment population relative to baseline.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 300
+  hospital_name:
+    variableNameInDataset: column_2
+    variableNameInArticle: Hospital Name
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Hospital or medical-facility identity, classification, or role attribute.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 198
+  hospital_node_id:
+    variableNameInDataset: derived:Hospital Node ID
+    variableNameInArticle: Hospital Node Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of the virtual road-network connector for an eligible emergency hospital.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 75
+  hospital_transport_time:
+    variableNameInDataset: derived:Hospital Transport Time
+    variableNameInArticle: Hospital Transport Time
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Shortest network travel time from the demand unit to an operational eligible hospital.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 251780
+  monte_carlo_convergence_status:
+    variableNameInDataset: derived:Monte Carlo Convergence Status
+    variableNameInArticle: Monte Carlo Convergence Status
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Indicator that prespecified accessibility estimates are stable across replicate checkpoints.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 20
+  municipality_name:
+    variableNameInDataset: N03_004
+    variableNameInArticle: Municipality Name
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Human-readable identity or descriptive attribute.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 49
+  network_component_id:
+    variableNameInDataset: derived:Network Component ID
+    variableNameInArticle: Network Component Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of the connected Standard Road subnetwork containing the edge or node.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  network_snap_distance_m:
+    variableNameInDataset: derived:Network Snap Distance (m)
+    variableNameInArticle: Network Snap Distance (m)
+    variableAttribute: continuous
+    variableUnit: metres
+    variableDescription: Euclidean distance in metres from the source point or centroid to its nearest eligible
+      road edge.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 62945
+  older_population_losing_timely_access:
+    variableNameInDataset: derived:Older Population Losing Timely Access
+    variableNameInArticle: Older Population Losing Timely Access
+    variableAttribute: count
+    variableUnit: people
+    variableDescription: Population age 65 or older timely in baseline but not timely in the disruption scenario.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  operational_hospital_set:
+    variableNameInDataset: derived:Operational Hospital Set
+    variableNameInArticle: Operational Hospital Set
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Named hospital inclusion set used in an accessibility scenario.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 75
+  p90_emergency_access_time:
+    variableNameInDataset: derived:P90 Emergency Access Time
+    variableNameInArticle: P90 Emergency Access Time
+    variableAttribute: continuous
+    variableUnit: minutes
+    variableDescription: Ninetieth percentile of Total Emergency Access Time across Monte Carlo replicates.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 251780
+  population_age_65:
+    variableNameInDataset: Population Age 65+
+    variableNameInArticle: Population Age 65+
+    variableAttribute: count
+    variableUnit: people
+    variableDescription: Population or household count/share for the represented spatial unit.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 36657
+  population_losing_timely_access:
+    variableNameInDataset: derived:Population Losing Timely Access
+    variableNameInArticle: Population Losing Timely Access
+    variableAttribute: count
+    variableUnit: people
+    variableDescription: Population timely in baseline but not timely in the disruption scenario.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  population_newly_disconnected:
+    variableNameInDataset: derived:Population Newly Disconnected
+    variableNameInArticle: Population Newly Disconnected
+    variableAttribute: count
+    variableUnit: people
+    variableDescription: Population connected to both stages of the emergency chain in baseline but disconnected
+      in a disruption state.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  random_failure_model:
+    variableNameInDataset: derived:Random Failure Model
+    variableNameInArticle: Random Failure Model
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Named mechanism used to assign simultaneous road-section failures.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  realized_failed_road_length_share:
+    variableNameInDataset: derived:Realized Failed Road Length Share
+    variableNameInArticle: Realized Failed Road Length Share
+    variableAttribute: continuous
+    variableUnit: proportion from 0 to 1
+    variableDescription: Observed share of total road-section length failed in one replicate and severity state.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  road_available:
+    variableNameInDataset: derived:Road Available
+    variableNameInArticle: Road Available
+    variableAttribute: boolean
+    variableUnit: unitless
+    variableDescription: Indicator that an edge is traversable in a specified network scenario.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  road_category:
+    variableNameInDataset: derived:road-category label
+    variableNameInArticle: Road Category
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Road-segment classification or network descriptor used for routing and corridor prioritization.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  road_edge_count:
+    variableNameInDataset: derived:Road Edge Count
+    variableNameInArticle: Road Edge Count
+    variableAttribute: count
+    variableUnit: count
+    variableDescription: Number of internal routing fragments composing a road section.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  road_edge_id:
+    variableNameInDataset: derived:Road Edge ID
+    variableNameInArticle: Road Edge Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Unique identifier for an internal routable Standard Road geometry fragment.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 390234
+  road_failure_indicator:
+    variableNameInDataset: derived:Road Failure Indicator
+    variableNameInArticle: Road Failure Indicator
+    variableAttribute: boolean
+    variableUnit: unitless
+    variableDescription: Indicator that a Road Section ID is unavailable in a replicate and severity state.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  road_length_m:
+    variableNameInDataset: derived:Road Length (m)
+    variableNameInArticle: Road Length (m)
+    variableAttribute: continuous
+    variableUnit: metres
+    variableDescription: Projected length of the routable edge in metres.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 390234
+  road_section_id:
+    variableNameInDataset: derived:Road Section ID
+    variableNameInArticle: Road Section Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Unique identifier for one continuous road section between true same-level junctions.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  road_section_length_m:
+    variableNameInDataset: derived:Road Section Length (m)
+    variableNameInArticle: Road Section Length (m)
+    variableAttribute: continuous
+    variableUnit: metres
+    variableDescription: Total length in metres of a junction-to-junction road section.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  road_type:
+    variableNameInDataset: derived:road-type label
+    variableNameInArticle: Road Type
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Road-segment classification or network descriptor used for routing and corridor prioritization.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 264
+  road_section_expected_risk:
+    variableNameInDataset: derived:Road-Section Expected Risk
+    variableNameInArticle: Road-Section Expected Risk
+    variableAttribute: continuous
+    variableUnit: people
+    variableDescription: Probability-weighted expected accessibility consequence of a road section under a declared
+      severity and timely-access threshold.
+    variableSource: road_section_consequence_results
+    observationNumber: 343844
+  road_section_potential_access_loss:
+    variableNameInDataset: derived:Road-Section Potential Access Loss
+    variableNameInArticle: Road-Section Potential Access Loss
+    variableAttribute: continuous
+    variableUnit: people
+    variableDescription: Population-weighted timely-access loss caused by failure of one junction-to-junction road
+      section with other roads available.
+    variableSource: road_section_consequence_results
+    observationNumber: 343844
+  route_name:
+    variableNameInDataset: derived:Route Name
+    variableNameInArticle: Route Name
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Road-segment classification or network descriptor used for routing and corridor prioritization.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  section_failure_probability:
+    variableNameInDataset: derived:Section Failure Probability
+    variableNameInArticle: Section Failure Probability
+    variableAttribute: continuous
+    variableUnit: proportion from 0 to 1
+    variableDescription: Probability that a junction-to-junction road section is unavailable in a declared severity
+      state.
+    variableSource: road_section_consequence_results
+    observationNumber: 343844
+  section_from_node_id:
+    variableNameInDataset: derived:Section From Node ID
+    variableNameInArticle: Section From Node Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of one terminal junction of a road section.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  section_to_node_id:
+    variableNameInDataset: derived:Section To Node ID
+    variableNameInArticle: Section To Node Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of the other terminal junction of a road section.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+  simulation_replicate:
+    variableNameInDataset: derived:Simulation Replicate
+    variableNameInArticle: Simulation Replicate
+    variableAttribute: ordinal
+    variableUnit: replicate number
+    variableDescription: Integer identifying one reproducible Monte Carlo randomization draw.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  timely_access_probability:
+    variableNameInDataset: derived:Timely Access Probability
+    variableNameInArticle: Timely Access Probability
+    variableAttribute: continuous
+    variableUnit: proportion from 0 to 1
+    variableDescription: Monte Carlo probability that a demand unit completes the fire-station-to-grid-to-hospital
+      chain within a declared threshold.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 251780
+  timely_access_status:
+    variableNameInDataset: derived:Timely Access Status
+    variableNameInArticle: Timely Access Status
+    variableAttribute: boolean
+    variableUnit: unitless
+    variableDescription: Indicator that Total Emergency Access Time does not exceed the selected threshold.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 251780
+  timely_access_threshold_min:
+    variableNameInDataset: derived:Timely Access Threshold (min)
+    variableNameInArticle: Timely Access Threshold (min)
+    variableAttribute: ordinal
+    variableUnit: minutes
+    variableDescription: Maximum total emergency access time defining timely service, in minutes.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 4000
+  to_node_id:
+    variableNameInDataset: derived:To Node ID
+    variableNameInArticle: To Node Identifier
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Identifier of the second endpoint node of a routable edge.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 390234
+  total_emergency_access_time:
+    variableNameInDataset: derived:Total Emergency Access Time
+    variableNameInArticle: Total Emergency Access Time
+    variableAttribute: continuous
+    variableUnit: unitless
+    variableDescription: Two-stage emergency travel time from dispatch base through the demand unit to the assigned
+      hospital.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 251780
+  total_population:
+    variableNameInDataset: Total Population
+    variableNameInArticle: Total Population
+    variableAttribute: count
+    variableUnit: people
+    variableDescription: Population or household count/share for the represented spatial unit.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 62945
+  width_category:
+    variableNameInDataset: derived:width label
+    variableNameInArticle: Width Category
+    variableAttribute: categorical
+    variableUnit: unitless
+    variableDescription: Road-segment classification or network descriptor used for routing and corridor prioritization.
+    variableSource: formal_monte_carlo_results
+    observationNumber: 343844
+tableDictionary:
+  table_network_and_simulation_descriptive_summary:
+    tableId: table_network_and_simulation_descriptive_summary
+    tablePath: data/results/tables/Table_network_and_simulation_descriptive_summary.xlsx
+    tableCaption: Network, demand, facility, connector, and simulation summary
+    tableAim: Document the represented analytical system and executed experiment.
+    tableExplanation: Reports the realized analysis scale and distributions for 343,844 road sections, graph elements,
+      demand supports, accepted connectors, failure calibration, and executed simulation specifications.
+    tableSuitableSection: Data and study setting
+  table_emergency_access_reliability_by_severity_and_threshold:
+    tableId: table_emergency_access_reliability_by_severity_and_threshold
+    tablePath: data/results/tables/Table_emergency_access_reliability_by_severity_and_threshold.xlsx
+    tableCaption: Emergency-access reliability by severity and timely threshold
+    tableAim: Quantify population reliability across four severities and three time thresholds.
+    tableExplanation: Compares 1,000-replicate population coverage, Monte Carlo precision, uncertainty quantiles,
+      loss, older-person loss, and new disconnection for every main or stress severity and threshold.
+    tableSuitableSection: Population reliability results
+  table_municipal_emergency_access_reliability:
+    tableId: table_municipal_emergency_access_reliability
+    tablePath: data/results/tables/Table_municipal_emergency_access_reliability.xlsx
+    tableCaption: Municipal emergency-access reliability levels and uncertainty
+    tableAim: Describe geographic heterogeneity without asserting ordinal rank stability.
+    tableExplanation: Reports municipality-specific population, older population, access probability, P90 time,
+      coverage loss, uncertainty, and disconnection without interpreting display order as a formal rank.
+    tableSuitableSection: Municipal heterogeneity results
+  table_hospital_service_reliability:
+    tableId: table_hospital_service_reliability
+    tablePath: data/results/tables/Table_hospital_service_reliability.xlsx
+    tableCaption: Hospital assignment and catchment reliability under road failure
+    tableAim: Quantify potential service-population stability for the fixed eligible-hospital set.
+    tableExplanation: Reports all 75 eligible hospitals across four severities, including fixed role, baseline and
+      simulated catchments, assignment probability, demand change, uncertainty quantiles, and zero-catchment frequency.
+    tableSuitableSection: Hospital reliability results
+  table_road_section_loss_by_network_characteristics:
+    tableId: table_road_section_loss_by_network_characteristics
+    tablePath: data/results/tables/Table_road_section_loss_by_network_characteristics.xlsx
+    tableCaption: Road-section loss and risk by network characteristics
+    tableAim: Summarize continuous all-section consequences without a Top-20 cutoff.
+    tableExplanation: Summarizes zero-loss prevalence and the full potential-loss and expected-risk distributions
+      by road category, emergency-route membership, hazard exposure, and failure severity without a Top-20 cutoff.
+    tableSuitableSection: Road consequence and risk results
+  table_monte_carlo_convergence_summary:
+    tableId: table_monte_carlo_convergence_summary
+    tablePath: data/results/tables/Table_monte_carlo_convergence_summary.xlsx
+    tableCaption: Monte Carlo convergence by severity and replicate checkpoint
+    tableAim: Document whether formal accessibility estimates meet the declared stability rule.
+    tableExplanation: Documents population coverage, standard error, uncertainty, and changes in population, grid
+      probability, and hospital catchments at each checkpoint under the declared stability thresholds.
+    tableSuitableSection: Robustness and convergence results
+figureDictionary:
+  fig_emergency_care_network_and_population_demand:
+    figureId: fig_emergency_care_network_and_population_demand
+    figurePath: data/results/figures/Figure_emergency_care_network_and_population_demand.png
+    figureCaption: Population demand and emergency-care network across Kumamoto
+    figureAim: Describe the spatial support of demand, dispatch bases, eligible hospitals, and emergency roads.
+    figureExplanation: Maps total population at 125 m resolution, older population at disclosure-group support,
+      and the road, dispatch-base, hospital, and emergency-route network used by the study.
+    figureSuitableSection: Data and study setting
+  fig_baseline_two_stage_emergency_travel_time:
+    figureId: fig_baseline_two_stage_emergency_travel_time
+    figurePath: data/results/figures/Figure_baseline_two_stage_emergency_travel_time.png
+    figureCaption: Baseline dispatch, hospital transport, and total emergency travel times
+    figureAim: Establish baseline travel impedance for both stages of emergency access.
+    figureExplanation: Shows that baseline access is the sum of nearest-dispatch and nearest-eligible-hospital travel
+      times, while grey units remain explicitly not estimated.
+    figureSuitableSection: Baseline accessibility results
+  fig_failure_severity_response:
+    figureId: fig_failure_severity_response
+    figurePath: data/results/figures/Figure_failure_severity_response.png
+    figureCaption: Emergency-access response to increasing failed road length
+    figureAim: Calibrate interpretable main and stress failure severities.
+    figureExplanation: The calibration shows monotone decline in 30-minute coverage and increasing access loss and
+      disconnection as expected failed road length rises; shaded bands are P5-P95 across 100 replicates.
+    figureSuitableSection: Failure calibration results
+  fig_nested_length_dependent_road_failure_realizations:
+    figureId: fig_nested_length_dependent_road_failure_realizations
+    figurePath: data/results/figures/Figure_nested_length_dependent_road_failure_realizations.png
+    figureCaption: Nested road-failure realizations across main and stress severities
+    figureAim: Demonstrate paired, length-dependent, nested failure assignment.
+    figureExplanation: One paired replicate visualizes how failed sections expand from 1% through 10%, with realized
+      failed length close to each calibrated expectation.
+    figureSuitableSection: Simulation design and realization checks
+  fig_grid_emergency_access_loss_probability:
+    figureId: fig_grid_emergency_access_loss_probability
+    figurePath: data/results/figures/Figure_grid_emergency_access_loss_probability.png
+    figureCaption: Grid probability of losing baseline 30-minute emergency access
+    figureAim: Locate population grids with fragile timely emergency access.
+    figureExplanation: Maps the expanding spatial footprint and probability of losing baseline 30-minute access
+      under the 1%, 3%, and 5% main scenarios, retaining zero-probability grids explicitly.
+    figureSuitableSection: Grid reliability results
+  fig_population_coverage_under_length_dependent_road_failure:
+    figureId: fig_population_coverage_under_length_dependent_road_failure
+    figurePath: data/results/figures/Figure_population_coverage_under_length_dependent_road_failure.png
+    figureCaption: Population coverage retained across failure severity and thresholds
+    figureAim: Compare total and older-population reliability across thresholds and severities.
+    figureExplanation: Total and age-65-plus population coverage decline at all thresholds as severity increases;
+      older-population coverage is consistently slightly less reliable on its valid disclosure-group support.
+    figureSuitableSection: Population reliability results
+  fig_hospital_service_reliability_under_road_failure:
+    figureId: fig_hospital_service_reliability_under_road_failure
+    figurePath: data/results/figures/Figure_hospital_service_reliability_under_road_failure.png
+    figureCaption: Hospital catchment reliability under increasing road failure
+    figureAim: Show road-supported changes in potential hospital service populations.
+    figureExplanation: Hospital catchment sizes, changes from baseline, and zero-catchment frequencies become more
+      variable as failed road length increases, conditional on the fixed unweighted hospital set.
+    figureSuitableSection: Hospital reliability results
+  fig_road_section_accessibility_consequence_and_expected_risk:
+    figureId: fig_road_section_accessibility_consequence_and_expected_risk
+    figurePath: data/results/figures/Figure_road_section_accessibility_consequence_and_expected_risk.png
+    figureCaption: Road-section accessibility consequence and expected risk surfaces
+    figureAim: Map every road section by potential access consequence and scenario risk.
+    figureExplanation: Maps nonzero leave-one-section-out population consequences for three thresholds and 30-minute
+      probability-weighted expected risk for all eligible sections at the three main severities.
+    figureSuitableSection: Road consequence and risk results
+  fig_monte_carlo_convergence_and_stress_sensitivity:
+    figureId: fig_monte_carlo_convergence_and_stress_sensitivity
+    figurePath: data/results/figures/Figure_monte_carlo_convergence_and_stress_sensitivity.png
+    figureCaption: Monte Carlo convergence, stress severity, and speed sensitivity
+    figureAim: Assess simulation precision and declared stress and speed sensitivities.
+    figureExplanation: Running estimates stabilize, Monte Carlo standard errors fall, all severities pass the declared
+      convergence rule after the reference checkpoint, and stress and speed sensitivities preserve the expected
+      ordering.
+    figureSuitableSection: Robustness and convergence results
+analysisStructureBrief:
+  overview: An applied paired Monte Carlo network-reliability study linking length-dependent road-section failures
+    to two-stage ambulance access, population and hospital reliability, and network-wide road-section consequence
+    across Kumamoto Prefecture.
+  levels:
+  - levelName: Baseline network and study-population validation
+    levelAim: Verify that the full fire-station-to-grid-to-hospital chain is represented on an interpretable road
+      network.
+    inputs:
+    - Road Section Identifier
+    - Road Section Length (m)
+    - Road Edge Count
+    - From Node Identifier
+    - To Node Identifier
+    - Network Component Identifier
+    - Network Snap Distance (m)
+    - Candidate Dispatch Base
+    - Eligible Emergency Hospital
+    - Total Population
+    modelOrMethod: Construct the eligible baseline graph G0=(V,E), assign edge time t_e=60L_e/(1000v_e), retain
+      all connected components, and add accepted demand, dispatch-base, and hospital connectors with their snap-distance
+      travel time.
+    outputs:
+    - Emergency Care Network and Population Demand
+    - Baseline Two-Stage Emergency Travel Time
+    - Network and Simulation Descriptive Summary
+    interpretation: The observed topology, impedance, facilities, demand supports, and connector audits determine
+      whether the modeled emergency chain is usable; results remain conditional on represented roads and connector
+      thresholds.
+  - levelName: Length-dependent failure calibration
+    levelAim: Calibrate comparable road-section failure states to target expected failed road length.
+    inputs:
+    - Expected Failed Road Length Share
+    - Failure Intensity per Metre
+    - Road Section Length (m)
+    - Section Failure Probability
+    - Realized Failed Road Length Share
+    - Simulation Replicate
+    modelOrMethod: For section s, q_s(lambda_d)=1-exp(-lambda_d L_s), with lambda_d solving sum_s L_s q_s(lambda_d)/sum_s
+      L_s=d; one paired uniform score per section and replicate creates nested severity states.
+    outputs:
+    - Failure Severity Response
+    - Network and Simulation Descriptive Summary
+    interpretation: Section length and the calibrated intensity determine failure probability; the response identifies
+      transparent planning severities rather than observed earthquake or engineering failure probabilities.
+  - levelName: Formal nested road-failure experiment
+    levelAim: Generate reproducible paired road-availability states for the main and stress severities.
+    inputs:
+    - Road Section Identifier
+    - Section Failure Probability
+    - Road Failure Indicator
+    - Road Available
+    - Simulation Replicate
+    - Random Failure Model
+    modelOrMethod: Set Z_srd=1{U_sr<q_s(lambda_d)} and remove every internal edge and attached connector belonging
+      to failed section s before full rerouting; reuse U_sr across severities within each replicate.
+    outputs:
+    - Nested Length-Dependent Road Failure Realizations
+    interpretation: The shared random score makes 1%, 3%, 5%, and 10% states directly comparable and nested, but
+      the mechanism remains a scenario model rather than event reconstruction.
+  - levelName: Grid emergency-access reliability
+    levelAim: Estimate each grid's probability of completing the two-stage emergency chain within declared thresholds.
+    inputs:
+    - Analysis Unit Identifier
+    - Dispatch Travel Time
+    - Hospital Transport Time
+    - Total Emergency Access Time
+    - Timely Access Threshold (min)
+    - Timely Access Status
+    - Timely Access Probability
+    - Grid Access Loss Probability
+    - P90 Emergency Access Time
+    modelOrMethod: Fully reroute D_ird=min_f d_rd(f,i) and H_ird=min_h d_rd(i,h), set T_ird=D_ird+H_ird and A_ird(tau)=1{T_ird<=tau},
+      then estimate pi_hat_id(tau)=R^-1 sum_r A_ird(tau) and baseline-loss probability over all R replicates.
+    outputs:
+    - Grid Emergency Access Loss Probability
+    - Emergency Access Reliability by Severity and Threshold
+    interpretation: Road availability determines feasible dispatch and hospital paths and therefore grid reliability;
+      unreachable outcomes remain explicit, and results are conditional on fixed facilities and assumed speeds.
+  - levelName: Population and municipal reliability
+    levelAim: Aggregate grid reliability into total, older-population, and municipal loss distributions.
+    inputs:
+    - Total Population
+    - Population Age 65+
+    - Municipality Name
+    - Timely Access Status
+    - Population Losing Timely Access
+    - Older Population Losing Timely Access
+    - Population Newly Disconnected
+    modelOrMethod: For weight w_i, compute C_rd(tau)=sum_i w_i A_ird(tau) and L_rd(tau)=sum_i w_i 1{A_i0(tau)=1
+      and A_ird(tau)=0}; summarize all 1,000 replicates and retain age-65-plus counts at disclosure-group support.
+    outputs:
+    - Population Coverage under Length-Dependent Road Failure
+    - Municipal Emergency Access Reliability
+    interpretation: Population weights convert grid states into coverage and loss; municipality estimates are descriptive
+      reliability levels with uncertainty, not ordinal rankings, and older-population precision is limited to disclosure
+      groups.
+  - levelName: Hospital service reliability
+    levelAim: Estimate road-supported hospital assignment and catchment stability under road failure.
+    inputs:
+    - Hospital Name Romanized
+    - Assigned Hospital
+    - Hospital Catchment Population
+    - Hospital Assignment Probability
+    - Hospital Demand Change
+    - Operational Hospital Set
+    modelOrMethod: Assign each reachable demand unit to the hospital minimizing transport time and compute K_hrd=sum_i
+      w_i 1{h_ird=h}; summarize catchment distributions, assignment frequency, baseline change, and zero-catchment
+      frequency.
+    outputs:
+    - Hospital Service Reliability under Road Failure
+    - Hospital Service Reliability
+    interpretation: Network reachability and substitution determine potential catchments within one fixed unweighted
+      eligible-hospital set; estimates do not represent clinical capacity or observed destination choice.
+  - levelName: Road-section consequence and expected risk
+    levelAim: Map every eligible road section by single-section accessibility consequence and scenario-weighted
+      expected risk.
+    inputs:
+    - Road Section Identifier
+    - Geometry
+    - Timely Access Threshold (min)
+    - Section Failure Probability
+    - Road-Section Potential Access Loss
+    - Road-Section Expected Risk
+    - Route Name
+    modelOrMethod: For each section s, compute P_s(tau)=C_0(tau)-C_-s(tau) after removing only s, then R_sd(tau)=q_s(lambda_d)P_s(tau);
+      retain zero and positive values for all 343,844 sections.
+    outputs:
+    - Road-Section Accessibility Consequence and Expected Risk
+    - Road-Section Loss by Network Characteristics
+    interpretation: Topology and population coverage determine potential loss, while the declared failure model
+      supplies the risk weight; interactions among simultaneous failures, repair costs, and engineering priority
+      are not identified.
+  - levelName: Uncertainty, convergence, and sensitivity
+    levelAim: Test whether primary results stabilize with replicate count and remain interpretable under stress
+      and speed alternatives.
+    inputs:
+    - Simulation Replicate
+    - Monte Carlo Convergence Status
+    - Expected Failed Road Length Share
+    - Assumed Speed (km/h)
+    - Operational Hospital Set
+    modelOrMethod: At R_j in {100,250,500,750,1000}, compare population mean change, the grid-probability P95 change,
+      and hospital-catchment P95 change with tolerances 0.005, 0.05, and 0.005; also evaluate 10% stress and 0.8x/1.2x
+      speed specifications.
+    outputs:
+    - Monte Carlo Convergence and Stress Sensitivity
+    - Monte Carlo Convergence Summary
+    interpretation: Stable checkpoint changes support numerical precision under the declared model; sensitivity
+      results reveal dependence on severity and speed but cannot validate unavailable engineering or operational
+      inputs.

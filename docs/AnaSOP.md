@@ -7,11 +7,11 @@ Analysis Standard Operating Procedure
 
 - Research question: Under length-dependent failures of continuous junction-to-junction road sections, how reliably can each population grid complete the fire-station-to-grid-to-hospital emergency chain, and where are the road sections whose loss most reduces timely emergency access across Kumamoto Prefecture?
 - Why it matters: Emergency managers need evidence on both where ambulance access is fragile and which road sections should receive continuity protection, inspection, or restoration priority when many road failures can occur simultaneously.
-- Data support currently visible: The evidence represents population demand, older populations, candidate fire-station dispatch bases, eligible emergency hospitals, 343,844 junction-to-junction road sections, road and route attributes, administrative geography, and hazard information. The 100-replicate calibration produced an ordered severity response at 0.5%, 1%, 2%, 3%, 5%, and 10% expected failed road length.
+- Data support currently visible: The evidence represents population demand, older populations, candidate fire-station dispatch bases, eligible emergency hospitals, 343,844 junction-to-junction road sections, road and route attributes, administrative geography, and hazard information. The 100-replicate calibration produced an ordered severity response at 0.5%, 1%, 2%, 3%, 5%, and 10% expected failed road length, and the formal experiment completed 1,000 paired replicates at each main and stress severity.
 - Key readable variables or data scope: Geometry, Total Population, Population Age 65+, Candidate Dispatch Base, Eligible Emergency Hospital, Road Section ID, Road Section Length (m), Expected Failed Road Length Share, Section Failure Probability, Total Emergency Access Time, Grid Access Loss Probability, Road-Section Potential Access Loss, and Road-Section Expected Risk.
 - What would verify it: Repeated full-network routing should produce reproducible and non-increasing access reliability as expected failed road length rises, while network-wide road-loss maps should identify spatially coherent high-consequence sections without relying on an arbitrary Top-20 cutoff.
 - What would falsify or weaken it: The study would weaken if baseline topology or connectors are unreliable, the full emergency chain cannot be computed for most represented population, Monte Carlo accessibility estimates fail to converge, or road-section results are dominated by implausibly long sections or unverified routing assumptions.
-- Required next feasibility check: Complete 1,000 paired replicates for the confirmed 1%, 3%, and 5% main scenarios and the 10% stress scenario, then verify convergence and inspect the full distribution of section lengths and failure probabilities.
+- Feasibility status: Completed. The 1%, 3%, 5%, and 10% states each contain 1,000 paired replicates; nested failures, monotone travel-time response, same-seed reproducibility, convergence, section-length distributions, and failure-probability calibration were verified.
 
 ### Supporting Research Questions
 
@@ -26,29 +26,29 @@ The four supporting questions deepen the central applied question through grid r
 - Key readable variables or data scope: Analysis Unit ID, Demand Node ID, Dispatch Base Node ID, Hospital Node ID, Expected Failed Road Length Share, Simulation Replicate, Total Emergency Access Time, Timely Access Probability, Grid Access Loss Probability, and P90 Emergency Access Time.
 - What would verify it: Access probability should be bounded, reproducible, and non-increasing across nested failure levels except for negligible Monte Carlo variation.
 - What would falsify or weaken it: Results would weaken if many grids lack baseline network access or if upper-tail estimates remain unstable at 1,000 replicates.
-- Required next feasibility check: Verify that failure of a Road Section ID closes all of its internal routing fragments and attached connectors, and that paired uniform scores preserve nested section failures across severity levels.
+- Feasibility status: Completed. Road Section ID failure closes its internal routing fragments and attached connectors, and shared paired scores produced verified nested failure sets with non-increasing accessibility across severity levels.
 
 #### Population, Older-Population, and Municipal Reliability
 
 - Role relative to central point: assess distributional and geographic heterogeneity.
-- Research question: Which population groups and municipalities experience the largest expected and upper-tail losses of timely emergency access under random road failure?
+- Research question: How do expected and upper-tail losses of timely emergency access vary across population groups and municipalities under random road failure?
 - Why it matters: A road system can appear robust in aggregate while leaving older populations or peripheral municipalities with high disconnection risk.
 - Data support currently visible: Total and older-population measures and municipal geography support population-weighted aggregation on their valid spatial supports.
 - Key readable variables or data scope: Total Population, Population Age 65+, Population Age 75+, Population Age 85+, Municipality Name, Expected Failed Road Length Share, Timely Access Probability, Population Losing Timely Access, Older Population Losing Timely Access, and Population Newly Disconnected.
-- What would verify it: Monte Carlo intervals should identify persistent differences across population supports and municipalities rather than isolated replicate-specific extremes.
-- What would falsify or weaken it: Claims would weaken if disclosure aggregation prevents defensible older-population localization or municipal ranks are highly unstable.
-- Required next feasibility check: Retain separate spatial support for older-population estimates and measure municipal rank stability across replicate counts.
+- What would verify it: Estimates based on the full 1,000-replicate experiment and their Monte Carlo intervals should reveal persistent geographic and population-support differences rather than isolated replicate-specific extremes.
+- What would falsify or weaken it: Claims would weaken if disclosure aggregation prevents defensible older-population localization or if Monte Carlo uncertainty is too large to distinguish substantively different municipal reliability levels.
+- Feasibility status: Completed. Older-population estimates retain their valid disclosure-group support, municipality-specific levels and uncertainty use all 1,000 replicates, and displayed ordering is not interpreted as a formal municipal ranking.
 
 #### Hospital Service Reliability
 
 - Role relative to central point: identify the hospital-side service mechanism.
 - Research question: How do random road failures change the probability that each eligible hospital remains the nearest feasible destination and the distribution of its population catchment?
 - Why it matters: Hospital emergency value depends on road-supported reachability and substitution, not only on beds or formal designation.
-- Data support currently visible: Eligible hospital locations, roles, capacity descriptors, population demand, and labelled multi-source routing support replicate-specific hospital assignment and catchment estimation.
-- Key readable variables or data scope: Hospital Name, Eligible Emergency Hospital, Assigned Hospital, Hospital Catchment Population, Hospital Assignment Probability, Hospital Role Weight, Hospital Capacity Weight, Expected Failed Road Length Share, and Simulation Replicate.
+- Data support currently visible: Eligible hospital locations, confirmed emergency or disaster-base designations, population demand, and labelled multi-source routing support replicate-specific hospital assignment and catchment estimation. Hospital role and capacity information is not complete enough for defensible weighting.
+- Key readable variables or data scope: Hospital Name, Eligible Emergency Hospital, Assigned Hospital, Hospital Catchment Population, Hospital Assignment Probability, Operational Hospital Set, Expected Failed Road Length Share, and Simulation Replicate.
 - What would verify it: Hospital assignment probabilities and catchment intervals should be reproducible and identify facilities with persistently large or volatile service roles.
-- What would falsify or weaken it: Interpretation would weaken if eligibility rules or missing capacity data reverse results or if nearest-hospital assignment is an inadequate proxy for actual emergency destination choice.
-- Required next feasibility check: Keep unweighted eligible-hospital routing primary and treat role or capacity weighting as separately labelled sensitivity analysis.
+- What would falsify or weaken it: Interpretation would weaken if the fixed eligibility rule or nearest-feasible-hospital assignment is an inadequate proxy for actual emergency destination choice. Incomplete role and capacity information prevents interpretation as clinical service capacity.
+- Feasibility status: Completed within the declared scope. The fixed roster contains 75 eligible hospitals with accepted network connectors, and unweighted nearest-feasible-hospital assignment is interpreted only as road-supported potential service coverage.
 
 #### Road-Section Consequences and Expected Risk
 
@@ -58,8 +58,8 @@ The four supporting questions deepen the central applied question through grid r
 - Data support currently visible: Junction-defined road geometry, section length, route attributes, baseline travel times, and repeated full-network routing support both single-section potential-loss calculations and probability-weighted expected-risk maps.
 - Key readable variables or data scope: Road Section ID, Road Section Length (m), Route Name, Timely Access Threshold (min), Section Failure Probability, Road-Section Potential Access Loss, Road-Section Expected Risk, Total Population, and Population Age 65+.
 - What would verify it: Road consequences should be nonnegative, spatially coherent, reproducible, and interpretable at all 343,844 sections, with expected risk changing consistently across the 1%, 3%, and 5% scenarios.
-- What would falsify or weaken it: Road-priority interpretation would weaken if most estimated consequences are numerically indistinguishable from zero, if isolated values are driven by topology errors, or if results change materially under plausible travel-speed and hospital-set sensitivity specifications.
-- Required next feasibility check: Compute leave-one-section-out potential loss for every eligible section and verify that the full-network color scale preserves both zero values and the upper tail.
+- What would falsify or weaken it: Road-priority interpretation would weaken if most estimated consequences are numerically indistinguishable from zero, if isolated values are driven by topology errors, or if results change materially under plausible travel-speed specifications.
+- Feasibility status: Completed. All 343,844 eligible sections have leave-one-section-out potential-loss records, zero values and the positive upper tail remain explicit, topology checks pass, and an independent 48-section recomputation exactly matches the stored results.
 
 ### Scope of Analysis
 
@@ -68,14 +68,14 @@ The four supporting questions deepen the central applied question through grid r
 - Operational chain: Candidate fire-station dispatch base to population grid, followed by population grid to the nearest feasible eligible emergency hospital.
 - Units of analysis: Junction-to-junction road section, population grid, older-population disclosure group, candidate dispatch base, eligible emergency hospital, municipality, expected failed road-length level, and simulation replicate.
 - Period: Cross-sectional network simulation using the confirmed source vintages; it is not an observed longitudinal disaster-response study.
-- Experimental scope: Nested 1%, 3%, and 5% expected failed road-length levels with 1,000 target replicates per level; 10% is an extreme stress sensitivity scenario, while 0.5% remains a near-baseline calibration check. Section failure probability increases with section length.
+- Experimental scope: Nested 1%, 3%, and 5% expected failed road-length levels with 1,000 completed replicates per level; 10% is an extreme stress sensitivity scenario with 1,000 completed replicates, while 0.5% remains a near-baseline calibration check. Section failure probability increases with section length.
 
 ### Study Design Declaration
 
 - Research type: applied
 - Study design: Applied Monte Carlo network-reliability and emergency-access simulation study.
 - Primary estimand: Grid-level probability of timely completion of the two-stage emergency chain and the population-weighted potential accessibility loss and expected risk associated with every junction-to-junction road section.
-- Interpretation limit: Results describe the specified random-failure models and routing assumptions. They do not reconstruct an observed earthquake, predict engineering failure probabilities, measure ambulance availability or on-scene delay, establish clinical capacity, or identify causal effects of an actual repair intervention.
+- Interpretation limit: Results describe the specified random-failure models, fixed eligible-hospital set, and unweighted nearest-feasible-hospital routing assumptions. They do not reconstruct an observed earthquake, predict engineering failure probabilities, measure ambulance availability or on-scene delay, establish clinical capacity, reproduce actual hospital destination choice, or identify causal effects of an actual repair intervention.
 
 ## 2. Theoretical Background  /  Conceptual Framework  /  Problem Formulation
 
@@ -104,53 +104,51 @@ Section focus: Empirical context, practical problem, and cautious interpretation
 - Primary grid outcome: Timely Access Probability for completing the two-stage chain within 30 minutes. The 15- and 45-minute thresholds and P90 Emergency Access Time are complementary outcomes.
 - Primary system outcome: Total Population retaining timely access in each replicate. Older-population measures use their valid disclosure-group support.
 - Primary road outcome: Road-Section Potential Access Loss, defined as the decline in population-weighted timely access after removing one section from the otherwise available baseline network, and Road-Section Expected Risk, defined by weighting that consequence by Section Failure Probability.
-- Interpretation limit: Single-section potential loss isolates direct network consequence but does not reproduce all interactions among simultaneous failures. Expected risk inherits the assumed length-dependent failure model, and the full-network maps support spatial prioritization rather than a definitive engineering repair order.
+- Interpretation limit: Single-section potential loss isolates direct network consequence but does not reproduce all interactions among simultaneous failures. Expected risk inherits the assumed length-dependent failure model, and the full-network maps support spatial prioritization rather than a definitive engineering repair order. Hospital catchments represent road-supported potential assignment within one fixed eligible-hospital set; incomplete role and capacity information precludes hospital weighting and clinical-capacity claims.
 
 ## 3. Data Overview
 
 ### Data Scope
 
-- Data sources reviewed: 6
-- Variables summarized: 196
-- Distribution plots generated: 24
+- Research-used analytical input datasets reviewed: 12
+- Variables summarized: 239
+- Distribution plots generated: 80
 - Files skipped during briefing: 0
-- Geospatial layers profiled separately: 12
-- Geospatial features profiled: 1,249,722
-- Geospatial attributes catalogued: 117
+- Generated result collections used by figures and tables: 4
+- Study design: Cross-sectional, static road-network simulation rather than a longitudinal panel
 
-| Data source | Rows | Columns |
-| --- | ---: | ---: |
-| Data source 1 | 2102 | 12 |
-| Data source 2 | 112 | 54 |
-| Data source 3 | 7715 | 65 |
-| Data source 4 | 250824 | 36 |
-| Data source 5 | 36657 | 19 |
-| Data source 6 | 62945 | 10 |
+### Units of Observation and Evaluation Dataset Size
 
-### Time-Series Candidates
+| Analytical data component | Primary unit of observation | Records used | Analytical role |
+|---|---|---:|---|
+| Population demand | 125 m population grid | 62,945 | Total-population emergency-access estimation |
+| Older-population demand | Disclosure-valid population group | 36,657 | Age 65+, 75+, and 85+ outcomes without mesh-level imputation |
+| Routable network | Grade-aware road edge | 390,234 | Shortest-path impedance and connectivity |
+| Failure experiment | Junction-to-junction road section | 343,844 | Length-dependent failure and all-section consequence estimation |
+| Network topology | Grade-aware road node | 314,391 | Connected-component and routing structure |
+| Ambulance supply | Accepted candidate dispatch base | 81 | First-stage dispatch origins |
+| Hospital supply | Accepted eligible emergency hospital | 75 | Fixed second-stage destination set |
+| Administrative geography | Municipal or ward polygon | 49 | Mapping and municipal aggregation |
+| Formal Monte Carlo experiment | Paired replicate-severity state | 4,000 | 1,000 replicates at each of four formal severity levels |
+| Grid reliability output | Grid-severity record | 251,780 | Timely-access probability and P90 estimation |
+| Hospital reliability output | Hospital-severity record | 300 | Catchment and assignment stability |
 
-No obvious time-series columns were detected.
+### Time Coverage and Time-Series Decision
+
+- Input sources have cross-sectional reference vintages spanning 2012-2026; the routable road network is represented at its 2024 reference state.
+- One source-date field was detected as time-like, but it is record-provenance metadata rather than a repeated observation of emergency access.
+- Baseline Edge Travel Time (min) and Baseline Section Travel Time (min) measure travel duration, not calendar time, even though automated screening flagged their names as time-like.
+- No longitudinal panel is available or required for the declared research question. Time-series estimation and time-series visualizations are therefore excluded from this study.
 
 ### Data Limitations
 
 - No skipped files were recorded by the briefing script.
-- The FDMA CSV and prefectural hospital workbook use multi-row headers. Their
-  automatically generated `Unnamed:*` labels and distribution plots are not
-  analytical variables; preprocessing must rebuild the headers first.
-- The P17 fire-facility layer is from 2012. The 2024 FDMA totals indicate that
-  the point roster requires completeness validation before dispatch modelling.
-- N13 provides road centerlines but no node-link topology. The five source
-  meshes must be clipped to Kumamoto, planarized at valid intersections, and
-  checked for disconnected components before routing.
-- P04 emergency/disaster designations are from 2020. Hospital names and roles
-  must be reconciled to the 2026 MHLW facility roster and the prefectural
-  2024-2029 healthcare plan.
-- The 2025 prefectural hospital workbook excludes Kumamoto City; the nationwide
-  MHLW file is therefore the complete current hospital-location source.
-- A33 is suitable for scenario construction and screening, not proof that a
-  particular road segment failed in the earthquake.
-- Treat this section as exploratory; final variable decisions belong to Section 4.
-- AnaSOP intentionally avoids raw dataset names, source file paths, and original column names.
+- Source vintages differ across infrastructure, facility, population, and hazard inputs; results represent a harmonized cross-sectional simulation rather than one perfectly synchronized observation date.
+- The fire-facility point roster predates the road network and requires completeness validation against newer organization totals before dispatch interpretation.
+- Older-population counts remain on their disclosure-valid group support and are not imputed to individual 125 m grids.
+- Hospital role and capacity information is incomplete, so the fixed eligible-hospital set is unweighted and does not represent clinical treatment capacity.
+- Hazard exposure supports scenario interpretation only and does not establish that a road section failed in an observed earthquake.
+- Final variables and construction rules are defined in Section 4; technical source names, paths, and original column labels remain outside AnaSOP.
 
 ## 4. Variable Construction  /  Key Variables
 
@@ -207,7 +205,7 @@ All names below are analysis-facing English names. Source-specific names and pat
 | Hazard Type | Hazard Type | disruption risk | Landslide warning-zone classification used for disruption scenarios. | Retained under the confirmed cleaning rules without missing-value imputation or outlier transformation. | yes |
 | Hazard Type Code | Hazard Type Code | disruption risk | Landslide warning-zone classification used for disruption scenarios. | Retained under the confirmed cleaning rules without missing-value imputation or outlier transformation. | yes |
 | Hospital Assignment Probability | Hospital Assignment Probability | hospital reliability outcome | Probability that an eligible hospital is the replicate-specific Assigned Hospital for a demand unit or represented population. | Estimated as assignment frequency across Monte Carlo replicates within Expected Failed Road Length Share and Random Failure Model. | yes |
-| Hospital Capacity Weight | Hospital Capacity Weight | hospital weight | Nonnegative hospital capacity weight used in weighted accessibility analyses. | Uses reported Bed Count without normalization during preprocessing; missing bed counts remain missing. | yes |
+| Hospital Capacity Weight | Hospital Capacity Weight | reference-only candidate weight | Candidate nonnegative weight for a capacity-weighted hospital specification. | No analytical weight is constructed because reported capacity information is incomplete; available bed descriptors remain reference information only. | no |
 | Hospital Catchment Population | Hospital Catchment Population | hospital demand | Population assigned to a hospital under a specified scenario. | Sum of Total Population over analysis units for which that hospital is Assigned Hospital. | yes |
 | Hospital Demand Change | Hospital Demand Change | hospital demand | Change in assigned hospital catchment population relative to baseline. | Scenario Hospital Catchment Population minus baseline Hospital Catchment Population. | yes |
 | Hospital ID | Hospital Identifier | hospital supply | Hospital or medical-facility identity, classification, or role attribute. | Retained under the confirmed cleaning rules without missing-value imputation or outlier transformation. | yes |
@@ -215,7 +213,7 @@ All names below are analysis-facing English names. Source-specific names and pat
 | Hospital Name Kana | Hospital Name Kana | hospital supply | Hospital or medical-facility identity, classification, or role attribute. | Retained under the confirmed cleaning rules without missing-value imputation or outlier transformation. | yes |
 | Hospital Name Romanized | Hospital Name Romanized | hospital supply | Hospital or medical-facility identity, classification, or role attribute. | Retained under the confirmed cleaning rules without missing-value imputation or outlier transformation. | yes |
 | Hospital Node ID | Hospital Node Identifier | network connector | Identifier of the virtual road-network connector for an eligible emergency hospital. | Assigned when the hospital is within 150 m of an eligible road edge. | yes |
-| Hospital Role Weight | Hospital Role Weight | hospital weight | Weight applied to a hospital's emergency-care role in weighted sensitivity analyses. | Initialized to 1.0 for the unweighted baseline; alternative role weights are estimated only in declared sensitivity specifications. | yes |
+| Hospital Role Weight | Hospital Role Weight | reference-only candidate weight | Candidate weight for a role-weighted hospital specification. | No non-unit analytical weight is constructed because hospital role information is incomplete; the accepted model remains unweighted. | no |
 | Hospital Transport Time | Hospital Transport Time | accessibility outcome | Shortest network travel time from the demand unit to an operational eligible hospital. | Calculated on the same scenario-specific road graph after ambulance arrival. | yes |
 | Households with Member Age 65+ | Households with Member Age 65+ | demand | Population or household count/share for the represented spatial unit. | Retained under the confirmed cleaning rules without missing-value imputation or outlier transformation. | yes |
 | Infectious Disease Beds | Infectious Disease Beds | hospital capacity | Reported hospital bed capacity for the stated bed category. | Retained under the confirmed cleaning rules without missing-value imputation or outlier transformation. | yes |
@@ -369,6 +367,18 @@ All names below are analysis-facing English names. Source-specific names and pat
 
 This study is an applied randomized computational experiment. Population demand, candidate dispatch bases, eligible hospitals, road topology, and baseline travel impedance are held fixed. Road availability changes across reproducible Monte Carlo states. The design identifies accessibility reliability and road consequence within the declared simulation model; it does not identify the causal effect of an observed earthquake, an actual road repair, or an operational ambulance intervention.
 
+### Section 4 Input Linkage and Section 8 Evidence Mapping
+
+The identification strategy uses readable final variables defined in Section 4. The inputs, treatments, outcomes, and diagnostics enter the analytical design as follows:
+
+- Baseline network and fixed-supply inputs are Geometry, Road Edge ID, Road Section ID, From Node ID, To Node ID, Network Component ID, Road Length (m), Road Section Length (m), Road Edge Count, Assumed Speed (km/h), Baseline Edge Travel Time (min), Baseline Section Travel Time (min), Road Category, Road Type, Width Category, Emergency Route Membership, Hazard Exposure Class, Network Snap Distance (m), Candidate Dispatch Base, Eligible Emergency Hospital, and Operational Hospital Set. These variables establish the graph, impedance, connectors, and fixed facility roster.
+- Demand and geographic inputs are Analysis Unit ID, Total Population, Population Age 65+, Population Age 75+, Population Age 85+, and Municipality Name. Total-population outcomes use the 125 m grid, while older-population outcomes remain on their disclosure-valid group support.
+- Experimental treatment variables are Expected Failed Road Length Share, Failure Intensity per Metre, Section Failure Probability, Road Failure Indicator, Road Available, Random Failure Model, and Simulation Replicate. They define the paired, nested, length-dependent failure states.
+- Accessibility and reliability outcomes are Dispatch Travel Time, Hospital Transport Time, Total Emergency Access Time, Timely Access Threshold (min), Timely Access Status, Timely Access Probability, Grid Access Loss Probability, P90 Emergency Access Time, Population Losing Timely Access, Older Population Losing Timely Access, Population Newly Disconnected, Assigned Hospital, Hospital Catchment Population, Hospital Assignment Probability, and Hospital Demand Change.
+- Road-priority outcomes are Road-Section Potential Access Loss and Road-Section Expected Risk. Monte Carlo Convergence Status and Confidence Interval summarize simulation precision. Hospital Role Weight and Hospital Capacity Weight are not final analytical inputs and do not enter the accepted specification.
+
+These Section 4 variables map directly to the Section 8 evidence products. Baseline network, demand, and facility inputs generate Emergency Care Network and Population Demand, Baseline Two-Stage Emergency Travel Time, and Network and Simulation Descriptive Summary. Failure-treatment variables generate Failure Severity Response and Nested Length-Dependent Road Failure Realizations. Grid, population, municipal, and hospital outcomes generate Grid Emergency Access Loss Probability, Population Coverage under Length-Dependent Road Failure, Emergency Access Reliability by Severity and Threshold, Municipal Emergency Access Reliability, Hospital Service Reliability under Road Failure, and Hospital Service Reliability. Road-priority outcomes generate Road-Section Accessibility Consequence and Expected Risk and Road-Section Loss by Network Characteristics. Replicate and precision diagnostics generate Monte Carlo Convergence and Stress Sensitivity and Monte Carlo Convergence Summary.
+
 ### 5.1 Experimental Unit and Failure Assignment
 
 Road Section ID is the failure and analysis unit. Each section is a continuous chain between true same-level junctions. Internal Road Edge ID fragments are retained only to preserve routing impedance, source attributes, and connector positions; all fragments assigned to one Road Section ID share one Road Failure Indicator.
@@ -400,6 +410,8 @@ The operational chain is Candidate Dispatch Base to population grid to Eligible 
 
 The primary grid estimand is Timely Access Probability at 30 minutes. The 15- and 45-minute thresholds, P90 Emergency Access Time, and Grid Access Loss Probability are complementary outcomes. System estimands are Total Population, Population Age 65+, and Population Newly Disconnected. Hospital estimands are Hospital Assignment Probability and the distribution of Hospital Catchment Population.
 
+Municipal comparisons are descriptive reliability-level comparisons based on the full replicate distribution. They are not ordinal ranking estimands, and no Top-\(k\) municipality claim is made.
+
 ### 5.3 Road Consequence and Risk Interpretation
 
 Road-Section Potential Access Loss is estimated by removing one Road Section ID from the otherwise available baseline graph and recomputing population-weighted timely access. This leave-one-section-out quantity measures potential network consequence. Road-Section Expected Risk multiplies that consequence by Section Failure Probability for a declared severity.
@@ -408,9 +420,11 @@ Potential loss is not a conditional Monte Carlo coefficient or a Shapley decompo
 
 ### 5.4 Identification Limits
 
-Results are conditional on the Standard Road topology, assumed travel speeds, connector rules, eligible hospital set, and length-dependent independent-failure mechanism. They do not measure ambulance availability, dispatch delay, on-scene treatment, congestion, hospital clinical capacity, engineering fragility, repair duration, or repair cost. Hospital capacity and role weights are sensitivity descriptors rather than observed destination-choice behavior. Hazard Exposure Class is used for interpretation and sensitivity grouping, not as proof that a section failed.
+Results are conditional on the Standard Road topology, assumed travel speeds, connector rules, fixed eligible hospital set, unweighted nearest-feasible-hospital assignment, and length-dependent independent-failure mechanism. They do not measure ambulance availability, dispatch delay, on-scene treatment, congestion, hospital clinical capacity, engineering fragility, repair duration, or repair cost. Hospital role and capacity weighting is outside the analytical scope because the available information is incomplete; hospital outputs describe road-supported potential catchments rather than observed destination-choice behavior. Hazard Exposure Class is used for interpretation and sensitivity grouping, not as proof that a section failed.
 
 ## 6. Main Estimation Framework
+
+Notation is consistent across the equations below: previously defined symbols are reused, and each subsection defines only newly introduced symbols. Interpretation limits follow Section 5.4 throughout: every estimate is conditional on the declared network, connector, speed, hospital-set, and length-dependent failure assumptions and is not a causal estimate of an observed earthquake, repair intervention, clinical capacity, or ambulance operation.
 
 ### 6.1 Baseline Emergency Network
 
@@ -452,7 +466,30 @@ With \(R\) executed replicates, Timely Access Probability is
 \widehat{\pi}_{i,d}(\tau)=\frac{1}{R}\sum_{r=1}^{R}A_{i,r,d}(\tau).
 \]
 
-P90 Emergency Access Time is the empirical 90th percentile of finite \(T_{i,r,d}\), while the share of infinite outcomes is reported separately. For a grid timely in baseline, Grid Access Loss Probability is
+The probability that the complete two-stage chain is unreachable is
+
+\[
+\widehat{u}_{i,d}
+=
+\frac{1}{R}
+\sum_{r=1}^{R}
+\mathbf{1}\{T_{i,r,d}=+\infty\}.
+\]
+
+Here, \(\widehat{u}_{i,d}\) is the share of all executed replicates in which grid \(i\) is unreachable under severity \(d\). P90 Emergency Access Time retains unreachable outcomes as \(+\infty\) and is defined over the complete replicate distribution as
+
+\[
+\widehat{q}_{0.90,i,d}
+=
+\begin{cases}
+\operatorname{Quantile}_{0.90}\left(\{T_{i,r,d}\}_{r=1}^{R}\right),
+& \widehat{u}_{i,d}<0.10,\\
+\text{unreachable},
+& \widehat{u}_{i,d}\geq 0.10.
+\end{cases}
+\]
+
+Here, \(\widehat{q}_{0.90,i,d}\) is the reported P90 Emergency Access Time. With 1,000 replicates, 100 or more unreachable outcomes therefore make P90 unreachable; tables display this state as `None` with an explanatory note rather than as zero or an ordinary missing value. For a grid timely in baseline, Grid Access Loss Probability is
 
 \[
 \widehat{\ell}_{i,d}(\tau)
@@ -479,7 +516,7 @@ L_{r,d}(\tau)=\sum_i w_i
 \mathbf{1}\{A_{i,0}(\tau)=1,\ A_{i,r,d}(\tau)=0\}.
 \]
 
-Population Newly Disconnected uses finite baseline Total Emergency Access Time and infinite disrupted Total Emergency Access Time. For each severity and threshold, report the mean, standard deviation, P5, P50, P95, and Monte Carlo confidence interval across replicates.
+Population Newly Disconnected uses finite baseline Total Emergency Access Time and infinite disrupted Total Emergency Access Time. For each severity and threshold, report the mean, standard deviation, P5, P50, P95, and Monte Carlo confidence interval across replicates. Municipal summaries use all 1,000 replicates to report reliability levels and uncertainty; municipality ordering is a presentation device rather than an estimated rank, so no separate municipal rank-stability criterion is imposed.
 
 ### 6.4 Hospital Service Reliability
 
@@ -489,7 +526,7 @@ Assigned Hospital is the eligible hospital minimizing Hospital Transport Time in
 K_{h,r,d}=\sum_i w_i\mathbf{1}\{h_{i,r,d}=h\},
 \]
 
-where \(h_{i,r,d}\) is Assigned Hospital for demand unit \(i\). Hospital Assignment Probability is the population-weighted or demand-unit-weighted assignment frequency, clearly labelled. Report the distribution of \(K_{h,r,d}\), Hospital Demand Change relative to baseline, and the probability that a baseline catchment becomes disconnected. Unweighted eligible-hospital routing is primary; Hospital Role Weight and Hospital Capacity Weight are separate sensitivity specifications.
+where \(h_{i,r,d}\) is Assigned Hospital for demand unit \(i\). Hospital Assignment Probability is the population-weighted or demand-unit-weighted assignment frequency, clearly labelled. Report the distribution of \(K_{h,r,d}\), Hospital Demand Change relative to baseline, and the probability that a baseline catchment becomes disconnected. All hospital reliability estimates use one fixed Operational Hospital Set and unweighted minimum Hospital Transport Time. Hospital Role Weight and Hospital Capacity Weight are not estimated because incomplete information would require unsupported weighting assumptions. Hospital results therefore describe road-supported potential assignment and catchment stability, not clinical capacity or observed destination choice.
 
 ### 6.5 Road-Section Potential Access Loss
 
@@ -513,7 +550,7 @@ Map \(P_s(\tau)\) for all three thresholds and \(R_{s,d}(30)\) for the 1%, 3%, a
 
 The 100-replicate calibration evaluates 0.5%, 1%, 2%, 3%, 5%, and 10% Expected Failed Road Length Share. It reports mean response and P5-P95 intervals for population retaining 30-minute access, Population Losing Timely Access, and Population Newly Disconnected. The calibration selects 1%, 3%, and 5% as main scenarios and 10% as stress sensitivity.
 
-The formal experiment targets 1,000 paired replicates per main and stress scenario. Convergence is evaluated at 100, 250, 500, 750, and 1,000 replicates. For checkpoint \(R_j\) and its preceding checkpoint \(R_{j-1}\), define
+The formal experiment uses 1,000 completed paired replicates per main and stress scenario. The large replicate count stabilizes the declared probability, population-coverage, and hospital-catchment estimands and their uncertainty summaries. Convergence is evaluated at 100, 250, 500, 750, and 1,000 replicates. For checkpoint \(R_j\) and its preceding checkpoint \(R_{j-1}\), define
 
 \[
 \Delta_{C,j,d}=\frac{|\overline{C}_{R_j,d}(30)-\overline{C}_{R_{j-1},d}(30)|}{\sum_i w_i},
@@ -537,7 +574,7 @@ Required checks are:
 
 - 10% Expected Failed Road Length Share as an extreme network-stress scenario.
 - Assumed Speed (km/h) multipliers of 0.8 and 1.2 relative to baseline.
-- Alternative Operational Hospital Set definitions and separately labelled Hospital Role Weight or Hospital Capacity Weight specifications.
+- Audit the inclusion rule and network connectors for the fixed Operational Hospital Set. Alternative hospital-set and role- or capacity-weighted specifications are outside scope because the required hospital information is incomplete.
 - Road Section Length (m), Road Edge Count, Network Component ID, and connector audits, with special inspection of the upper tail of section length.
 - Comparison of results by Emergency Route Membership, Road Category, and Hazard Exposure Class without interpreting these descriptors as observed failure causes.
 - Replicate checkpoint comparisons for all primary population and grid-reliability outcomes.
@@ -546,14 +583,14 @@ Required checks are:
 
 | step | variables used | formula/model used | generated figure/table title | theory or claim evaluated | support status |
 |---|---|---|---|---|---|
-| 1. Validate baseline network and study population | Road Section ID, Road Section Length (m), Road Edge Count, From Node ID, To Node ID, Network Component ID, Network Snap Distance (m), Candidate Dispatch Base, Eligible Emergency Hospital, Total Population | Section 6.1 network, impedance, component, and connector checks | Emergency Care Network and Population Demand; Baseline Two-Stage Emergency Travel Time; Network and Simulation Descriptive Summary | The complete fire-station-to-grid-to-hospital chain is represented on interpretable junction-defined road sections. | Partially supported: topology and connector checks pass; the formal simulation remains pending. |
-| 2. Calibrate failure severity | Expected Failed Road Length Share, Failure Intensity per Metre, Road Section Length (m), Section Failure Probability, Realized Failed Road Length Share, Simulation Replicate | Section 5.1 calibration equation and paired nested assignment | Failure Severity Response; Network and Simulation Descriptive Summary | Lower severities reveal the onset and shape of emergency-access deterioration. | Supported for the 100-replicate calibration; formal scenario precision remains pending. |
-| 3. Generate formal nested failures | Road Section ID, Section Failure Probability, Road Failure Indicator, Road Available, Simulation Replicate, Random Failure Model | Section 5.1 nested length-dependent failure assignment | Nested Length-Dependent Road Failure Realizations | Main severity states are comparable within paired replicates. | Pending formal 1,000-replicate experiment. |
-| 4. Estimate grid reliability | Analysis Unit ID, Total Emergency Access Time, Timely Access Threshold (min), Timely Access Status, Timely Access Probability, Grid Access Loss Probability, P90 Emergency Access Time | Sections 6.1-6.2 two-stage routing and reliability estimators | Grid Emergency Access Loss Probability; Emergency Access Reliability by Severity and Threshold | Road failures create spatially heterogeneous loss of emergency access. | Inconclusive until formal simulation outputs are generated. |
-| 5. Aggregate population and municipal outcomes | Total Population, Population Age 65+, Municipality Name, Population Losing Timely Access, Older Population Losing Timely Access, Population Newly Disconnected | Section 6.3 coverage and loss estimators | Population Coverage under Length-Dependent Road Failure; Municipal Emergency Access Reliability | Aggregate robustness can coexist with concentrated geographic or older-population loss. | Inconclusive until formal simulation outputs are generated. |
-| 6. Estimate hospital service reliability | Hospital Name, Assigned Hospital, Hospital Catchment Population, Hospital Assignment Probability, Hospital Demand Change, Operational Hospital Set | Section 6.4 hospital assignment and catchment estimators | Hospital Service Reliability under Road Failure; Hospital Service Reliability | Hospital value depends on road-supported reachability and substitution across hospitals. | Inconclusive until formal simulation outputs are generated. |
-| 7. Map every road section's consequence and expected risk | Road Section ID, Geometry, Timely Access Threshold (min), Section Failure Probability, Road-Section Potential Access Loss, Road-Section Expected Risk, Route Name | Section 6.5 leave-one-section-out consequence and probability weighting | Road-Section Accessibility Consequence and Expected Risk; Road-Section Loss by Network Characteristics | A small subset of spatially coherent sections may support disproportionate emergency access without requiring an arbitrary rank cutoff. | Inconclusive until all-section routing is completed. |
-| 8. Evaluate uncertainty and sensitivity | Simulation Replicate, Monte Carlo Convergence Status, Expected Failed Road Length Share, Assumed Speed (km/h), Hospital Role Weight, Hospital Capacity Weight | Sections 6.6-6.7 checkpoint convergence comparisons using the declared 0.5%, 5-percentage-point, and 0.5% tolerances, plus sensitivity comparisons | Monte Carlo Convergence and Stress Sensitivity; Monte Carlo Convergence Summary | Main conclusions remain interpretable under simulation error and declared routing assumptions. | Supported: all four severity states pass the declared convergence rule at 1,000 replicates, and the travel-speed sensitivity remains explicitly reported. |
+| 1. Validate baseline network and study population | Road Section ID, Road Section Length (m), Road Edge Count, From Node ID, To Node ID, Network Component ID, Network Snap Distance (m), Candidate Dispatch Base, Eligible Emergency Hospital, Total Population | Section 6.1 network, impedance, component, and connector checks | Emergency Care Network and Population Demand; Baseline Two-Stage Emergency Travel Time; Network and Simulation Descriptive Summary | The complete fire-station-to-grid-to-hospital chain is represented on interpretable junction-defined road sections. | Supported within the represented network: topology, section construction, components, demand support, and dispatch-base and hospital connectors pass validation, and the formal simulation is complete. |
+| 2. Calibrate failure severity | Expected Failed Road Length Share, Failure Intensity per Metre, Road Section Length (m), Section Failure Probability, Realized Failed Road Length Share, Simulation Replicate | Section 5.1 calibration equation and paired nested assignment | Failure Severity Response; Network and Simulation Descriptive Summary | Lower severities reveal the onset and shape of emergency-access deterioration. | Supported: the 100-replicate calibration shows an ordered response, expected failed-length shares match their targets, and the selected 1%, 3%, 5%, and 10% states each have 1,000 formal replicates. |
+| 3. Generate formal nested failures | Road Section ID, Section Failure Probability, Road Failure Indicator, Road Available, Simulation Replicate, Random Failure Model | Section 5.1 nested length-dependent failure assignment | Nested Length-Dependent Road Failure Realizations | Main severity states are comparable within paired replicates. | Supported: 1,000 paired replicates per severity are complete, failed-section sets are nested, travel times are monotone after removal, and same-seed reproduction passes. |
+| 4. Estimate grid reliability | Analysis Unit ID, Total Emergency Access Time, Timely Access Threshold (min), Timely Access Status, Timely Access Probability, Grid Access Loss Probability, P90 Emergency Access Time | Sections 6.1-6.2 two-stage routing and reliability estimators | Grid Emergency Access Loss Probability; Emergency Access Reliability by Severity and Threshold | Road failures create spatially heterogeneous loss of emergency access. | Supported within the declared simulation model: grid probabilities, loss probabilities, and P90 outcomes are complete for all formal severities, bounded as defined, and stable under the declared convergence rule. |
+| 5. Aggregate population and municipal outcomes | Total Population, Population Age 65+, Municipality Name, Population Losing Timely Access, Older Population Losing Timely Access, Population Newly Disconnected | Section 6.3 full-replicate coverage, loss, and uncertainty estimators without an ordinal rank estimand | Population Coverage under Length-Dependent Road Failure; Municipal Emergency Access Reliability | Aggregate robustness can coexist with concentrated geographic or older-population loss. | Supported for descriptive municipal reliability levels and uncertainty from 1,000 replicates; no formal municipal ranking is claimed. |
+| 6. Estimate hospital service reliability | Hospital Name, Assigned Hospital, Hospital Catchment Population, Hospital Assignment Probability, Hospital Demand Change, Operational Hospital Set | Section 6.4 fixed-set, unweighted hospital assignment and catchment estimators | Hospital Service Reliability under Road Failure; Hospital Service Reliability | Potential hospital service coverage depends on road-supported reachability and substitution within the fixed eligible-hospital set. | Supported within the fixed-set, unweighted nearest-feasible-hospital scope; clinical capacity and observed destination choice remain outside scope. |
+| 7. Map every road section's consequence and expected risk | Road Section ID, Geometry, Timely Access Threshold (min), Section Failure Probability, Road-Section Potential Access Loss, Road-Section Expected Risk, Route Name | Section 6.5 leave-one-section-out consequence and probability weighting | Road-Section Accessibility Consequence and Expected Risk; Road-Section Loss by Network Characteristics | A small subset of spatially coherent sections may support disproportionate emergency access without requiring an arbitrary rank cutoff. | Supported as network-consequence evidence: all 343,844 sections have complete nonnegative results, expected-risk formulas pass, upper-tail topology checks pass, and an independent 48-section recomputation exactly matches stored losses. |
+| 8. Evaluate uncertainty and sensitivity | Simulation Replicate, Monte Carlo Convergence Status, Expected Failed Road Length Share, Assumed Speed (km/h), Operational Hospital Set | Sections 6.6-6.7 checkpoint convergence comparisons using the declared 0.5%, 5-percentage-point, and 0.5% tolerances, travel-speed sensitivity, and fixed-hospital-set audit | Monte Carlo Convergence and Stress Sensitivity; Monte Carlo Convergence Summary | Main conclusions remain interpretable under simulation error and declared routing assumptions. | Supported: all four severity states pass the full convergence rule at every evaluated non-reference checkpoint from 250 through 1,000 replicates, travel-speed sensitivity is reported, and hospital interpretation is explicitly conditional on the fixed eligible-hospital set. |
 
 Analytical checkpoints:
 
@@ -583,7 +620,7 @@ Analytical checkpoints:
 
 | title | what it expresses | rows | columns | row meaning | column meaning | status |
 |---|---|---:|---:|---|---|---|
-| Network and Simulation Descriptive Summary | Summarizes junction-defined road sections, population grids, dispatch bases, hospitals, failure calibration, and executed replicate counts. | approximately 35 | 8 | One network, demand, facility, connector, or simulation-design indicator. | Count, length, total, mean, standard deviation, P5, P50, and P95 as applicable. | done |
+| Network and Simulation Descriptive Summary | Summarizes junction-defined road sections, population grids, dispatch bases, hospitals, failure calibration, and executed replicate counts. | approximately 40 | 10 | One network, demand, facility, connector, or simulation-design indicator. | Category, indicator, unit, count, total, mean, standard deviation, P5, P50, and P95 as applicable. | done |
 | Emergency Access Reliability by Severity and Threshold | Compares population-weighted emergency-access reliability across three main scenarios, the stress scenario, and three timely-access thresholds. | 12 | 12 | One Expected Failed Road Length Share and Timely Access Threshold (min) combination. | Replicates, mean coverage, Monte Carlo standard error, P5, P50, P95, Population Losing Timely Access, Older Population Losing Timely Access, and Population Newly Disconnected. | done |
 | Municipal Emergency Access Reliability | Reports geographic heterogeneity in simulated emergency-access reliability. | approximately 180 | 12 | One Municipality Name and main or stress Expected Failed Road Length Share combination. | Total Population, Population Age 65+, Timely Access Probability, P90 Emergency Access Time, coverage loss, disconnection, and uncertainty measures. | done |
 | Hospital Service Reliability | Reports hospital assignment and service-population stability under road failure. | approximately 300 | 12 | One eligible Hospital Name and main or stress Expected Failed Road Length Share combination. | Hospital role, mean Hospital Catchment Population, Hospital Assignment Probability, Hospital Demand Change, P5, P50, P95, and disconnection frequency. | done |
