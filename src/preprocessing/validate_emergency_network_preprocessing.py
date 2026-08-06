@@ -52,9 +52,15 @@ def main() -> None:
 
     edge_path = PROCESSED / "kumamoto_routable_road_edges_preprocessed.parquet"
     node_path = PROCESSED / "kumamoto_routable_road_nodes_preprocessed.parquet"
+    section_path = PROCESSED / "kumamoto_road_sections_preprocessed.parquet"
     edges = gpd.read_parquet(edge_path)
     nodes = gpd.read_parquet(node_path)
-    assert edges.crs.to_epsg() == 6668 and nodes.crs.to_epsg() == 6668
+    sections = gpd.read_parquet(section_path)
+    assert (
+        edges.crs.to_epsg() == 6668
+        and nodes.crs.to_epsg() == 6668
+        and sections.crs.to_epsg() == 6668
+    )
     assert len(edges) == edges["Road Edge ID"].nunique()
     assert edges["Road Edge ID"].notna().all()
     assert edges["Road Available"].all() and edges["Network Analysis Eligible"].all()
@@ -66,10 +72,22 @@ def main() -> None:
     assert set(edges["From Node ID"]).issubset(node_ids)
     assert set(edges["To Node ID"]).issubset(node_ids)
     assert nodes["Network Node ID"].is_unique
-    assert edges["Road Failure Unit ID"].notna().all()
-    assert edges["Road Failure Unit ID"].is_unique
-    assert (edges["Road Length (m)"] <= 100.0 + 1e-6).all()
-    for frame in [edges, nodes]:
+    assert edges["Road Section ID"].notna().all()
+    assert sections["Road Section ID"].notna().all()
+    assert sections["Road Section ID"].is_unique
+    assert set(edges["Road Section ID"]) == set(sections["Road Section ID"])
+    assert (sections["Road Section Length (m)"] > 0).all()
+    edge_length_by_section = edges.groupby("Road Section ID")["Road Length (m)"].sum()
+    reported_length = sections.set_index("Road Section ID")["Road Section Length (m)"]
+    assert np.allclose(
+        edge_length_by_section.sort_index(), reported_length.sort_index(), rtol=1e-9
+    )
+    edge_count_by_section = edges.groupby("Road Section ID").size()
+    reported_edge_count = sections.set_index("Road Section ID")["Road Edge Count"]
+    assert np.array_equal(
+        edge_count_by_section.sort_index(), reported_edge_count.sort_index()
+    )
+    for frame in [edges, nodes, sections]:
         _assert_ascii_columns(frame)
         assert frame.geometry.notna().all() and frame.geometry.is_valid.all()
     checks["road_network"] = {
@@ -78,8 +96,14 @@ def main() -> None:
         "nodes": len(nodes),
         "components": int(edges["Network Component ID"].nunique()),
         "largest_component_edges": int(edges["Network Component ID"].value_counts().iloc[0]),
-        "road_failure_units": int(edges["Road Failure Unit ID"].nunique()),
-        "maximum_failure_unit_length_m": float(edges["Road Length (m)"].max()),
+        "road_sections": len(sections),
+        "median_road_section_length_m": float(
+            sections["Road Section Length (m)"].median()
+        ),
+        "maximum_road_section_length_m": float(
+            sections["Road Section Length (m)"].max()
+        ),
+        "multi_edge_road_sections": int((sections["Road Edge Count"] > 1).sum()),
         "self_loop_edges": int((edges["From Node ID"] == edges["To Node ID"]).sum()),
     }
 

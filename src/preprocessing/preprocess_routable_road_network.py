@@ -10,7 +10,6 @@ import numpy as np
 import pandas as pd
 import shapely
 from shapely import MultiLineString, STRtree
-from shapely.ops import substring
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -19,8 +18,6 @@ CALC_CRS = "EPSG:6670"
 OUTPUT_CRS = "EPSG:6668"
 SNAP_GRID_M = 1.0
 EMERGENCY_ROUTE_TOLERANCE_M = 30.0
-MAX_FAILURE_UNIT_LENGTH_M = 100.0
-FAILURE_UNIT_SPLIT_TARGET_M = 98.0
 
 ROAD_COLUMNS = [
     "Road Category",
@@ -190,31 +187,6 @@ def _assign_emergency_routes(edges: gpd.GeoDataFrame) -> pd.DataFrame:
     )
 
 
-def _split_long_edges(edges: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
-    """Split every topological edge into road-failure units no longer than 100 m."""
-    records: list[dict[str, object]] = []
-    columns = list(edges.columns)
-    geometry_column = edges.geometry.name
-    for values in edges.itertuples(index=False, name=None):
-        record = dict(zip(columns, values, strict=True))
-        geometry = record.pop(geometry_column)
-        piece_count = max(1, int(np.ceil(geometry.length / FAILURE_UNIT_SPLIT_TARGET_M)))
-        if piece_count == 1:
-            record[geometry_column] = geometry
-            records.append(record)
-            continue
-        boundaries = np.linspace(0.0, float(geometry.length), piece_count + 1)
-        for start, end in zip(boundaries[:-1], boundaries[1:], strict=True):
-            piece = shapely.set_precision(
-                substring(geometry, float(start), float(end)), SNAP_GRID_M
-            )
-            if not piece.is_empty and piece.length > 0:
-                piece_record = record.copy()
-                piece_record[geometry_column] = piece
-                records.append(piece_record)
-    return gpd.GeoDataFrame(records, geometry=geometry_column, crs=edges.crs)
-
-
 def _assign_hazard_exposure(edges: gpd.GeoDataFrame) -> pd.Series:
     zones = gpd.read_parquet(
         PROCESSED / "kumamoto_landslide_warning_zones_2025_preprocessed.parquet"
@@ -278,6 +250,198 @@ def _assign_components(edges: gpd.GeoDataFrame) -> tuple[gpd.GeoDataFrame, gpd.G
     return edges, nodes
 
 
+def _assign_road_sections(edges: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    """Assign maximal junction-to-junction sections without distance splitting."""
+    from_nodes = edges["From Node ID"].astype(str).to_numpy()
+    to_nodes = edges["To Node ID"].astype(str).to_numpy()
+    node_edges: dict[str, list[int]] = {}
+    for edge_position, (start, end) in enumerate(
+        zip(from_nodes, to_nodes, strict=True)
+    ):
+        node_edges.setdefault(start, []).append(edge_position)
+        node_edges.setdefault(end, []).append(edge_position)
+    for incident in node_edges.values():
+        incident.sort()
+    degree = {node: len(incident) for node, incident in node_edges.items()}
+
+    assigned = np.full(len(edges), -1, dtype=np.int64)
+    section_records: list[tuple[str, str, list[int]]] = []
+
+    def other_node(edge_position: int, node: str) -> str:
+        start = from_nodes[edge_position]
+        end = to_nodes[edge_position]
+        if start == node:
+            return end
+        if end == node:
+            return start
+        raise RuntimeError("Road-section traversal encountered a nonincident edge")
+
+    junctions = sorted(node for node, value in degree.items() if value != 2)
+    for start_node in junctions:
+        for first_edge in node_edges[start_node]:
+            if assigned[first_edge] >= 0:
+                continue
+            section_edges: list[int] = []
+            current_node = start_node
+            current_edge = first_edge
+            while True:
+                if assigned[current_edge] >= 0:
+                    break
+                assigned[current_edge] = len(section_records)
+                section_edges.append(current_edge)
+                next_node = other_node(current_edge, current_node)
+                if degree[next_node] != 2:
+                    current_node = next_node
+                    break
+                candidates = [
+                    edge_position
+                    for edge_position in node_edges[next_node]
+                    if edge_position != current_edge
+                ]
+                if len(candidates) != 1 or assigned[candidates[0]] >= 0:
+                    current_node = next_node
+                    break
+                current_node = next_node
+                current_edge = candidates[0]
+            section_records.append((start_node, current_node, section_edges))
+
+    # Components containing no degree-not-two node are closed cycles. They have
+    # no true junction at which to split, so the full cycle is one road section.
+    for first_edge in np.flatnonzero(assigned < 0):
+        if assigned[first_edge] >= 0:
+            continue
+        section_number = len(section_records)
+        stack = [int(first_edge)]
+        cycle_edges: list[int] = []
+        cycle_nodes: set[str] = set()
+        while stack:
+            edge_position = stack.pop()
+            if assigned[edge_position] >= 0:
+                continue
+            assigned[edge_position] = section_number
+            cycle_edges.append(edge_position)
+            for node in (from_nodes[edge_position], to_nodes[edge_position]):
+                cycle_nodes.add(node)
+                stack.extend(
+                    candidate
+                    for candidate in node_edges[node]
+                    if assigned[candidate] < 0
+                )
+        anchor = min(cycle_nodes)
+        section_records.append((anchor, anchor, sorted(cycle_edges)))
+
+    if np.any(assigned < 0):
+        raise RuntimeError("Not every routing edge received a road section")
+
+    section_order = sorted(
+        range(len(section_records)),
+        key=lambda position: (
+            edges.iloc[section_records[position][2][0]]["Network Component ID"],
+            section_records[position][0],
+            section_records[position][1],
+            min(section_records[position][2]),
+        ),
+    )
+    old_to_new = {
+        old: new for new, old in enumerate(section_order, start=1)
+    }
+    edges = edges.copy()
+    edges["Road Section ID"] = [
+        f"SECTION-{old_to_new[int(value)]:07d}" for value in assigned
+    ]
+    section_from = {
+        f"SECTION-{old_to_new[position]:07d}": section_records[position][0]
+        for position in range(len(section_records))
+    }
+    section_to = {
+        f"SECTION-{old_to_new[position]:07d}": section_records[position][1]
+        for position in range(len(section_records))
+    }
+    edges["Section From Node ID"] = edges["Road Section ID"].map(section_from)
+    edges["Section To Node ID"] = edges["Road Section ID"].map(section_to)
+    return edges
+
+
+def _build_section_layer(edges: gpd.GeoDataFrame) -> gpd.GeoDataFrame:
+    """Dissolve routing fragments into one record per junction-defined section."""
+    grouped = edges.groupby("Road Section ID", sort=True, observed=True)
+    sections = grouped.agg(
+        **{
+            "Section From Node ID": ("Section From Node ID", "first"),
+            "Section To Node ID": ("Section To Node ID", "first"),
+            "Network Component ID": ("Network Component ID", "first"),
+            "Road Section Length (m)": ("Road Length (m)", "sum"),
+            "Road Edge Count": ("Road Edge ID", "size"),
+            "Baseline Section Travel Time (min)": (
+                "Baseline Edge Travel Time (min)",
+                "sum",
+            ),
+            "Vertical Level": ("Vertical Level", "first"),
+        }
+    ).reset_index()
+
+    # Use the longest constituent edge as the deterministic representative for
+    # descriptors that may change inside a junction-defined section.
+    descriptor_columns = [
+        "Emergency Route Membership",
+        "Route ID",
+        "Route Name",
+        "Road Category",
+        "Road State",
+        "Width Category",
+        "Toll Category",
+    ]
+    representative = (
+        edges.sort_values(
+            ["Road Section ID", "Road Length (m)", "From Node ID", "To Node ID"],
+            ascending=[True, False, True, True],
+            kind="stable",
+        )
+        .drop_duplicates("Road Section ID", keep="first")
+        [["Road Section ID", *descriptor_columns]]
+    )
+    sections = sections.merge(
+        representative,
+        on="Road Section ID",
+        how="left",
+        validate="one_to_one",
+    )
+
+    hazard_score = edges["Hazard Exposure Class"].map(
+        {"None": 0, "Warning Zone": 1, "Special Warning Zone": 2}
+    ).fillna(0)
+    maximum_hazard = hazard_score.groupby(
+        edges["Road Section ID"], sort=True
+    ).max()
+    hazard_labels = np.asarray(
+        ["None", "Warning Zone", "Special Warning Zone"], dtype=object
+    )
+    sections["Hazard Exposure Class"] = pd.Series(
+        hazard_labels[
+            sections["Road Section ID"].map(maximum_hazard).to_numpy(dtype=int)
+        ],
+        dtype="string",
+    )
+    sections["Assumed Speed (km/h)"] = sections["Road Section Length (m)"] / (
+        sections["Baseline Section Travel Time (min)"] * 1000.0 / 60.0
+    )
+    sections["Road Available"] = True
+    sections["Network Analysis Eligible"] = True
+
+    geometry = (
+        edges[["Road Section ID", "Geometry"]]
+        .dissolve(by="Road Section ID", as_index=False)
+        [["Road Section ID", "Geometry"]]
+    )
+    sections = sections.merge(
+        geometry,
+        on="Road Section ID",
+        how="left",
+        validate="one_to_one",
+    )
+    return gpd.GeoDataFrame(sections, geometry="Geometry", crs=edges.crs)
+
+
 def main() -> None:
     roads = gpd.read_parquet(PROCESSED / "kumamoto_road_centerlines_2024_preprocessed.parquet")
     roads = roads.loc[roads["Road Centerline Type"].eq("Standard Road"), ROAD_COLUMNS + ["Geometry"]].to_crs(CALC_CRS)
@@ -298,8 +462,6 @@ def main() -> None:
         print(f"Excluded {int(self_loops.sum()):,} closed self-loop lines that do not connect distinct network nodes")
         edges = edges.loc[~self_loops].reset_index(drop=True)
 
-    edges = _split_long_edges(edges)
-    edges = edges.loc[~edges.geometry.is_empty & (edges.geometry.length > 0)].reset_index(drop=True)
     edges["Road Length (m)"] = edges.geometry.length
     category_speed = edges["Road Category"].map(BASE_SPEED).fillna(20.0).astype(float)
     width_speed = edges["Width Category"].map(WIDTH_CAP).fillna(20.0).astype(float)
@@ -311,16 +473,15 @@ def main() -> None:
     edges["Hazard Exposure Class"] = _assign_hazard_exposure(edges)
     edges["Road Available"] = True
     edges, nodes = _assign_components(edges)
+    edges = _assign_road_sections(edges)
 
     order_columns = ["Network Component ID", "From Node ID", "To Node ID", "Road Category", "Road Length (m)"]
     edges = edges.sort_values(order_columns, kind="stable").reset_index(drop=True)
     edges["Road Edge ID"] = [f"EDGE-{position + 1:07d}" for position in range(len(edges))]
-    edges["Road Failure Unit ID"] = [
-        f"RFU-{position + 1:07d}" for position in range(len(edges))
-    ]
+    sections = _build_section_layer(edges)
 
     edge_columns = [
-        "Road Edge ID", "Road Failure Unit ID", "From Node ID", "To Node ID", "Network Component ID",
+        "Road Edge ID", "Road Section ID", "From Node ID", "To Node ID", "Network Component ID",
         "Road Length (m)", "Assumed Speed (km/h)", "Baseline Edge Travel Time (min)",
         "Hazard Exposure Class", "Emergency Route Membership", "Road Available", "Network Analysis Eligible",
         "Route ID", "Route Name",
@@ -330,15 +491,18 @@ def main() -> None:
     node_output = nodes.to_crs(OUTPUT_CRS)
     edge_path = PROCESSED / "kumamoto_routable_road_edges_preprocessed.parquet"
     node_path = PROCESSED / "kumamoto_routable_road_nodes_preprocessed.parquet"
+    section_path = PROCESSED / "kumamoto_road_sections_preprocessed.parquet"
     edge_output.to_parquet(edge_path, index=False)
     node_output.to_parquet(node_path, index=False)
+    sections.to_crs(OUTPUT_CRS).to_parquet(section_path, index=False)
     print(f"Saved {len(edge_output):,} road edges x {len(edge_output.columns)} columns -> {edge_path.relative_to(ROOT)}")
     print(f"Saved {len(node_output):,} road nodes x {len(node_output.columns)} columns -> {node_path.relative_to(ROOT)}")
+    print(f"Saved {len(sections):,} road sections x {len(sections.columns)} columns -> {section_path.relative_to(ROOT)}")
     largest_component_edges = int(edge_output["Network Component ID"].value_counts().iloc[0])
     print(
         f"Analysis-eligible edges: {int(edge_output['Network Analysis Eligible'].sum()):,}; "
         f"largest component edges: {largest_component_edges:,}; "
-        f"100 m road-failure units: {edge_output['Road Failure Unit ID'].nunique():,}"
+        f"junction-to-junction road sections: {edge_output['Road Section ID'].nunique():,}"
     )
 
 

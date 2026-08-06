@@ -18,10 +18,14 @@ VARIABLE_LIST = EXP / "variable_list.csv"
 README = EXP / "README.md"
 LOGICAL_PREFIX = "logical:analysis_"
 
-ROAD_STRUCTURE = [
-    "Road Edge ID", "Road Failure Unit ID", "From Node ID", "To Node ID", "Network Component ID",
+ROAD_EDGE_STRUCTURE = [
+    "Road Edge ID", "Road Section ID", "From Node ID", "To Node ID", "Network Component ID",
     "Road Length (m)", "Assumed Speed (km/h)", "Baseline Edge Travel Time (min)",
     "Hazard Exposure Class", "Emergency Route Membership", "Road Available", "Network Analysis Eligible",
+]
+ROAD_SECTION_STRUCTURE = [
+    "Road Section ID", "Section From Node ID", "Section To Node ID",
+    "Road Section Length (m)", "Road Edge Count", "Baseline Section Travel Time (min)",
 ]
 ROAD_REFERENCE = ["Route ID", "Route Name"]
 NETWORK_ACCESS = [
@@ -33,14 +37,19 @@ ACCESSIBILITY = [
     "Total Emergency Access Time", "Access Time Increase", "Timely Access Status", "Assigned Hospital",
     "Alternative Hospital Count", "Hospital Catchment Population", "Hospital Demand Change",
     "Population Losing Timely Access", "Older Population Losing Timely Access",
+    "Population Newly Disconnected",
 ]
 MONTE_CARLO = [
-    "Failure Rate", "Simulation Replicate", "Road Failure Indicator", "Random Failure Model",
+    "Expected Failed Road Length Share", "Failure Intensity per Metre",
+    "Section Failure Probability", "Realized Failed Road Length Share",
+    "Simulation Replicate", "Road Failure Indicator", "Random Failure Model",
     "Timely Access Probability", "P90 Emergency Access Time", "Hospital Assignment Probability",
-    "Road Failure Importance", "Road Importance Standard Error", "Confidence Interval",
-    "Rank Stability", "Monte Carlo Convergence Status",
+    "Grid Access Loss Probability", "Road-Section Potential Access Loss",
+    "Road-Section Expected Risk", "Confidence Interval", "Monte Carlo Convergence Status",
 ]
-APPROVED_VARIABLES = ROAD_STRUCTURE + NETWORK_ACCESS + ACCESSIBILITY + MONTE_CARLO
+APPROVED_VARIABLES = list(dict.fromkeys(
+    ROAD_EDGE_STRUCTURE + ROAD_SECTION_STRUCTURE + NETWORK_ACCESS + ACCESSIBILITY + MONTE_CARLO
+))
 REFERENCE_FIELDS = ["Network Node ID", "Network Snap Accepted", "Access Road Edge ID", "Access Edge Fraction"]
 GROUP_REFERENCE_FIELD = "Representative Mesh Code"
 
@@ -76,7 +85,17 @@ def extend_decisions() -> dict[str, object]:
             "Derived from confirmed Standard Road centerlines, emergency routes, and landslide zones",
             "data/processed/kumamoto_routable_road_edges_preprocessed.parquet",
             "src/preprocessing/preprocess_routable_road_network.py",
-            ROAD_STRUCTURE + ROAD_REFERENCE,
+            ROAD_EDGE_STRUCTURE + ROAD_REFERENCE,
+            "preprocessing",
+        ),
+        "logical:analysis_road_sections": item(
+            "Derived junction-to-junction road sections assembled from the routable edge topology",
+            "data/processed/kumamoto_road_sections_preprocessed.parquet",
+            "src/preprocessing/preprocess_routable_road_network.py",
+            ROAD_SECTION_STRUCTURE + [
+                "Network Component ID", "Assumed Speed (km/h)", "Hazard Exposure Class",
+                "Emergency Route Membership", "Road Available", "Network Analysis Eligible",
+            ] + ROAD_REFERENCE,
             "preprocessing",
         ),
         "logical:analysis_routable_road_nodes": item(
@@ -127,19 +146,19 @@ def extend_decisions() -> dict[str, object]:
         for entry in dataset["variables"]:
             if entry["readable_name"] in REFERENCE_FIELDS + [GROUP_REFERENCE_FIELD]:
                 entry["is_final_variable"] = "no"
-    road_entries = datasets["logical:analysis_routable_road_edges"]["variables"]
+    road_entries = datasets["logical:analysis_road_sections"]["variables"]
     for entry in road_entries:
-        if entry["readable_name"] == "Road Failure Unit ID":
+        if entry["readable_name"] == "Road Section ID":
             entry["preprocessing"] = [
                 "Preserve true same-level road intersections and grade separation.",
-                "Split every topological road edge into pieces no longer than 100 m.",
-                "Assign one deterministic Road Failure Unit ID to each resulting piece.",
+                "Trace each maximal continuous chain between junction nodes.",
+                "Assign one deterministic Road Section ID to each junction-to-junction chain.",
             ]
     payload["schema_version"] = 2
     payload["confirmed_analysis_variable_count"] = len(APPROVED_VARIABLES)
     payload["notes"] = [
         f"The {len(APPROVED_VARIABLES)} approved analysis variables are defined here; Monte Carlo outcomes are not estimated during preprocessing.",
-        "Road-failure variables define the confirmed analysis contract for the 100-replicate pilot and the target 1,000-replicate experiment.",
+        "Road-failure variables define the confirmed analysis contract for length-weighted severity calibration and the subsequent Monte Carlo experiment.",
     ]
     DECISIONS.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return payload
@@ -182,6 +201,7 @@ def update_readme(payload: dict[str, object]) -> None:
     text = re.sub(r"- Processed Parquet/GeoParquet outputs: \d+", f"- Processed Parquet/GeoParquet outputs: {processed_count}", text, count=1)
     layer_specs = [
         ("Routable Standard Road edges", "kumamoto_routable_road_edges_preprocessed.parquet", "Core network"),
+        ("Junction-to-junction road sections", "kumamoto_road_sections_preprocessed.parquet", "Failure and analysis units"),
         ("Grade-aware road nodes", "kumamoto_routable_road_nodes_preprocessed.parquet", "Core network"),
         ("Dispatch-base network access", "kumamoto_dispatch_base_network_access_preprocessed.parquet", "Core network access"),
         ("Emergency-hospital network access", "kumamoto_hospital_network_access_preprocessed.parquet", "Core network access"),
@@ -202,8 +222,9 @@ def update_readme(payload: dict[str, object]) -> None:
         "- Ambulance routing uses Standard Road centerlines only; endpoints and same-level intersections are snapped/noded on a 1 m grid in EPSG:6670.\n"
         "- All valid Standard Road components remain eligible so island and remote-area demand is not silently deleted; component IDs preserve disconnected-network status.\n"
         "- Facility access is accepted within 150 m and population access within 250 m; rejected snaps remain in the files with an explicit flag.\n"
-        "- Road Failure Unit ID defines deterministic pieces no longer than 100 m while retaining true network intersections and grade separation.\n"
-        "- Accessibility, restoration, and Shapley outputs are schema contracts at this stage and have not been estimated.\n"
+        "- Road Section ID defines maximal continuous sections between true same-level junctions; no distance-based segmentation is applied.\n"
+        "- Section failure probability increases with Road Section Length (m), and scenario intensity is calibrated to expected failed road length.\n"
+        "- Accessibility and full-network road-loss outputs are schema contracts at this stage and have not been estimated.\n"
         "- Older-population disclosure groups use their source-defined aggregation-destination mesh centroid; group counts are not duplicated or proportionally imputed to 125 m meshes.\n"
     )
     if marker_start in text:
