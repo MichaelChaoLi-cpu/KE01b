@@ -187,16 +187,6 @@ def main() -> None:
             linewidth=0.55,
             zorder=3,
         )
-        not_stable = subset["Monte Carlo Convergence Status"].eq("Not stable")
-        axis.scatter(
-            subset.loc[not_stable, "Simulation Replicate Checkpoint"],
-            subset.loc[not_stable, "Population Coverage Standard Error"],
-            s=34,
-            facecolor="white",
-            edgecolor=SEVERITY_COLORS[severity],
-            linewidth=1.2,
-            zorder=3,
-        )
         reference = subset["Monte Carlo Convergence Status"].eq(
             "Reference checkpoint"
         )
@@ -236,16 +226,6 @@ def main() -> None:
                 markersize=6.5,
                 label="Stable",
             ),
-            Line2D(
-                [0],
-                [0],
-                marker="o",
-                linestyle="none",
-                markerfacecolor="white",
-                markeredgecolor="#59646a",
-                markersize=6.5,
-                label="Not stable",
-            ),
         ],
         loc="upper right",
         frameon=True,
@@ -258,7 +238,7 @@ def main() -> None:
     axis.text(
         0.98,
         0.52,
-        "All severities stable\nat 1,000 replicates",
+        "All severities stable at\n250–1,000 replicates\n(5 pp grid criterion)",
         transform=axis.transAxes,
         ha="right",
         va="center",
