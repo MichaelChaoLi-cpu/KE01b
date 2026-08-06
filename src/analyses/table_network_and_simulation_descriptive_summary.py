@@ -199,6 +199,29 @@ def style_workbook(path: Path, data_rows: int) -> None:
         for column in range(5, 11):
             sheet.cell(row, column).number_format = "#,##0.000"
 
+        unit = str(sheet.cell(row, 3).value or "")
+        indicator = str(sheet.cell(row, 2).value or "")
+        integer_total_units = {
+            "sections",
+            "edges",
+            "nodes",
+            "components",
+            "people",
+            "connectors; acceptance share in Mean",
+            "disclosure groups",
+            "fire-service facilities",
+            "hospitals",
+            "beds",
+            "replicates",
+            "network states",
+            "severity outcomes",
+        }
+        if unit in integer_total_units:
+            sheet.cell(row, 5).number_format = "#,##0"
+        if indicator == "Simulation replicates per severity":
+            for column in range(6, 11):
+                sheet.cell(row, column).number_format = "#,##0"
+
     note_row = last_data_row + 2
     sheet.merge_cells(start_row=note_row, start_column=1, end_row=note_row, end_column=10)
     note = sheet.cell(note_row, 1)

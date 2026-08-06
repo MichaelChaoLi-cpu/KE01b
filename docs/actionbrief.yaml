@@ -811,8 +811,9 @@ figureDictionary:
     figureNote: >-
       Panels a-c map potential population loss after single-section removal for 15-, 30-, and 45-minute timely-access
       thresholds, respectively. Panels d-f map 30-minute expected risk, defined as failure probability multiplied by
-      potential population loss, at expected failed-road-length levels of 1%, 3%, and 5%, respectively. Both color
-      scales are logarithmic; zero-value sections remain outlined.
+      potential population loss, at expected failed-road-length levels of 1%, 3%, and 5%, respectively. The logarithmic
+      potential-loss colorbar is placed below panels a-c, and the logarithmic expected-risk colorbar is placed below
+      panels d-f; zero-value sections remain outlined.
     figureAim: Map every road section by potential access consequence and scenario risk.
     figureExplanation: Maps nonzero leave-one-section-out population consequences for three thresholds and 30-minute
       probability-weighted expected risk for all eligible sections at the three main severities.

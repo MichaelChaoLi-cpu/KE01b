@@ -249,6 +249,7 @@ def style_workbook(path: Path, data_rows: int) -> None:
         sheet.cell(row, 5).number_format = '0.0"%"'
         for column in range(6, 12):
             sheet.cell(row, column).number_format = "#,##0.0"
+        sheet.cell(row, 11).number_format = "#,##0"
         sheet.cell(row, 12).number_format = "#,##0.000"
         previous_group = group_label
 

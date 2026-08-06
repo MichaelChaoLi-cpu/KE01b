@@ -222,11 +222,13 @@ def annotation(
     positive_count: int,
     maximum: float,
     maximum_label: str,
+    maximum_decimals: int,
 ) -> None:
+    maximum_text = f"{maximum:,.{maximum_decimals}f}"
     axis.text(
         0.975,
         0.975,
-        f"{heading}\nPositive-value sections: {positive_count:,}\n{maximum_label}: {maximum:,.2f}",
+        f"{heading}\nPositive-value sections: {positive_count:,}\n{maximum_label}: {maximum_text}",
         transform=axis.transAxes,
         ha="right",
         va="top",
@@ -290,22 +292,22 @@ def main() -> None:
     bounds = tuple(boundary.total_bounds)
     geographic_bounds = tuple(boundary.to_crs(GEOGRAPHIC_CRS).total_bounds)
     sns.set_theme(context="paper", style="white", font_scale=1.0)
-    fig = plt.figure(figsize=(17.2, 12.7), constrained_layout=True)
+    fig = plt.figure(figsize=(17.2, 13.2), constrained_layout=True)
     grid = fig.add_gridspec(
-        3,
+        4,
         6,
-        height_ratios=(1.0, 1.0, 0.050),
+        height_ratios=(1.0, 0.050, 1.0, 0.050),
         hspace=0.055,
         wspace=0.055,
     )
     axes = np.array(
         [
             [fig.add_subplot(grid[0, 0:2]), fig.add_subplot(grid[0, 2:4]), fig.add_subplot(grid[0, 4:6])],
-            [fig.add_subplot(grid[1, 0:2]), fig.add_subplot(grid[1, 2:4]), fig.add_subplot(grid[1, 4:6])],
+            [fig.add_subplot(grid[2, 0:2]), fig.add_subplot(grid[2, 2:4]), fig.add_subplot(grid[2, 4:6])],
         ]
     )
-    potential_colorbar_axis = fig.add_subplot(grid[2, 0:3])
-    risk_colorbar_axis = fig.add_subplot(grid[2, 3:6])
+    potential_colorbar_axis = fig.add_subplot(grid[1, :])
+    risk_colorbar_axis = fig.add_subplot(grid[3, :])
 
     diagnostics: list[dict[str, float | int | str]] = []
     for axis, threshold in zip(axes[0], THRESHOLDS, strict=True):
@@ -319,6 +321,7 @@ def main() -> None:
             positive_count,
             maximum,
             "Maximum potential loss",
+            0,
         )
         diagnostics.append(
             {
@@ -340,6 +343,7 @@ def main() -> None:
             positive_count,
             maximum,
             "Maximum expected risk",
+            3,
         )
         diagnostics.append(
             {
@@ -362,7 +366,7 @@ def main() -> None:
     potential_colorbar.set_ticks(potential_ticks)
     potential_colorbar.set_ticklabels([f"{value:,.0f}" for value in potential_ticks])
     potential_colorbar.set_label(
-        "Potential population losing timely access after single-section removal (log scale)",
+        "Panels a-c: potential population losing timely access after single-section removal (log scale)",
         fontsize=8.6,
     )
     potential_colorbar.ax.tick_params(labelsize=7.7, length=2)
@@ -392,7 +396,7 @@ def main() -> None:
         [f"{value:,.3g}" if value < 1 else f"{value:,.0f}" for value in risk_ticks]
     )
     risk_colorbar.set_label(
-        "30-minute expected risk: failure probability × potential population loss (log scale)",
+        "Panels d-f: 30-minute expected risk = failure probability × potential population loss (log scale)",
         fontsize=8.6,
     )
     risk_colorbar.ax.tick_params(labelsize=7.7, length=2)
