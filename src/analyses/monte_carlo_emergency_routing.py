@@ -191,17 +191,30 @@ def _append_undirected(
 def build_compact_emergency_network(
     processed: Path,
     include_population_groups: bool = False,
+    category_speed_multipliers: dict[str, float] | None = None,
 ) -> CompactEmergencyNetwork:
     """Build a reusable sparse graph with road-section-labelled directed arcs."""
     started = perf_counter()
     edges = pd.read_parquet(
         processed / "kumamoto_routable_road_edges_preprocessed.parquet",
-        columns=ROAD_COLUMNS,
+        columns=ROAD_COLUMNS + (["Road Category"] if category_speed_multipliers else []),
     )
     eligible = edges["Road Available"].fillna(False) & edges[
         "Network Analysis Eligible"
     ].fillna(False)
     edges = edges.loc[eligible].reset_index(drop=True)
+    if category_speed_multipliers:
+        values = np.asarray(list(category_speed_multipliers.values()), dtype=float)
+        if not np.all(np.isfinite(values) & (values > 0)):
+            raise ValueError("Category speed multipliers must be finite and positive")
+        unknown = set(category_speed_multipliers) - set(edges["Road Category"])
+        if unknown:
+            raise ValueError(f"Categories absent from eligible edges: {sorted(unknown)}")
+        multiplier = edges["Road Category"].map(category_speed_multipliers).fillna(1.0)
+        # Perturb the effective, already width-capped speed; connectors below
+        # inherit this modified access-edge speed. Never alter processed inputs.
+        edges["Assumed Speed (km/h)"] *= multiplier
+        edges["Baseline Edge Travel Time (min)"] /= multiplier
     if not edges["Road Edge ID"].is_unique:
         raise ValueError("Road Edge ID must be unique")
     road_section_ids = np.sort(edges["Road Section ID"].astype(str).unique())

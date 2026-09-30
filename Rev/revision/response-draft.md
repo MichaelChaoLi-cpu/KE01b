@@ -53,11 +53,19 @@ The authors state that standard road centerlines were used as input. However, fo
 
 The assumed travel speeds for different road types should be more explicitly differentiated. Emergency vehicles, especially ambulances, may have different operational speeds on expressways, national highways, and municipal roads. The uniform speed assumption or the current classification may not fully capture this variation. Please either justify the chosen speed values with empirical evidence or discuss the potential impact of this simplification.
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for highlighting the importance of road-type speed differences. The revised “Emergency-Care Network and Analysis Units” section specifies the category speeds and width caps and identifies them as modeling assumptions. The Methods and Results sections on “Convergence and Sensitivity Analysis” now describe two category-specific 20% speed reductions evaluated through 1,000 paired replicates at each failure severity, with both routing stages recomputed. These comparisons quantify changes in timely coverage, grid access probabilities, and hospital allocation beyond those captured by uniform speed scaling. The “Limitations and Future Research” section identifies ambulance movement records as a basis for empirical speed calibration.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"Base speeds are 80 km/h for national expressways or equivalent roads, 50 km/h for national highways, 40 km/h for prefectural roads, 30 km/h for municipal roads or equivalent roads, and 20 km/h for other or unknown categories. Width-based caps are 20, 30, 50, 60, and 80 km/h for widths below 3 m, 3 to below 5.5 m, 5.5 to below 13 m, 13 to below 19.5 m, and at least 19.5 m, respectively; unknown width receives a 20 km/h cap. Each edge uses the lower of its category speed and width cap. These values are modeling assumptions rather than empirically calibrated ambulance operating speeds."
+(Page 11, Lines 201–208)
+
+"Two additional scenarios reduce effective, width-capped speeds by 20% on either national expressways and national highways (A) or prefectural and municipal roads (B), leaving other categories unchanged. Connector speeds follow their referenced access edges. Both routing stages are recomputed for each scenario using the same 1,000 failure draws at each expected failed-road-length share of 1%, 3%, 5%, and 10%. Paired comparisons assess 30-minute population coverage, grid access probabilities, and hospital reassignment among residents with a reachable complete emergency chain. The perturbation magnitude is a sensitivity setting, not an estimated speed error."
+(Page 19, Lines 373–381)
+
+"Under category-specific speed reductions, mean 30-minute coverage decreases relative to original speeds in the same failed networks by 18,955–25,788 residents in scenario A and 31,494–39,449 in scenario B across the four failure severities. The corresponding population-weighted probability reductions are 1.09–1.48 and 1.81–2.27 percentage points. Hospital assignments change for an average of 3.60–3.85% and 2.76–2.87% of reachable residents, respectively, while network disconnection remains unchanged. Grid-level effects are more concentrated: the 95th percentile of absolute access-probability reductions across grids ranges from 3.0 to 13.9 percentage points in A and 13.2 to 35.0 in B. These comparisons show sensitivity of timely coverage and hospital allocation to relative road-type speeds, which uniform speed scaling does not capture."
+(Page 24, Lines 490–499)
+
+"Ambulance movement records could calibrate category-specific speeds and refine dispatch and destination behavior, and complete hospital capacity data could support explicitly weighted alternatives to minimum-time assignment."
+(Page 28, Lines 580–583)
 
 ## Comment 3
 
