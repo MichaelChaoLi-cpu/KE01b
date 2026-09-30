@@ -4,7 +4,17 @@
 
 Thank you for the editor’s and reviewers’ careful review of our manuscript, “Length-Dependent Road Failure and Two-Stage Emergency Medical Access in Kumamoto Prefecture.”
 
-[The revision summary will be completed after the revisions and detailed responses are finalized.]
+The main revisions are:
+
+1. Clarified the road-centerline representation, bidirectional routing assumptions, and implications of omitted carriageway and turn restrictions.
+2. Specified road-category speeds and width-based speed caps, distinguishing modeling assumptions from empirically calibrated ambulance speeds.
+3. Added paired category-specific speed sensitivity analyses to assess effects on timely population coverage, grid-level access probabilities, and hospital assignment.
+4. Explained the omission of bridge and elevated-road fragility and identified the data needed to incorporate structural vulnerability.
+5. Expanded the study-area description with geographic context, population statistics, road-network length, and road-type composition.
+6. Improved figure resolution and readability through revised panel layouts, clearer annotations and legends, and reduced unused space.
+7. Strengthened the critical literature synthesis, clarified the research gap, and aligned the contribution statements in the Introduction and Discussion.
+8. Added a methodological overview and flowchart distinguishing the repeated road-failure simulations from the individual road-section consequence and expected-risk analysis.
+9. Linked the results more explicitly to continuity protection and restoration screening, and clarified how the framework can be transferred to other regions using locally specified inputs and assumptions.
 
 # Editor
 
@@ -16,11 +26,7 @@ To view your reviewer feedback, please log in as an author at https://www.editor
  
 When revising your manuscript, please consider all issues mentioned in the reviewers' comments carefully. Please note that your revised submission may need to be re-reviewed.
 
-**Response:**
-[Response to be completed.]
-
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+**Response:** Thank you for the opportunity to revise our manuscript. We have carefully addressed the reviewers’ comments. The revised manuscript clarifies the modeling assumptions, adds category-specific speed sensitivity analysis, improves figure readability, and strengthens the presentation of the research gap, methodological workflow, contributions, and planning implications. Detailed responses follow below.
 
 # Reviewer 1
 
