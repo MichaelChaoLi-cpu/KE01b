@@ -520,3 +520,713 @@ The study covers Kumamoto Prefecture and represents emergency access as a cross-
 - Extent: 5486400 x 4453128 EMU, six-inch width, preserved aspect ratio.
 - Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
 
+## reviewer-2/comment-3
+
+
+### part-01
+
+- Mode: authorized-tracked-insertion
+- Decision: KILA-D-20260930-020
+- Location: After Materials and Methods; before Study Area and Data Sources
+- Timestamp: 2026-09-30T11:21:51Z
+- Before: no inserted content at this location
+- After:
+
+~~~~text
+Figure 1 summarizes the methodological workflow. Spatial inputs are integrated into a junction-to-junction road network to establish baseline dispatch-to-patient and patient-to-hospital travel times. Two complementary analyses then use this common baseline: paired length-dependent road-failure simulations quantify grid, population, and hospital reliability, whereas separate removal of each road section measures potential accessibility loss and its probability-weighted expected risk. Convergence and speed-sensitivity checks assess the simulation estimates.
+~~~~
+
+- Revision IDs: [31, 32]
+- Markup SHA-256 before: 2b91cc8aba62d6cdec0422a428a1a867f29acb0235066be30c392f6c43ad317a
+- Markup SHA-256 after: 77cb959dc77f047537f01982750454b08d1118b3e867f17a3be3bdb3fc41308f
+- Backup: Rev/revision/.kila-backups/R2C3-part-01-2b91cc8aba62.docx
+- Checks: existing XML restored by removal of inserted paragraphs; original media, endnotes and prior revisions preserved; source paragraph/run styles reused.
+
+### part-02
+
+- Location: Methods/Results figure callout, current clean paragraph index 33 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:21:52Z
+- Author: Kila
+- Markup SHA-256 before: `77cb959dc77f047537f01982750454b08d1118b3e867f17a3be3bdb3fc41308f`
+- Markup SHA-256 after: `bede85b391d3e03fd4fdf5c477f7ae5508ce6373ee2876cd3ccd8a241a651174`
+- Revision IDs: `33, 34`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202153861850.reviewer-2-comment-3.part-02.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 1 maps these demand supports together with the road network, primary and secondary emergency roads, candidate dispatch bases, and eligible hospitals.
+~~~~
+
+- After:
+
+~~~~text
+Figure 2 maps these demand supports together with the road network, primary and secondary emergency roads, candidate dispatch bases, and eligible hospitals.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "1"
+     - After: "2"
+
+### part-03
+
+- Location: Methods/Results figure callout, current clean paragraph index 97 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:21:54Z
+- Author: Kila
+- Markup SHA-256 before: `bede85b391d3e03fd4fdf5c477f7ae5508ce6373ee2876cd3ccd8a241a651174`
+- Markup SHA-256 after: `dad9a23f56e0d3972add2cbcef626712496c5140a7d7a7bb2c2fd1fdb8f623a0`
+- Revision IDs: `35, 36`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202155482891.reviewer-2-comment-3.part-03.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 2 shows that the dispatch, hospital-transport, and combined two-stage surfaces have related but nonidentical spatial patterns.
+~~~~
+
+- After:
+
+~~~~text
+Figure 3 shows that the dispatch, hospital-transport, and combined two-stage surfaces have related but nonidentical spatial patterns.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "2"
+     - After: "3"
+
+### part-04
+
+- Location: Methods/Results figure callout, current clean paragraph index 100 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:21:56Z
+- Author: Kila
+- Markup SHA-256 before: `dad9a23f56e0d3972add2cbcef626712496c5140a7d7a7bb2c2fd1fdb8f623a0`
+- Markup SHA-256 after: `972f10c5986465c5ce2f7f23e3b0894dd74a7279f1b3d6f03983948116e1ad52`
+- Revision IDs: `37, 38`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202157093331.reviewer-2-comment-3.part-04.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 3 reports an ordered response across the calibration range.
+~~~~
+
+- After:
+
+~~~~text
+Figure 4 reports an ordered response across the calibration range.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "3"
+     - After: "4"
+
+### part-05
+
+- Location: Methods/Results figure callout, current clean paragraph index 100 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:21:57Z
+- Author: Kila
+- Markup SHA-256 before: `972f10c5986465c5ce2f7f23e3b0894dd74a7279f1b3d6f03983948116e1ad52`
+- Markup SHA-256 after: `51c3737c90ee01352959f97a0f0ab1a77cb1ea8238473e958a55f9b58c5ef565`
+- Revision IDs: `39, 40`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202158665507.reviewer-2-comment-3.part-05.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The paired realization in Figure 4 confirms the intended nesting visually.
+~~~~
+
+- After:
+
+~~~~text
+The paired realization in Figure 5 confirms the intended nesting visually.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "4"
+     - After: "5"
+
+### part-06
+
+- Location: Methods/Results figure callout, current clean paragraph index 103 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:21:59Z
+- Author: Kila
+- Markup SHA-256 before: `51c3737c90ee01352959f97a0f0ab1a77cb1ea8238473e958a55f9b58c5ef565`
+- Markup SHA-256 after: `d66754ea42313580a3e88a5031d6b393561f299d310b32afce4a868b58345173`
+- Revision IDs: `41, 42`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202200245074.reviewer-2-comment-3.part-06.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 5 maps a marked expansion in the population exposed to loss of baseline 30-minute access.
+~~~~
+
+- After:
+
+~~~~text
+Figure 6 maps a marked expansion in the population exposed to loss of baseline 30-minute access.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "5"
+     - After: "6"
+
+### part-07
+
+- Location: Methods/Results figure callout, current clean paragraph index 106 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:00Z
+- Author: Kila
+- Markup SHA-256 before: `d66754ea42313580a3e88a5031d6b393561f299d310b32afce4a868b58345173`
+- Markup SHA-256 after: `46a196e5d474efb459359742db603e8c0e410394654351b4a313bc8f9f8bb7d7`
+- Revision IDs: `43, 44`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202201805746.reviewer-2-comment-3.part-07.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 6 shows monotonic declines in retained baseline coverage at all three timely thresholds.
+~~~~
+
+- After:
+
+~~~~text
+Figure 7 shows monotonic declines in retained baseline coverage at all three timely thresholds.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "6"
+     - After: "7"
+
+### part-08
+
+- Location: Methods/Results figure callout, current clean paragraph index 109 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:02Z
+- Author: Kila
+- Markup SHA-256 before: `46a196e5d474efb459359742db603e8c0e410394654351b4a313bc8f9f8bb7d7`
+- Markup SHA-256 after: `8446015d35f0f31a150f06f006bdf0175c18d4f13cdc5a1fb0eec5d866d93f25`
+- Revision IDs: `45, 46`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202203370796.reviewer-2-comment-3.part-08.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 7 shows simultaneous positive and negative changes in mean hospital catchments.
+~~~~
+
+- After:
+
+~~~~text
+Figure 8 shows simultaneous positive and negative changes in mean hospital catchments.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "7"
+     - After: "8"
+
+### part-09
+
+- Location: Methods/Results figure callout, current clean paragraph index 112 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:04Z
+- Author: Kila
+- Markup SHA-256 before: `8446015d35f0f31a150f06f006bdf0175c18d4f13cdc5a1fb0eec5d866d93f25`
+- Markup SHA-256 after: `d4d244e7158d05f191f3d962293d56b5c5001489868317cb13912581a0313c72`
+- Revision IDs: `47, 48`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202204997277.reviewer-2-comment-3.part-09.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 8 maps nonzero potential loss for 41,178 sections at the 15-minute threshold, 55,192 at 30 minutes, and 55,717 at 45 minutes.
+~~~~
+
+- After:
+
+~~~~text
+Figure 9 maps nonzero potential loss for 41,178 sections at the 15-minute threshold, 55,192 at 30 minutes, and 55,717 at 45 minutes.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "8"
+     - After: "9"
+
+### part-10
+
+- Location: Methods/Results figure callout, current clean paragraph index 116 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:05Z
+- Author: Kila
+- Markup SHA-256 before: `d4d244e7158d05f191f3d962293d56b5c5001489868317cb13912581a0313c72`
+- Markup SHA-256 after: `f791579050cbaeb610db4d998302595c075e441535de3bbae23969f9ec68f00a`
+- Revision IDs: `49, 50`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202206582338.reviewer-2-comment-3.part-10.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 9 shows nearly flat running coverage means after the early checkpoints and declining Monte Carlo standard errors as replicates accumulate.
+~~~~
+
+- After:
+
+~~~~text
+Figure 10 shows nearly flat running coverage means after the early checkpoints and declining Monte Carlo standard errors as replicates accumulate.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "9"
+     - After: "10"
+
+### part-11
+
+- Location: Figures section, current clean paragraph index 149 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:07Z
+- Author: Kila
+- Markup SHA-256 before: `f791579050cbaeb610db4d998302595c075e441535de3bbae23969f9ec68f00a`
+- Markup SHA-256 after: `b1b7b6887daeeec065fc31afb8246e57e71241ce5643e4a608f79921bb4707dc`
+- Revision IDs: `51, 52`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202208142463.reviewer-2-comment-3.part-11.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 1. Population demand and emergency-care network across Kumamoto
+~~~~
+
+- After:
+
+~~~~text
+Figure 2. Population demand and emergency-care network across Kumamoto
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "1"
+     - After: "2"
+
+### part-12
+
+- Location: Figures section, current clean paragraph index 153 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:08Z
+- Author: Kila
+- Markup SHA-256 before: `b1b7b6887daeeec065fc31afb8246e57e71241ce5643e4a608f79921bb4707dc`
+- Markup SHA-256 after: `088e2670a8cbab6d1b379d49c8c4eb68b3b434a808ac5c6923b50e92bc6454cf`
+- Revision IDs: `53, 54`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202209690577.reviewer-2-comment-3.part-12.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 2. Baseline dispatch, hospital transport, and total emergency travel times
+~~~~
+
+- After:
+
+~~~~text
+Figure 3. Baseline dispatch, hospital transport, and total emergency travel times
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "2"
+     - After: "3"
+
+### part-13
+
+- Location: Figures section, current clean paragraph index 157 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:10Z
+- Author: Kila
+- Markup SHA-256 before: `088e2670a8cbab6d1b379d49c8c4eb68b3b434a808ac5c6923b50e92bc6454cf`
+- Markup SHA-256 after: `b14edb1ca43a765e6f003a5d8254ddb208cf40d3f182159b69995ada3309c91d`
+- Revision IDs: `55, 56`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202211239414.reviewer-2-comment-3.part-13.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 3. Emergency-access response to increasing failed road length
+~~~~
+
+- After:
+
+~~~~text
+Figure 4. Emergency-access response to increasing failed road length
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "3"
+     - After: "4"
+
+### part-14
+
+- Location: Figures section, current clean paragraph index 161 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:11Z
+- Author: Kila
+- Markup SHA-256 before: `b14edb1ca43a765e6f003a5d8254ddb208cf40d3f182159b69995ada3309c91d`
+- Markup SHA-256 after: `26c6bc0fc1f35944df722402e8bfb158d4fbba34abeaea897414e17061a0c12a`
+- Revision IDs: `57, 58`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202212838716.reviewer-2-comment-3.part-14.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 4. Nested road-failure realizations across main and stress severities
+~~~~
+
+- After:
+
+~~~~text
+Figure 5. Nested road-failure realizations across main and stress severities
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "4"
+     - After: "5"
+
+### part-15
+
+- Location: Figures section, current clean paragraph index 165 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:13Z
+- Author: Kila
+- Markup SHA-256 before: `26c6bc0fc1f35944df722402e8bfb158d4fbba34abeaea897414e17061a0c12a`
+- Markup SHA-256 after: `65cbc9895c3a9c477e6cc8c7a83978e8212c9b35659a0b9c3f40f78d081de985`
+- Revision IDs: `59, 60`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202214415070.reviewer-2-comment-3.part-15.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 5. Grid probability of losing baseline 30-minute emergency access
+~~~~
+
+- After:
+
+~~~~text
+Figure 6. Grid probability of losing baseline 30-minute emergency access
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "5"
+     - After: "6"
+
+### part-16
+
+- Location: Figures section, current clean paragraph index 169 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:15Z
+- Author: Kila
+- Markup SHA-256 before: `65cbc9895c3a9c477e6cc8c7a83978e8212c9b35659a0b9c3f40f78d081de985`
+- Markup SHA-256 after: `d9b893f2e6555e74107512b4b3723fc017349861c1aec26d98ab87ae737f4056`
+- Revision IDs: `61, 62`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202216012598.reviewer-2-comment-3.part-16.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 6. Population coverage retained across failure severity and thresholds
+~~~~
+
+- After:
+
+~~~~text
+Figure 7. Population coverage retained across failure severity and thresholds
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "6"
+     - After: "7"
+
+### part-17
+
+- Location: Figures section, current clean paragraph index 173 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:16Z
+- Author: Kila
+- Markup SHA-256 before: `d9b893f2e6555e74107512b4b3723fc017349861c1aec26d98ab87ae737f4056`
+- Markup SHA-256 after: `a54c97273fb90a47da538d7dbeaa79dc9c60693ab5e2889196f6f7ebb150df41`
+- Revision IDs: `63, 64`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202217684600.reviewer-2-comment-3.part-17.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 7. Hospital catchment reliability under increasing road failure
+~~~~
+
+- After:
+
+~~~~text
+Figure 8. Hospital catchment reliability under increasing road failure
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "7"
+     - After: "8"
+
+### part-18
+
+- Location: Figures section, current clean paragraph index 177 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:18Z
+- Author: Kila
+- Markup SHA-256 before: `a54c97273fb90a47da538d7dbeaa79dc9c60693ab5e2889196f6f7ebb150df41`
+- Markup SHA-256 after: `5f61a3c8bcc423d2bbbdc21bbb050ab4c7d907a2525345b5585fdb12872e5ca7`
+- Revision IDs: `65, 66`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202219279482.reviewer-2-comment-3.part-18.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 8. Road-section accessibility consequence and expected risk surfaces
+~~~~
+
+- After:
+
+~~~~text
+Figure 9. Road-section accessibility consequence and expected risk surfaces
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "8"
+     - After: "9"
+
+### part-19
+
+- Location: Figures section, current clean paragraph index 181 (zero-based; exact text is the locator).
+- Reason: Renumber existing figure after workflow Figure 1 insertion.
+- Kila decisions: KILA-D-20260930-020
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:22:19Z
+- Author: Kila
+- Markup SHA-256 before: `5f61a3c8bcc423d2bbbdc21bbb050ab4c7d907a2525345b5585fdb12872e5ca7`
+- Markup SHA-256 after: `096f99fac0bc6eeff7f5d71efcc94fbbf2601af61d6a0ffcde226a1435161c9f`
+- Revision IDs: `67, 68`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20260930T202220859153.reviewer-2-comment-3.part-19.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `3ed02e454dab3dedfb8d6f75472db6dd289f38cf7eb0541008bf00b626a56413`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Figure 9. Monte Carlo convergence, stress severity, and speed sensitivity
+~~~~
+
+- After:
+
+~~~~text
+Figure 10. Monte Carlo convergence, stress severity, and speed sensitivity
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "9"
+     - After: "10"
+
+
+### part-20
+
+- Mode: authorized-tracked-insertion
+- Decision: KILA-D-20260930-020
+- Location: Figures section, before the previous first figure
+- Timestamp: 2026-09-30T11:22:47Z
+- Before: no inserted content at this location
+- After:
+
+~~~~text
+[Workflow PNG: eeaada6a2908d04dc0d5168df7e245a76f9093a9b649d21529d5fd67ae79b219]
+Figure 1. Methodological workflow for two-stage emergency medical access
+Note: The shared network and baseline support two complementary analyses. Random-failure simulations use 1,000 paired replicates at 1%, 3%, and 5% expected failed road length, with 10% as a stress scenario. Single-section analysis removes each section separately from the baseline network and combines potential population loss with the section failure probability to calculate expected risk. Timely access is evaluated at 15, 30, and 45 minutes, with 30 minutes as the primary threshold.
+~~~~
+
+- Revision IDs: [69, 70, 71, 72, 73, 74]
+- Markup SHA-256 before: 096f99fac0bc6eeff7f5d71efcc94fbbf2601af61d6a0ffcde226a1435161c9f
+- Markup SHA-256 after: 2af639ba4120034f2e87767e4ef8372d9fdf9e499215e574c6381ccc34c7617e
+- Backup: Rev/revision/.kila-backups/R2C3-part-20-096f99fac0bc.docx
+- Checks: existing XML restored by removal of inserted paragraphs; original media, endnotes and prior revisions preserved; source paragraph/run styles reused.
+

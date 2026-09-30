@@ -71,22 +71,22 @@ The assumed travel speeds for different road types should be more explicitly dif
 
 The resolution of several figures, particularly the maps, could be improved for readability. Important details, such as road networks and grid-level probabilities, are not clearly visible in the current version. Please provide higher-resolution versions.
 
-**Response:** Thank you for this suggestion. Figures 1–9 now use 600-dpi images at their six-inch display width, with revised panel layouts, clearer labels and legends, and reduced unused space to improve readability. In particular, the three-panel maps in Figures 1, 2, 5, and 7 use two columns, giving each map more space; map annotations, hospital symbols, and colorbar labels are repositioned or resized to reduce crowding. These presentation changes preserve the underlying numerical results, geographic extents, and color-scale definitions. The updated figures appear on pages 32–40. The following unchanged figure titles identify the locations of the revised artwork:
+**Response:** Thank you for this suggestion. Figures 2–10 now use 600-dpi images at their six-inch display width, with revised panel layouts, clearer labels and legends, and reduced unused space to improve readability. In particular, the three-panel maps in Figures 2, 3, 6, and 8 use two columns, giving each map more space; map annotations, hospital symbols, and colorbar labels are repositioned or resized to reduce crowding. These presentation changes preserve the underlying numerical results, geographic extents, and color-scale definitions. The updated figures appear on pages 33–41. The following unchanged figure titles identify the locations of the revised artwork:
 
-"Figure 1. Population demand and emergency-care network across Kumamoto"
-(Page 32, Lines 4–4)
+"Figure 2. Population demand and emergency-care network across Kumamoto"
+(Page 33, Lines 11–11)
 
-"Figure 3. Emergency-access response to increasing failed road length"
-(Page 34, Lines 18–18)
+"Figure 4. Emergency-access response to increasing failed road length"
+(Page 35, Lines 25–25)
 
-"Figure 5. Grid probability of losing baseline 30-minute emergency access"
-(Page 36, Lines 32–32)
+"Figure 6. Grid probability of losing baseline 30-minute emergency access"
+(Page 37, Lines 39–39)
 
-"Figure 7. Hospital catchment reliability under increasing road failure"
-(Page 38, Lines 46–46)
-
-"Figure 8. Road-section accessibility consequence and expected risk surfaces"
+"Figure 8. Hospital catchment reliability under increasing road failure"
 (Page 39, Lines 53–53)
+
+"Figure 9. Road-section accessibility consequence and expected risk surfaces"
+(Page 40, Lines 60–60)
 
 ## Comment 4
 
@@ -146,11 +146,39 @@ In the Literature Review section, each statement is supported by one or more ref
 
 In the Materials and Methods section, the authors provide a detailed description of the methods. However, an overview of the overall methodological workflow is missing, making it difficult for readers to follow the procedures. To further improve the readability and systematicity of the paper, we suggest that the authors refine the current method descriptions and develop a complete methodological flowchart to serve as a guide for the subsequent method presentation
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for this suggestion. The Materials and Methods section now opens with an overview linked to a new methodological flowchart (Figure 1), which organizes the shared network and baseline, random-failure simulations, and independent single-section analysis into three connected frames. The overview and figure note explain how these analyses lead to emergency-access reliability and road-section consequence and risk outputs. Existing figures and their text references are renumbered as Figures 2–10.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"Figure 1 summarizes the methodological workflow. Spatial inputs are integrated into a junction-to-junction road network to establish baseline dispatch-to-patient and patient-to-hospital travel times. Two complementary analyses then use this common baseline: paired length-dependent road-failure simulations quantify grid, population, and hospital reliability, whereas separate removal of each road section measures potential accessibility loss and its probability-weighted expected risk. Convergence and speed-sensitivity checks assess the simulation estimates."
+(Pages 9–10, Lines 166–172)
+
+"Note: The shared network and baseline support two complementary analyses. Random-failure simulations use 1,000 paired replicates at 1%, 3%, and 5% expected failed road length, with 10% as a stress scenario. Single-section analysis removes each section separately from the baseline network and combines potential population loss with the section failure probability to calculate expected risk. Timely access is evaluated at 15, 30, and 45 minutes, with 30 minutes as the primary threshold."
+(Page 32, Lines 5–9)
+
+The following figure titles show the updated numbering:
+
+"Figure 2. Population demand and emergency-care network across Kumamoto"
+(Page 33, Lines 11–11)
+
+"Figure 3. Baseline dispatch, hospital transport, and total emergency travel times"
+(Page 34, Lines 18–18)
+
+"Figure 4. Emergency-access response to increasing failed road length"
+(Page 35, Lines 25–25)
+
+"Figure 6. Grid probability of losing baseline 30-minute emergency access"
+(Page 37, Lines 39–39)
+
+"Figure 7. Population coverage retained across failure severity and thresholds"
+(Page 38, Lines 46–46)
+
+"Figure 8. Hospital catchment reliability under increasing road failure"
+(Page 39, Lines 53–53)
+
+"Figure 9. Road-section accessibility consequence and expected risk surfaces"
+(Page 40, Lines 60–60)
+
+"Figure 10. Monte Carlo convergence, stress severity, and speed sensitivity"
+(Page 41, Lines 68–68)
 
 ## Comment 4
 
