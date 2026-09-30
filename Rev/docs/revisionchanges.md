@@ -1392,3 +1392,116 @@ The same framework also provides a reusable basis for future emergency preparedn
      - Before: "Prefecture"
      - After: "and for assessments in other regions using locally specified network, demand, facility, and failure-scenario inputs"
 
+## reviewer-2/comment-2
+
+### part-01
+
+- Location: Literature Review / Emergency Medical Service Accessibility, final sentence.
+- Reason: evaluate the scope and tradeoffs of existing approaches and connect them to the present study without overstating novelty.
+- Kila decisions: KILA-D-20260930-024
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T12:02:10Z
+- Author: Kila
+- Markup SHA-256 before: `b93acbcb09b22aa19a3f1ef97290176582af395aa6becd29175449d0b64fa872`
+- Markup SHA-256 after: `67799f4fd8b65dd2f894b1ea00678eef85fd8c3184d7f195b02c4d88ed2fd942`
+- Revision IDs: `87`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T210211442723.reviewer-2-comment-2.part-01.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Distributional analysis is therefore a distinct component of emergency-access assessment rather than a descriptive add-on (Utkarsh et al., 2022).
+~~~~
+
+- After:
+
+~~~~text
+Distributional analysis is therefore a distinct component of emergency-access assessment rather than a descriptive add-on (Utkarsh et al., 2022). The operational detail of ambulance-routing and hospital-assignment models is valuable for managing congestion and treatment delays, as illustrated by the model of Chou et al. (2022). That objective differs from identifying where repeated road failures prevent completion of the dispatch-to-patient-to-hospital chain. For the latter question, travel-time and coverage measures need to be recalculated jointly for both stages in each disrupted network, with losses distinguished across population groups and receiving hospitals.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " The operational detail of ambulance-routing and hospital-assignment models is valuable for managing congestion and treatment delays, as illustrated by the model of Chou et al. (2022). That objective differs from identifying where repeated road failures prevent completion of the dispatch-to-patient-to-hospital chain. For the latter question, travel-time and coverage measures need to be recalculated jointly for both stages in each disrupted network, with losses distinguished across population groups and receiving hospitals."
+
+### part-02
+
+- Location: Literature Review / Road-Network Reliability under Disruption, final sentence.
+- Reason: evaluate the scope and tradeoffs of existing approaches and connect them to the present study without overstating novelty.
+- Kila decisions: KILA-D-20260930-024
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T12:02:23Z
+- Author: Kila
+- Markup SHA-256 before: `67799f4fd8b65dd2f894b1ea00678eef85fd8c3184d7f195b02c4d88ed2fd942`
+- Markup SHA-256 after: `45aa69697f81660e4de002427b72f38c82d80d1997e2532f265a10302f928752`
+- Revision IDs: `88`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T210224617647.reviewer-2-comment-2.part-02.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Repeated or scenario-based road-network analysis can characterize performance degradation and connectivity or accessibility consequences under disruption (Anthony et al., 2002; Erik & Lars‐Göran, 2012; Xiangdong et al., 2018).
+~~~~
+
+- After:
+
+~~~~text
+Repeated or scenario-based road-network analysis can characterize performance degradation and connectivity or accessibility consequences under disruption (Anthony et al., 2002; Erik & Lars‐Göran, 2012; Xiangdong et al., 2018). Area-covering disruption analysis shows why the impact of a single closure cannot stand in for the loss of several nearby alternatives: the spatial distribution of vulnerability changes with the disruption pattern. This makes the failure representation a substantive modeling choice, not simply a computational detail. The present independent length-dependent experiment complements spatially clustered disruption scenarios by isolating network response under a declared exposure rule; it does not reproduce their spatial dependence. Pairing repeated-failure estimates with separate single-section removals allows system reliability and individual-section consequence to be interpreted without conflating them.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " Area-covering disruption analysis shows why the impact of a single closure cannot stand in for the loss of several nearby alternatives: the spatial distribution of vulnerability changes with the disruption pattern. This makes the failure representation a substantive modeling choice, not simply a computational detail. The present independent length-dependent experiment complements spatially clustered disruption scenarios by isolating network response under a declared exposure rule; it does not reproduce their spatial dependence. Pairing repeated-failure estimates with separate single-section removals allows system reliability and individual-section consequence to be interpreted without conflating them."
+
+### part-03
+
+- Location: Literature Review / Critical-Road Identification for Emergency Planning, final sentence.
+- Reason: evaluate the scope and tradeoffs of existing approaches and connect them to the present study without overstating novelty.
+- Kila decisions: KILA-D-20260930-024
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T12:02:50Z
+- Author: Kila
+- Markup SHA-256 before: `45aa69697f81660e4de002427b72f38c82d80d1997e2532f265a10302f928752`
+- Markup SHA-256 after: `ebc0985e1f05d5be58697361e431d76bcbc53c13d532bc4249f5140d9aacb778`
+- Revision IDs: `89`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T210251729480.reviewer-2-comment-2.part-03.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Critical-road and restoration analyses can screen links for protection, retrofit, inspection, or post-disaster reconnection, while operational restoration requires additional field information (Vahid et al., 2021).
+~~~~
+
+- After:
+
+~~~~text
+Critical-road and restoration analyses can screen links for protection, retrofit, inspection, or post-disaster reconnection, while operational restoration requires additional field information (Vahid et al., 2021). The evacuation-risk approach of Nitheesh and Bhavathrathan (2025) also shows that critical-link identification already combines probability and consequence. The remaining issue for emergency medical access is therefore the service consequence being measured: evacuation traffic and topological exposure answer a different planning question from population loss along a dispatch-to-patient-to-hospital chain. Our assessment uses that complete-chain coverage loss and reports it separately from scenario-weighted risk. These outputs support continuity screening, while restoration optimization additionally requires repair resources, costs, and interactions among damaged sections.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " The evacuation-risk approach of Nitheesh and Bhavathrathan (2025) also shows that critical-link identification already combines probability and consequence. The remaining issue for emergency medical access is therefore the service consequence being measured: evacuation traffic and topological exposure answer a different planning question from population loss along a dispatch-to-patient-to-hospital chain. Our assessment uses that complete-chain coverage loss and reports it separately from scenario-weighted risk. These outputs support continuity screening, while restoration optimization additionally requires repair resources, costs, and interactions among damaged sections."
+

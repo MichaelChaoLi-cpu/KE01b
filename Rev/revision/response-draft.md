@@ -136,11 +136,16 @@ Lines 92-108: It is not clear on the research gap and contribution of this paper
 
 In the Literature Review section, each statement is supported by one or more references. While it is nice to attribute credit to prior work, the authors do not offer critical commentary on these studies. Considering that the objective of a literature review is to evaluate existing research and identify unresolved research gaps, this reviewer suggests the authors to provide critical assessment in order to pinpoint the limitations of current studies.
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for this suggestion. The three Literature Review subsections now compare the objectives, modeling choices, and planning implications of existing approaches. The revised text distinguishes operational ambulance and hospital-assignment models from disrupted-chain accessibility assessment, contrasts single-section and spatially clustered failures, and explains how emergency medical coverage loss differs from evacuation-oriented critical-link measures. These comparisons clarify the methodological choices underlying the present study while acknowledging the capabilities of prior work.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"The operational detail of ambulance-routing and hospital-assignment models is valuable for managing congestion and treatment delays, as illustrated by the model of Chou et al. (2022). That objective differs from identifying where repeated road failures prevent completion of the dispatch-to-patient-to-hospital chain. For the latter question, travel-time and coverage measures need to be recalculated jointly for both stages in each disrupted network, with losses distinguished across population groups and receiving hospitals."
+(Page 8, Lines 129–134)
+
+"Area-covering disruption analysis shows why the impact of a single closure cannot stand in for the loss of several nearby alternatives: the spatial distribution of vulnerability changes with the disruption pattern. This makes the failure representation a substantive modeling choice, not simply a computational detail. The present independent length-dependent experiment complements spatially clustered disruption scenarios by isolating network response under a declared exposure rule; it does not reproduce their spatial dependence. Pairing repeated-failure estimates with separate single-section removals allows system reliability and individual-section consequence to be interpreted without conflating them."
+(Page 9, Lines 152–160)
+
+"The evacuation-risk approach of Nitheesh and Bhavathrathan (2025) also shows that critical-link identification already combines probability and consequence. The remaining issue for emergency medical access is therefore the service consequence being measured: evacuation traffic and topological exposure answer a different planning question from population loss along a dispatch-to-patient-to-hospital chain. Our assessment uses that complete-chain coverage loss and reports it separately from scenario-weighted risk. These outputs support continuity screening, while restoration optimization additionally requires repair resources, costs, and interactions among damaged sections."
+(Page 10, Lines 177–185)
 
 ## Comment 3
 
