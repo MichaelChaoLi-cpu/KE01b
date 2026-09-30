@@ -265,3 +265,82 @@ Ambulance movement records could calibrate category-specific speeds and refine d
      - Before: ""
      - After: " calibrate category-specific speeds and"
 
+## reviewer-1/comment-4
+
+### part-01
+
+- Location: Methods / Length-Dependent Road-Failure Experiment, opening paragraph.
+- Reason: State exactly how the current model treats structure types rather than implying that mapped attributes enter the probability model.
+- Kila decisions: KILA-D-20260930-007
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T07:56:37Z
+- Author: Kila
+- Markup SHA-256 before: `829158defce8a9a834bd9af3fd1c820f01877b45f26f0cbc43d3a3b743b72e95`
+- Markup SHA-256 after: `377c7e89baaeb431e0037aa076c0f3580d1186c2fd7913550b9dacb30c593e82`
+- Revision IDs: `9`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T165637821271.reviewer-1-comment-4.part-01.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+This functional form compares sections within a transparent random-failure scenario; mapped hazard categories are used for grouped interpretation rather than substituted for an unavailable engineering fragility model.
+~~~~
+
+- After:
+
+~~~~text
+This functional form compares sections within a transparent random-failure scenario; mapped hazard categories are used for grouped interpretation rather than substituted for an unavailable engineering fragility model. At a given severity, sections of equal length receive the same failure probability, without a separate adjustment for bridges or elevated roads.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " At a given severity, sections of equal length receive the same failure probability, without a separate adjustment for bridges or elevated roads."
+
+### part-02
+
+- Location: Discussion / Limitations and Future Research.
+- Reason: Explicitly acknowledge the omission, explain its model implications without asserting an unmeasured direction or magnitude, and identify a path to refinement.
+- Kila decisions: KILA-D-20260930-007
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T07:57:07Z
+- Author: Kila
+- Markup SHA-256 before: `377c7e89baaeb431e0037aa076c0f3580d1186c2fd7913550b9dacb30c593e82`
+- Markup SHA-256 after: `8a05924b5be2a69a059113776c986a5846dcd4628101ba08e4b09f0a177f9aa0`
+- Revision IDs: `10, 11`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T165707935823.reviewer-1-comment-4.part-02.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Future work can replace scenario probabilities with verified engineering fragility or observed closure data while retaining the routing and outcome framework.
+~~~~
+
+- After:
+
+~~~~text
+Differences in bridge and elevated-road fragility are not represented by the length-only failure model. Such heterogeneity could change the spatial pattern of road disruption and the resulting probability-weighted emergency-access losses, even at the same expected failed-road-length share. Future work can replace scenario probabilities with verified engineering fragility or observed closure data while retaining the routing and outcome framework. Bridge and elevated-road inventories linked to structural-condition, shaking-intensity, and fragility data would support this refinement.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: "Differences in bridge and elevated-road fragility are not represented by the length-only failure model. Such heterogeneity could change the spatial pattern of road disruption and the resulting probability-weighted emergency-access losses, even at the same expected failed-road-length share. "
+  2. `insert`
+     - Before: ""
+     - After: " Bridge and elevated-road inventories linked to structural-condition, shaking-intensity, and fragility data would support this refinement."
+

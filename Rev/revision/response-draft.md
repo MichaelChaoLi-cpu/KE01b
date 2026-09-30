@@ -81,11 +81,13 @@ The resolution of several figures, particularly the maps, could be improved for 
 
 The Monte Carlo simulation uses a length-dependent random failure model. While this is a transparent approach, it does not account for the fact that certain road types (e.g., bridges, elevated sections) are inherently more vulnerable to earthquake damage. This omission should be explicitly acknowledged and discussed in the limitations section.
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for this comment. The revised “Length-Dependent Road-Failure Experiment” section explicitly states that equal-length sections receive the same failure probability without separate adjustments for bridges or elevated roads. The “Limitations and Future Research” section now acknowledges the omitted structural heterogeneity, explains its implications for the spatial distribution of disruption and probability-weighted emergency-access losses, and identifies the data needed for refinement.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"At a given severity, sections of equal length receive the same failure probability, without a separate adjustment for bridges or elevated roads."
+(Page 13, Lines 246–248)
+
+"Differences in bridge and elevated-road fragility are not represented by the length-only failure model. Such heterogeneity could change the spatial pattern of road disruption and the resulting probability-weighted emergency-access losses, even at the same expected failed-road-length share. Future work can replace scenario probabilities with verified engineering fragility or observed closure data while retaining the routing and outcome framework. Bridge and elevated-road inventories linked to structural-condition, shaking-intensity, and fragility data would support this refinement."
+(Page 28, Lines 581–587)
 
 ## Comment 5
 
