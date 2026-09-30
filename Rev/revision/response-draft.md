@@ -71,11 +71,22 @@ The assumed travel speeds for different road types should be more explicitly dif
 
 The resolution of several figures, particularly the maps, could be improved for readability. Important details, such as road networks and grid-level probabilities, are not clearly visible in the current version. Please provide higher-resolution versions.
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for this suggestion. Figures 1–9 now use 600-dpi images at their six-inch display width, with revised panel layouts, clearer labels and legends, and reduced unused space to improve readability. In particular, the three-panel maps in Figures 1, 2, 5, and 7 use two columns, giving each map more space; map annotations, hospital symbols, and colorbar labels are repositioned or resized to reduce crowding. These presentation changes preserve the underlying numerical results, geographic extents, and color-scale definitions. The updated figures appear on pages 32–40. The following unchanged figure titles identify the locations of the revised artwork:
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"Figure 1. Population demand and emergency-care network across Kumamoto"
+(Page 32, Lines 4–4)
+
+"Figure 3. Emergency-access response to increasing failed road length"
+(Page 34, Lines 18–18)
+
+"Figure 5. Grid probability of losing baseline 30-minute emergency access"
+(Page 36, Lines 32–32)
+
+"Figure 7. Hospital catchment reliability under increasing road failure"
+(Page 38, Lines 46–46)
+
+"Figure 8. Road-section accessibility consequence and expected risk surfaces"
+(Page 39, Lines 53–53)
 
 ## Comment 4
 

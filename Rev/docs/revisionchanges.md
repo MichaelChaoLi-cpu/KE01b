@@ -382,3 +382,141 @@ The study covers Kumamoto Prefecture and represents emergency access as a cross-
   1. `insert`
      - Before: ""
      - After: " Located in central Kyushu, the prefecture includes mountainous terrain to the east and south, the Aso caldera, and western coastal and island areas facing the Ariake and Yatsushiro seas. The study's 2020 population baseline comprises 1,738,301 residents in 62,945 populated 125 m meshes. The eligible modeled road network spans 42,949 km across 343,844 junction-to-junction sections. By represented road length, municipal roads or equivalent roads account for 88.9%, prefectural roads for 7.1%, national highways for 3.0%, national expressways or equivalent roads for 0.6%, and other roads for 0.4%."
+
+## reviewer-1/comment-3
+
+
+### figure-01
+
+- Timestamp: 2026-09-30T10:03:58Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 1. Population demand and emergency-care network across Kumamoto
+- Before: media/image1.png; preserved within tracked deletion 13.
+- After: data/exp/r1c3_revised_figures/Figure_01.png, SHA-256 11ff9241921c8582d7ea307575f0c771763be6aa3dd44bc2243bed69bc51da9b; tracked insertion 14.
+- Markup SHA-256 before: ba355fe3c302ec1c4869fb63cd8d4c332cafc817fa84c68a53cd46eae7d6e229
+- Markup SHA-256 after: b1cfeb97bae35f3a3d3a7afaf559bdcf1e2e154713fcde0dd1c034e21eeea9cb
+- Backup: Rev/revision/.kila-backups/R1C3-figure-01-ba355fe3c302.docx
+- Extent: 5486400 x 5465064 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
+
+### figure-02
+
+- Timestamp: 2026-09-30T10:03:59Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 2. Baseline dispatch, hospital transport, and total emergency travel times
+- Before: media/image2.png; preserved within tracked deletion 15.
+- After: data/exp/r1c3_revised_figures/Figure_02.png, SHA-256 071fdca7a8b5f1fc855cb4cd89d95ccf545cbf586ecc37f2da2be8e11010925c; tracked insertion 16.
+- Markup SHA-256 before: b1cfeb97bae35f3a3d3a7afaf559bdcf1e2e154713fcde0dd1c034e21eeea9cb
+- Markup SHA-256 after: 57bd275006915f5dbc2dbc22029487fed7befe78c63ba7e330004f6d47396fc8
+- Backup: Rev/revision/.kila-backups/R1C3-figure-02-b1cfeb97bae3.docx
+- Extent: 5486400 x 6077712 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
+
+### figure-03
+
+- Timestamp: 2026-09-30T10:04:00Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 3. Emergency-access response to increasing failed road length
+- Before: media/image3.png; preserved within tracked deletion 17.
+- After: data/exp/r1c3_revised_figures/Figure_03.png, SHA-256 5473d4a08a477e1b9d0390aa5758797027bcc09e32a7437dc1c1f15842745dc3; tracked insertion 18.
+- Markup SHA-256 before: 57bd275006915f5dbc2dbc22029487fed7befe78c63ba7e330004f6d47396fc8
+- Markup SHA-256 after: e6c1ba7ac509d4db7616d0e6667ef05faaa889d6881e0531c809d16afb2fe58e
+- Backup: Rev/revision/.kila-backups/R1C3-figure-03-57bd27500691.docx
+- Extent: 5486400 x 2685288 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
+
+### figure-04
+
+- Timestamp: 2026-09-30T10:04:00Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 4. Nested road-failure realizations across main and stress severities
+- Before: media/image4.png; preserved within tracked deletion 19.
+- After: data/exp/r1c3_revised_figures/Figure_04.png, SHA-256 9401d1b6b47da0947c3350dd1447a85b407b243d3fa084e2cb73b9baf753c351; tracked insertion 20.
+- Markup SHA-256 before: e6c1ba7ac509d4db7616d0e6667ef05faaa889d6881e0531c809d16afb2fe58e
+- Markup SHA-256 after: bd1fabfb9ee5da062f2dec1cf8b77e0529e934fabbdc45bb4a4186800f76d8d7
+- Backup: Rev/revision/.kila-backups/R1C3-figure-04-e6c1ba7ac509.docx
+- Extent: 5486400 x 5401056 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
+
+### figure-05
+
+- Timestamp: 2026-09-30T10:04:02Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 5. Grid probability of losing baseline 30-minute emergency access
+- Before: media/image5.png; preserved within tracked deletion 21.
+- After: data/exp/r1c3_revised_figures/Figure_05.png, SHA-256 1be49969da4fe8136623157772d51ab48855895eca7b527c6f513ce61f67b498; tracked insertion 22.
+- Markup SHA-256 before: bd1fabfb9ee5da062f2dec1cf8b77e0529e934fabbdc45bb4a4186800f76d8d7
+- Markup SHA-256 after: 94313db6bcdc75bd681ff9c481ebcc153e76114cb2bdc869d7dff9e7c72c8f67
+- Backup: Rev/revision/.kila-backups/R1C3-figure-05-bd1fabfb9ee5.docx
+- Extent: 5486400 x 5716524 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
+
+### figure-06
+
+- Timestamp: 2026-09-30T10:04:03Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 6. Population coverage retained across failure severity and thresholds
+- Before: media/image6.png; preserved within tracked deletion 23.
+- After: data/exp/r1c3_revised_figures/Figure_06.png, SHA-256 71fe7fc018de66fd0ca4c3e1d11a4040559b8878684b216611bb175b40d6a4dd; tracked insertion 24.
+- Markup SHA-256 before: 94313db6bcdc75bd681ff9c481ebcc153e76114cb2bdc869d7dff9e7c72c8f67
+- Markup SHA-256 after: f0b1a65e63ee8df2366b2a3dacd16405dfa014dff3cd5ed58f1efc7700a71a2e
+- Backup: Rev/revision/.kila-backups/R1C3-figure-06-94313db6bcdc.docx
+- Extent: 5486400 x 3009900 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
+
+### figure-07
+
+- Timestamp: 2026-09-30T10:04:04Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 7. Hospital catchment reliability under increasing road failure
+- Before: media/image7.png; preserved within tracked deletion 25.
+- After: data/exp/r1c3_revised_figures/Figure_07.png, SHA-256 c0407754f4e5ed8895f51635d12d627ef3088383b22c05950e8ee6d08c05b533; tracked insertion 26.
+- Markup SHA-256 before: f0b1a65e63ee8df2366b2a3dacd16405dfa014dff3cd5ed58f1efc7700a71a2e
+- Markup SHA-256 after: 9f4898fbfdd51af7a68624765d3a790dd82d6a6cd8f62759a9981b34007702e2
+- Backup: Rev/revision/.kila-backups/R1C3-figure-07-f0b1a65e63ee.docx
+- Extent: 5486400 x 5873496 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
+
+### figure-08
+
+- Timestamp: 2026-09-30T10:04:06Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 8. Road-section accessibility consequence and expected risk surfaces
+- Before: media/image8.png; preserved within tracked deletion 27.
+- After: data/exp/r1c3_revised_figures/Figure_08.png, SHA-256 0f6e6c274f583a1b56becf76e107924f007edc57e368ad7a58601b4d2af5ce4b; tracked insertion 28.
+- Markup SHA-256 before: 9f4898fbfdd51af7a68624765d3a790dd82d6a6cd8f62759a9981b34007702e2
+- Markup SHA-256 after: 13ee0830d02849dc664d7173de244539f9ab4ec5c6e0bb7e85690800d012b547
+- Backup: Rev/revision/.kila-backups/R1C3-figure-08-9f4898fbfdd5.docx
+- Extent: 5486400 x 4829556 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
+
+### figure-09
+
+- Timestamp: 2026-09-30T10:04:08Z
+- Mode: authorized-tracked-picture-replacement
+- Decision: KILA-D-20260930-015
+- Location: image preceding Figure 9. Monte Carlo convergence, stress severity, and speed sensitivity
+- Before: media/image9.png; preserved within tracked deletion 29.
+- After: data/exp/r1c3_revised_figures/Figure_09.png, SHA-256 f86c3041cbf17303ceaf580e4b786cd7c4e3ec2063a384942bdffdff92c17e87; tracked insertion 30.
+- Markup SHA-256 before: 13ee0830d02849dc664d7173de244539f9ab4ec5c6e0bb7e85690800d012b547
+- Markup SHA-256 after: 2b91cc8aba62d6cdec0422a428a1a867f29acb0235066be30c392f6c43ad317a
+- Backup: Rev/revision/.kila-backups/R1C3-figure-09-13ee0830d028.docx
+- Extent: 5486400 x 4453128 EMU, six-inch width, preserved aspect ratio.
+- Checks: prior revisions, paragraph/run styling, captions, other package parts and endnotes preserved; rejecting this pair restores original XML.
+
