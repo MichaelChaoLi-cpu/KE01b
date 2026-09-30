@@ -204,8 +204,16 @@ Lines 524-537: In the Discussion section, the authors restate the contributions 
 
 Finally, is the proposed method only applicable to the Kumamoto Prefecture, or is it a generalizable approach? If the method is intended to be generalizable, the description of the methodology and the core positioning of this paper may be revised to frame it as a general method, with the Kumamoto Prefecture serving merely as a case study.
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for this comment. The revised Abstract, Materials and Methods, Discussion, and Conclusion present a reusable emergency-access framework with Kumamoto as the case study. The manuscript distinguishes the transferable routing, simulation, and outcome calculations from locally specified inputs and parameters, and explains how applications elsewhere accommodate local ambulance-service organization and recalculate coverage and road-section priorities.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"We present a reusable network framework for assessing this complete chain and demonstrate it in Kumamoto Prefecture, Japan, following the 28 July 2026 Kumamoto earthquake (M7.1)."
+(Page 1, Lines 7–9)
+
+"The framework represents emergency access as a cross-sectional network simulation, with Kumamoto Prefecture as the case study. Its core inputs are a routable road network, spatial population demand, eligible dispatch bases, and eligible hospitals. The junction-based section definition, two-stage rerouting, paired failure simulation, and accessibility indicators are reusable across study areas; road speeds, connector rules, facility eligibility, timely-access thresholds, and failure-scenario parameters require local specification."
+(Page 10, Lines 175–181)
+
+"The present network experiment provides the baseline quantities required for those extensions. Application elsewhere follows the same routing and outcome calculations after replacing the spatial inputs and specifying local service and failure assumptions. Dispatch bases can represent the locally responsible ambulance service rather than necessarily fire stations. Local validation of road connectivity, travel times, and facility eligibility supports that transfer; coverage estimates and section priorities must be recalculated for each study area."
+(Page 29, Lines 611–617)
+
+"The same framework also provides a reusable basis for future emergency preparedness in Kumamoto and for assessments in other regions using locally specified network, demand, facility, and failure-scenario inputs."
+(Page 30, Lines 632–634)

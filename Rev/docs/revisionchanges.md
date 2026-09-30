@@ -1230,3 +1230,165 @@ Note: The shared network and baseline support two complementary analyses. Random
 - Backup: Rev/revision/.kila-backups/R2C3-part-20-096f99fac0bc.docx
 - Checks: existing XML restored by removal of inserted paragraphs; original media, endnotes and prior revisions preserved; source paragraph/run styles reused.
 
+## reviewer-2/comment-6
+
+### part-01
+
+- Location: Abstract, second sentence.
+- Reason: state the method-level positioning at the start of the paper without changing numerical findings.
+- Kila decisions: KILA-D-20260930-022
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:44:37Z
+- Author: Kila
+- Markup SHA-256 before: `2af639ba4120034f2e87767e4ef8372d9fdf9e499215e574c6381ccc34c7617e`
+- Markup SHA-256 after: `e6fd9225f42557e8c2830de377591135c7c12855b33d6390ab912ff1e09fd9f1`
+- Revision IDs: `75, 76, 77`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T204439102177.reviewer-2-comment-6.part-01.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `d8896a5d8a384489adf05857f50ad8f501569380b48ab49b37858cd7b58c8d6b`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Following the 28 July 2026 Kumamoto earthquake (M7.1), we assess this complete chain across Kumamoto Prefecture, Japan.
+~~~~
+
+- After:
+
+~~~~text
+We present a reusable network framework for assessing this complete chain and demonstrate it in Kumamoto Prefecture, Japan, following the 28 July 2026 Kumamoto earthquake (M7.1).
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "Following"
+     - After: "We present a reusable network framework for assessing this complete chain and demonstrate it in Kumamoto Prefecture, Japan, following"
+  2. `delete`
+     - Before: ", we assess this complete chain across Kumamoto Prefecture, Japan"
+     - After: ""
+
+### part-02
+
+- Location: Materials and Methods / Study Area and Data Sources, opening sentence.
+- Reason: make transfer requirements explicit within the method description rather than relying solely on the Discussion.
+- Kila decisions: KILA-D-20260930-022
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:44:50Z
+- Author: Kila
+- Markup SHA-256 before: `e6fd9225f42557e8c2830de377591135c7c12855b33d6390ab912ff1e09fd9f1`
+- Markup SHA-256 after: `835f3b0277f798a02cae47f31152df96b7817183d834ca82e3dcc258ef888731`
+- Revision IDs: `78, 79, 80, 81`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T204451872418.reviewer-2-comment-6.part-02.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The study covers Kumamoto Prefecture and represents emergency access as a cross-sectional network simulation.
+~~~~
+
+- After:
+
+~~~~text
+The framework represents emergency access as a cross-sectional network simulation, with Kumamoto Prefecture as the case study. Its core inputs are a routable road network, spatial population demand, eligible dispatch bases, and eligible hospitals. The junction-based section definition, two-stage rerouting, paired failure simulation, and accessibility indicators are reusable across study areas; road speeds, connector rules, facility eligibility, timely-access thresholds, and failure-scenario parameters require local specification.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "study covers Kumamoto Prefecture and"
+     - After: "framework"
+  2. `insert`
+     - Before: ""
+     - After: ", with Kumamoto Prefecture as the case study"
+  3. `insert`
+     - Before: ""
+     - After: " Its core inputs are a routable road network, spatial population demand, eligible dispatch bases, and eligible hospitals. The junction-based section definition, two-stage rerouting, paired failure simulation, and accessibility indicators are reusable across study areas; road speeds, connector rules, facility eligibility, timely-access thresholds, and failure-scenario parameters require local specification."
+
+### part-03
+
+- Location: Discussion / Limitations and Future Research, final sentence.
+- Reason: explain how to transfer the method without transferring Kumamoto-specific results or assuming identical emergency-service organization.
+- Kila decisions: KILA-D-20260930-022
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:45:03Z
+- Author: Kila
+- Markup SHA-256 before: `835f3b0277f798a02cae47f31152df96b7817183d834ca82e3dcc258ef888731`
+- Markup SHA-256 after: `5531eb1af83ed070d76fe3a09ceab142629a403e41b004db2092438d2a176d35`
+- Revision IDs: `82`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T204504631514.reviewer-2-comment-6.part-03.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The present network experiment provides the baseline quantities required for those extensions.
+~~~~
+
+- After:
+
+~~~~text
+The present network experiment provides the baseline quantities required for those extensions. Application elsewhere follows the same routing and outcome calculations after replacing the spatial inputs and specifying local service and failure assumptions. Dispatch bases can represent the locally responsible ambulance service rather than necessarily fire stations. Local validation of road connectivity, travel times, and facility eligibility supports that transfer; coverage estimates and section priorities must be recalculated for each study area.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " Application elsewhere follows the same routing and outcome calculations after replacing the spatial inputs and specifying local service and failure assumptions. Dispatch bases can represent the locally responsible ambulance service rather than necessarily fire stations. Local validation of road connectivity, travel times, and facility eligibility supports that transfer; coverage estimates and section priorities must be recalculated for each study area."
+
+### part-04
+
+- Location: Conclusion, final sentence.
+- Reason: align the closing statement with the Abstract and Methods positioning.
+- Kila decisions: KILA-D-20260930-022
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T11:45:29Z
+- Author: Kila
+- Markup SHA-256 before: `5531eb1af83ed070d76fe3a09ceab142629a403e41b004db2092438d2a176d35`
+- Markup SHA-256 after: `b93acbcb09b22aa19a3f1ef97290176582af395aa6becd29175449d0b64fa872`
+- Revision IDs: `83, 84, 85, 86`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T204530755775.reviewer-2-comment-6.part-04.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The same framework also provides a reusable basis for future emergency preparedness across Kumamoto Prefecture.
+~~~~
+
+- After:
+
+~~~~text
+The same framework also provides a reusable basis for future emergency preparedness in Kumamoto and for assessments in other regions using locally specified network, demand, facility, and failure-scenario inputs.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "across"
+     - After: "in"
+  2. `replace`
+     - Before: "Prefecture"
+     - After: "and for assessments in other regions using locally specified network, demand, facility, and failure-scenario inputs"
+
