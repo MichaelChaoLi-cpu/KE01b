@@ -1925,3 +1925,122 @@ The combined evidence identifies road sections with high modeled accessibility c
      - Before: "restored first, to preserve continuous emergency medical access"
      - After: "screening"
 
+## reviewer-2/comment-5
+
+### part-01
+
+- Location: Discussion / Contributions to Network-Reliability Assessment, sole paragraph.
+- Reason: Align the three contributions with Introduction and distinguish repeated-failure reliability from separate section-removal analysis; broader rewrite rationale approved in proposal.
+- Kila decisions: KILA-D-20261001-005, KILA-D-20261001-006
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T23:15:00Z
+- Author: Kila
+- Markup SHA-256 before: `5f6ccc4d5241dd72fd25cccaf7692dc4114df7bdc92d060477aba952ba7a072e`
+- Markup SHA-256 after: `650f81ef343eb8f8c1869e3e2468cf268e37410aeaa434218fa308d5e9498831`
+- Revision IDs: `173, 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 184, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223, 224`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20261001T081501694240.reviewer-2-comment-5.part-01.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The framework connects four outcome levels within the same paired road-failure experiment. Grid estimates locate fragile demand, population and municipal summaries describe distribution, hospital catchments show destination substitution, and road-section surfaces identify continuity consequence. Complete rerouting preserves the interaction between these levels because every outcome is derived from the feasible network in each replicate. The approach therefore avoids combining results from incompatible disruption assumptions. A second contribution is the explicit separation of repeated simultaneous-failure reliability from leave-one-section-out consequence. The former estimates how access behaves across complete disrupted networks, whereas the latter isolates the maximum direct accessibility loss associated with one section when other roads remain available. Probability weighting produces a third, scenario-dependent expected-risk measure without collapsing these meanings. This distinction clarifies which output answers each planning question.
+~~~~
+
+- After:
+
+~~~~text
+The framework makes three linked contributions, consistent with the Introduction. First, complete two-stage rerouting connects grid access, population and municipal coverage, and hospital catchment stability within the same paired road-failure experiment. Grid estimates locate fragile demand, population and municipal summaries describe distribution, and hospital catchments show destination substitution. These outcomes are derived from the feasible network in each replicate. Second, a separate leave-one-section-out analysis identifies road-section accessibility consequence when other roads remain available, and probability weighting expresses that consequence as scenario-dependent expected risk. This separation distinguishes repeated simultaneous-failure reliability from individual-section consequence. Third, the complementary demand, hospital, and road-section outputs connect service fragility with evidence for continuity protection and restoration screening. This distinction clarifies which output answers each planning question.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: "makes three linked contributions, consistent with the Introduction. First, complete two-stage rerouting "
+  2. `replace`
+     - Before: "four"
+     - After: "grid"
+  3. `replace`
+     - Before: "outcome"
+     - After: "access,"
+  4. `replace`
+     - Before: "levels"
+     - After: "population and municipal coverage, and hospital catchment stability"
+  5. `insert`
+     - Before: ""
+     - After: "and "
+  6. `delete`
+     - Before: ", and road-section surfaces identify continuity consequence"
+     - After: ""
+  7. `replace`
+     - Before: "Complete"
+     - After: "These"
+  8. `replace`
+     - Before: "rerouting"
+     - After: "outcomes"
+  9. `replace`
+     - Before: "preserves the interaction between these levels because every outcome is"
+     - After: "are"
+  10. `delete`
+     - Before: " The approach therefore avoids combining results from incompatible disruption assumptions."
+     - After: ""
+  11. `replace`
+     - Before: "A"
+     - After: "Second,"
+  12. `replace`
+     - Before: "second"
+     - After: "a"
+  13. `replace`
+     - Before: "contribution is the explicit separation of repeated simultaneous-failure reliability from"
+     - After: "separate"
+  14. `replace`
+     - Before: "consequence."
+     - After: "analysis"
+  15. `replace`
+     - Before: "The"
+     - After: "identifies"
+  16. `replace`
+     - Before: "former estimates how access behaves across complete disrupted networks, whereas the latter isolates the maximum direct"
+     - After: "road-section"
+  17. `replace`
+     - Before: "loss associated with one section"
+     - After: "consequence"
+  18. `replace`
+     - Before: "."
+     - After: ","
+  19. `replace`
+     - Before: "Probability"
+     - After: "and probability"
+  20. `replace`
+     - Before: "produces"
+     - After: "expresses"
+  21. `replace`
+     - Before: "a"
+     - After: "that"
+  22. `replace`
+     - Before: "third,"
+     - After: "consequence as"
+  23. `replace`
+     - Before: "expected-risk"
+     - After: "expected"
+  24. `replace`
+     - Before: "measure"
+     - After: "risk."
+  25. `replace`
+     - Before: "without"
+     - After: "This"
+  26. `replace`
+     - Before: "collapsing"
+     - After: "separation"
+  27. `replace`
+     - Before: "these"
+     - After: "distinguishes"
+  28. `replace`
+     - Before: "meanings"
+     - After: "repeated simultaneous-failure reliability from individual-section consequence. Third, the complementary demand, hospital, and road-section outputs connect service fragility with evidence for continuity protection and restoration screening"

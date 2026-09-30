@@ -215,11 +215,10 @@ In the Results section, the authors present abundant analytical findings. Howeve
 
 Lines 524-537: In the Discussion section, the authors restate the contributions of this work. I suggest that these claims be further aligned with the contributions presented earlier in the manuscript to ensure consistency.
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for this suggestion. The revised “Contributions to Network-Reliability Assessment” subsection now follows the same three contributions as the Introduction: complete-chain, multi-level reliability; separate road-section consequence and scenario-dependent expected risk; and their complementary use for continuity protection and restoration screening. It also explicitly distinguishes the repeated road-failure experiment from the separate leave-one-section-out analysis. The revised paragraph reads as follows.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"The framework makes three linked contributions, consistent with the Introduction. First, complete two-stage rerouting connects grid access, population and municipal coverage, and hospital catchment stability within the same paired road-failure experiment. Grid estimates locate fragile demand, population and municipal summaries describe distribution, and hospital catchments show destination substitution. These outcomes are derived from the feasible network in each replicate. Second, a separate leave-one-section-out analysis identifies road-section accessibility consequence when other roads remain available, and probability weighting expresses that consequence as scenario-dependent expected risk. This separation distinguishes repeated simultaneous-failure reliability from individual-section consequence. Third, the complementary demand, hospital, and road-section outputs connect service fragility with evidence for continuity protection and restoration screening. This distinction clarifies which output answers each planning question."
+(Pages 29–30, Lines 617–629)
 
 ## Comment 6
 
