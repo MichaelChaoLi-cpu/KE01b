@@ -1720,3 +1720,208 @@ These approaches establish tools for disruption assessment, but they answer diff
      - Before: ""
      - After: " Kumamoto demonstrates this reusable framework with locally specified inputs and failure scenarios."
 
+## reviewer-2/comment-4
+
+### part-01
+
+- Location: Results / Grid-Level Emergency-Access Reliability, closing sentence.
+- Reason: distinguish demand-side reliability from evidence about individual road sections, linking the grid and population results to the objective.
+- Kila decisions: KILA-D-20261001-003
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T22:52:29Z
+- Author: Kila
+- Markup SHA-256 before: `5e6b54c393bfcdf4e9533ca23fc644fcfc22216b9078fcba965ced62c2fa97b4`
+- Markup SHA-256 after: `201e2fbefa61fa806031c29512c8017974ad20f4169583cf64231645c2aab065`
+- Revision IDs: `156`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20261001T075230869833.reviewer-2-comment-4.part-01.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+It also explains why prefecture-wide coverage can remain high while local reliability differs sharply.
+~~~~
+
+- After:
+
+~~~~text
+It also explains why prefecture-wide coverage can remain high while local reliability differs sharply. For the road-continuity objective, these grid patterns locate demand exposed to unreliable access, while population and municipal summaries quantify the associated burden; the section-level analysis below identifies the consequence of individual road interruptions.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " For the road-continuity objective, these grid patterns locate demand exposed to unreliable access, while population and municipal summaries quantify the associated burden; the section-level analysis below identifies the consequence of individual road interruptions."
+
+### part-02
+
+- Location: Results / Hospital Service Reliability, closing sentence.
+- Reason: connect hospital substitution and instability to examination of supporting road access without claiming clinical capacity or a hospital-specific road attribution calculation.
+- Kila decisions: KILA-D-20261001-003
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T22:52:31Z
+- Author: Kila
+- Markup SHA-256 before: `201e2fbefa61fa806031c29512c8017974ad20f4169583cf64231645c2aab065`
+- Markup SHA-256 after: `c95c5610364e74939d4f06e821d8e677c520b3dee875b604fb859502c2140f12`
+- Revision IDs: `157`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20261001T075232720028.reviewer-2-comment-4.part-02.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+A hospital can retain a positive mean catchment while occasionally losing all assigned population.
+~~~~
+
+- After:
+
+~~~~text
+A hospital can retain a positive mean catchment while occasionally losing all assigned population. For continuity planning, the joint pattern of catchment gains, losses, and intermittent zero assignments identifies receiving facilities whose road-supported service areas merit closer examination alongside the section-consequence maps.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " For continuity planning, the joint pattern of catchment gains, losses, and intermittent zero assignments identifies receiving facilities whose road-supported service areas merit closer examination alongside the section-consequence maps."
+
+### part-03
+
+- Location: Results / Road-Section Accessibility Consequence and Expected Risk, closing sentence.
+- Reason: explicitly state which result answers the road-continuity question and distinguish the single-section counterfactual from simultaneous-failure reliability.
+- Kila decisions: KILA-D-20261001-003
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T22:52:33Z
+- Author: Kila
+- Markup SHA-256 before: `c95c5610364e74939d4f06e821d8e677c520b3dee875b604fb859502c2140f12`
+- Markup SHA-256 after: `4b5843c2f7a6297a4d4110598cfe72ba1b70c0543f35779061e1ea531745f8a9`
+- Revision IDs: `158`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20261001T075234365977.reviewer-2-comment-4.part-03.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+Differences among sections still depend jointly on section length and the population coverage supported by network topology.
+~~~~
+
+- After:
+
+~~~~text
+Differences among sections still depend jointly on section length and the population coverage supported by network topology. These section-level results directly address the continuity objective: potential loss measures the timely population coverage preserved by keeping an individual section available when the rest of the network remains intact, while expected risk weights that consequence by the section's scenario-specific failure probability.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " These section-level results directly address the continuity objective: potential loss measures the timely population coverage preserved by keeping an individual section available when the rest of the network remains intact, while expected risk weights that consequence by the section's scenario-specific failure probability."
+
+### part-04
+
+- Location: Discussion / Road Continuity Priorities for Emergency Planning, final sentence.
+- Reason: provide an explicit link from the complementary results to a practical screening task, not an unestimated optimized repair schedule.
+- Kila decisions: KILA-D-20261001-003
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T22:52:35Z
+- Author: Kila
+- Markup SHA-256 before: `4b5843c2f7a6297a4d4110598cfe72ba1b70c0543f35779061e1ea531745f8a9`
+- Markup SHA-256 after: `a5eb6d691492d42bb5905c963bad5725569df75613cdc58caa75f0d7fb1e6cb3`
+- Revision IDs: `159`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20261001T075236090097.reviewer-2-comment-4.part-04.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The accessibility maps supply one decision layer within that broader process.
+~~~~
+
+- After:
+
+~~~~text
+The accessibility maps supply one decision layer within that broader process. Read together, the demand and hospital results indicate where service continuity is fragile, and the road-section surfaces show which individual interruptions have the largest modeled coverage consequences. This combination supports screening candidate corridors for continuity protection and field inspection; restoration sequencing then uses verified conditions and operational constraints.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " Read together, the demand and hospital results indicate where service continuity is fragile, and the road-section surfaces show which individual interruptions have the largest modeled coverage consequences. This combination supports screening candidate corridors for continuity protection and field inspection; restoration sequencing then uses verified conditions and operational constraints."
+
+### part-05
+
+- Location: Conclusion, sentence beginning 'The combined evidence identifies'.
+- Reason: align Conclusion with the R2C1 objective and the Results evidence; the existing following sentences already describe the complementary maps and required field information.
+- Kila decisions: KILA-D-20261001-003
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T22:52:36Z
+- Author: Kila
+- Markup SHA-256 before: `a5eb6d691492d42bb5905c963bad5725569df75613cdc58caa75f0d7fb1e6cb3`
+- Markup SHA-256 after: `5f6ccc4d5241dd72fd25cccaf7692dc4114df7bdc92d060477aba952ba7a072e`
+- Revision IDs: `160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170, 171, 172`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20261001T075237874469.reviewer-2-comment-4.part-05.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The combined evidence identifies which road sections must be kept open, and which restored first, to preserve continuous emergency medical access.
+~~~~
+
+- After:
+
+~~~~text
+The combined evidence identifies road sections with high modeled accessibility consequences for continuity protection and restoration screening.
+~~~~
+
+- Minimal tracked fragments:
+  1. `delete`
+     - Before: "which "
+     - After: ""
+  2. `replace`
+     - Before: "must"
+     - After: "with"
+  3. `replace`
+     - Before: "be"
+     - After: "high"
+  4. `replace`
+     - Before: "kept"
+     - After: "modeled"
+  5. `replace`
+     - Before: "open,"
+     - After: "accessibility consequences for continuity protection"
+  6. `replace`
+     - Before: "which"
+     - After: "restoration"
+  7. `replace`
+     - Before: "restored first, to preserve continuous emergency medical access"
+     - After: "screening"
+

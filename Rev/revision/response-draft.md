@@ -194,11 +194,22 @@ The following figure titles show the updated numbering:
 
 In the Results section, the authors present abundant analytical findings. However, these results are not clearly or explicitly linked to the primary objective of this study, i.e, "to determine which road sections must be kept open, and, once damaged, restored first, in order to preserve continuous emergency medical access from dispatch base to patient to hospital", which is stated in the Introduction. Therefore, this reviewer recommends that the authors further interpret the results against this core research objective.
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for this comment. The revised Results explicitly connects grid and population reliability, hospital catchment changes, and individual road-section consequences to the road-continuity objective, while the Discussion explains their combined use for continuity protection and restoration screening. Potential loss provides the direct section-level measure of timely coverage supported by keeping a road available, and expected risk weights this consequence by the declared failure probability. The Conclusion now uses the same screening scope as the revised Introduction; an operational repair sequence additionally requires verified damage and resource constraints. The revised passages read as follows.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"For the road-continuity objective, these grid patterns locate demand exposed to unreliable access, while population and municipal summaries quantify the associated burden; the section-level analysis below identifies the consequence of individual road interruptions."
+(Page 23, Lines 475–478)
+
+"For continuity planning, the joint pattern of catchment gains, losses, and intermittent zero assignments identifies receiving facilities whose road-supported service areas merit closer examination alongside the section-consequence maps."
+(Page 25, Lines 510–513)
+
+"These section-level results directly address the continuity objective: potential loss measures the timely population coverage preserved by keeping an individual section available when the rest of the network remains intact, while expected risk weights that consequence by the section's scenario-specific failure probability."
+(Page 26, Lines 532–536)
+
+"Read together, the demand and hospital results indicate where service continuity is fragile, and the road-section surfaces show which individual interruptions have the largest modeled coverage consequences. This combination supports screening candidate corridors for continuity protection and field inspection; restoration sequencing then uses verified conditions and operational constraints."
+(Page 29, Lines 610–614)
+
+"The combined evidence identifies road sections with high modeled accessibility consequences for continuity protection and restoration screening."
+(Pages 31–32, Lines 669–670)
 
 ## Comment 5
 
