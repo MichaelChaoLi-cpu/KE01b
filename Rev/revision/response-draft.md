@@ -112,11 +112,7 @@ Thank you for this suggestion. The revised Study Area and Data Sources section n
 
 Following comments are supplied in order to improve the paper.
 
-**Response:**
-[Response to be completed.]
-
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+**Response:** Thank you for your constructive suggestions. The revised manuscript clarifies the research gap and contributions, strengthens the critical literature synthesis, adds a methodological overview and flowchart, links the results more explicitly to the road-continuity objective, and clarifies the framework’s transferability. Detailed responses to each comment follow below.
 
 ## Comment 1
 
