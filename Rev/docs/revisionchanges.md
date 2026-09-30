@@ -1505,3 +1505,218 @@ Critical-road and restoration analyses can screen links for protection, retrofit
      - Before: ""
      - After: " The evacuation-risk approach of Nitheesh and Bhavathrathan (2025) also shows that critical-link identification already combines probability and consequence. The remaining issue for emergency medical access is therefore the service consequence being measured: evacuation traffic and topological exposure answer a different planning question from population loss along a dispatch-to-patient-to-hospital chain. Our assessment uses that complete-chain coverage loss and reports it separately from scenario-weighted risk. These outputs support continuity screening, while restoration optimization additionally requires repair resources, costs, and interactions among damaged sections."
 
+## reviewer-2/comment-1
+
+### part-01
+
+- Location: Introduction / Emergency Access and Road-Network Disruption, objective sentence.
+- Reason: Replace the unestimated mandatory protection/repair-order claim with the actual section-consequence objective and its planning use.
+- Kila decisions: KILA-D-20260930-026, KILA-D-20260930-027, KILA-D-20261001-001
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T22:44:05Z
+- Author: Kila
+- Markup SHA-256 before: `ebc0985e1f05d5be58697361e431d76bcbc53c13d532bc4249f5140d9aacb778`
+- Markup SHA-256 after: `9691e8ab633b74f47a5937912192074eb4e5d51b37045d88a1f10876ac41b74c`
+- Revision IDs: `90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20261001T074406592287.reviewer-2-comment-1.part-01.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `d8896a5d8a384489adf05857f50ad8f501569380b48ab49b37858cd7b58c8d6b`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+A primary objective of this study is therefore to determine which road sections must be kept open,  and, once damaged, restored first, in order to preserve continuous emergency medical access from dispatch base to patient to hospital.
+~~~~
+
+- After:
+
+~~~~text
+A primary objective of this study is therefore to identify road sections whose loss most reduces continuous emergency medical access from dispatch base to patient to hospital, providing evidence for continuity protection and post-disaster restoration screening.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "determine which"
+     - After: "identify"
+  2. `replace`
+     - Before: "must"
+     - After: "whose"
+  3. `replace`
+     - Before: "be"
+     - After: "loss"
+  4. `replace`
+     - Before: "kept"
+     - After: "most"
+  5. `replace`
+     - Before: "open,  and, once damaged, restored first, in order to preserve"
+     - After: "reduces"
+  6. `insert`
+     - Before: ""
+     - After: ", providing evidence for continuity protection and post-disaster restoration screening"
+
+### part-02
+
+- Location: Introduction / Emergency Access and Road-Network Disruption, final sentence.
+- Reason: Replace only 'sequencing' with 'planning' to align the intended use with the objective.
+- Kila decisions: KILA-D-20260930-026, KILA-D-20260930-027, KILA-D-20261001-001
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T22:44:18Z
+- Author: Kila
+- Markup SHA-256 before: `9691e8ab633b74f47a5937912192074eb4e5d51b37045d88a1f10876ac41b74c`
+- Markup SHA-256 after: `ca69c8eb97e8975f9b35f7bdad3f191b5082b4b0784f187af9aa628ccbeca32c`
+- Revision IDs: `101, 102`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20261001T074420331855.reviewer-2-comment-1.part-02.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `d8896a5d8a384489adf05857f50ad8f501569380b48ab49b37858cd7b58c8d6b`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The resulting prefecture-wide maps are accordingly intended as a screening layer for road inspection, continuity protection, and restoration sequencing, to be updated as field-verified damage information becomes available.
+~~~~
+
+- After:
+
+~~~~text
+The resulting prefecture-wide maps are accordingly intended as a screening layer for road inspection, continuity protection, and restoration planning, to be updated as field-verified damage information becomes available.
+~~~~
+
+- Minimal tracked fragments:
+  1. `replace`
+     - Before: "sequencing"
+     - After: "planning"
+
+### part-03
+
+- Location: Introduction / Research Gap and Contributions, final four sentences.
+- Reason: Replace the undefined 'this gap' with a precise integration question and organize the existing analytical elements as three explicit contributions. Preserve the experiment description where useful; retain the preceding four literature-bearing sentences and their citations.
+- Kila decisions: KILA-D-20260930-026, KILA-D-20260930-027, KILA-D-20261001-001
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T22:44:29Z
+- Author: Kila
+- Markup SHA-256 before: `ca69c8eb97e8975f9b35f7bdad3f191b5082b4b0784f187af9aa628ccbeca32c`
+- Markup SHA-256 after: `5e6b54c393bfcdf4e9533ca23fc644fcfc22216b9078fcba965ced62c2fa97b4`
+- Revision IDs: `103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155`
+- Backup: `/Users/lichao/Research/KE01b/Rev/revision/.kila-backups/KE01b.rev.markup.20261001T074430612604.reviewer-2-comment-1.part-03.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+We address this gap with a reproducible, paired network experiment in which continuous junction-to-junction sections fail with probabilities that increase with their lengths. Every simulated state is fully rerouted, and the resulting evidence is organized at four connected levels: grid access, population and municipal coverage, hospital catchment stability, and road-section consequence. We also separate the potential access loss caused by removing one section from the probability-weighted expected risk of that section under a declared scenario. This structure supports full-network maps rather than an arbitrary short list of roads.
+~~~~
+
+- After:
+
+~~~~text
+These approaches establish tools for disruption assessment, but they answer different questions about operations, network vulnerability, and link criticality. The specific problem addressed here is how to connect reliability of the complete dispatch-to-patient-to-hospital chain under multiple road failures with the accessibility consequence of each road section, using a common network and population baseline. We address this problem with a reproducible, paired network experiment in which continuous junction-to-junction sections fail with probabilities that increase with their lengths. The study makes three linked contributions. First, every simulated state is fully rerouted through both emergency-care stages, linking grid access, population and municipal coverage, and hospital catchment stability within the same disrupted networks. Second, a separate single-section-removal analysis maps potential access loss for every eligible section and distinguishes this consequence from its probability-weighted expected risk under each declared scenario. Third, these complementary outputs connect the locations and populations exposed to unreliable emergency access with road-section evidence for continuity protection and restoration screening. Kumamoto demonstrates this reusable framework with locally specified inputs and failure scenarios.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: "These approaches establish tools for disruption assessment, but they answer different questions about operations, network vulnerability, and link criticality. The specific problem addressed here is how to connect reliability of the complete dispatch-to-patient-to-hospital chain under multiple road failures with the accessibility consequence of each road section, using a common network and population baseline. "
+  2. `replace`
+     - Before: "gap"
+     - After: "problem"
+  3. `replace`
+     - Before: "Every"
+     - After: "The study makes three linked contributions. First, every"
+  4. `insert`
+     - Before: ""
+     - After: " through both emergency-care stages"
+  5. `replace`
+     - Before: "and the resulting evidence is organized at four connected levels:"
+     - After: "linking"
+  6. `insert`
+     - Before: ""
+     - After: "and "
+  7. `insert`
+     - Before: ""
+     - After: " within the same disrupted networks. Second"
+  8. `replace`
+     - Before: "and road-section consequence. We also"
+     - After: "a"
+  9. `replace`
+     - Before: "the"
+     - After: "single-section-removal analysis maps"
+  10. `replace`
+     - Before: "caused"
+     - After: "for"
+  11. `replace`
+     - Before: "by"
+     - After: "every"
+  12. `replace`
+     - Before: "removing one"
+     - After: "eligible"
+  13. `insert`
+     - Before: ""
+     - After: "and distinguishes this consequence "
+  14. `replace`
+     - Before: "the"
+     - After: "its"
+  15. `delete`
+     - Before: "of that section "
+     - After: ""
+  16. `replace`
+     - Before: "a"
+     - After: "each"
+  17. `replace`
+     - Before: "This"
+     - After: "Third,"
+  18. `replace`
+     - Before: "structure"
+     - After: "these"
+  19. `replace`
+     - Before: "supports"
+     - After: "complementary"
+  20. `replace`
+     - Before: "full-network"
+     - After: "outputs"
+  21. `replace`
+     - Before: "maps"
+     - After: "connect"
+  22. `replace`
+     - Before: "rather"
+     - After: "the"
+  23. `replace`
+     - Before: "than"
+     - After: "locations"
+  24. `replace`
+     - Before: "an"
+     - After: "and"
+  25. `replace`
+     - Before: "arbitrary"
+     - After: "populations"
+  26. `replace`
+     - Before: "short"
+     - After: "exposed"
+  27. `replace`
+     - Before: "list"
+     - After: "to"
+  28. `replace`
+     - Before: "of"
+     - After: "unreliable"
+  29. `replace`
+     - Before: "roads"
+     - After: "emergency access with road-section evidence for continuity protection and restoration screening"
+  30. `insert`
+     - Before: ""
+     - After: " Kumamoto demonstrates this reusable framework with locally specified inputs and failure scenarios."
+

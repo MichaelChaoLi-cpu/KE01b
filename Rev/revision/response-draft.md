@@ -126,11 +126,16 @@ Following comments are supplied in order to improve the paper.
 
 Lines 92-108: It is not clear on the research gap and contribution of this paper, please rephrase.
 
-**Response:**
-[Response to be completed.]
+**Response:** Thank you for this comment. The revised Introduction defines the research gap as connecting reliability of the complete dispatch-to-patient-to-hospital chain under multiple road failures with the accessibility consequence of individual road sections, and states three linked contributions: multi-level emergency-access reliability, a separate all-section consequence and expected-risk assessment, and their combined use for continuity protection and restoration screening. The objective and intended planning use are aligned with this scope. The revised text reads as follows.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"A primary objective of this study is therefore to identify road sections whose loss most reduces continuous emergency medical access from dispatch base to patient to hospital, providing evidence for continuity protection and post-disaster restoration screening."
+(Pages 5–6, Lines 81–84)
+
+"The resulting prefecture-wide maps are accordingly intended as a screening layer for road inspection, continuity protection, and restoration planning, to be updated as field-verified damage information becomes available."
+(Page 6, Lines 89–91)
+
+"These approaches establish tools for disruption assessment, but they answer different questions about operations, network vulnerability, and link criticality. The specific problem addressed here is how to connect reliability of the complete dispatch-to-patient-to-hospital chain under multiple road failures with the accessibility consequence of each road section, using a common network and population baseline. We address this problem with a reproducible, paired network experiment in which continuous junction-to-junction sections fail with probabilities that increase with their lengths. The study makes three linked contributions. First, every simulated state is fully rerouted through both emergency-care stages, linking grid access, population and municipal coverage, and hospital catchment stability within the same disrupted networks. Second, a separate single-section-removal analysis maps potential access loss for every eligible section and distinguishes this consequence from its probability-weighted expected risk under each declared scenario. Third, these complementary outputs connect the locations and populations exposed to unreliable emergency access with road-section evidence for continuity protection and restoration screening. Kumamoto demonstrates this reusable framework with locally specified inputs and failure scenarios."
+(Pages 6–7, Lines 102–117)
 
 ## Comment 2
 
