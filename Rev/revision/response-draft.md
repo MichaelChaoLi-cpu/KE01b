@@ -94,10 +94,10 @@ The Monte Carlo simulation uses a length-dependent random failure model. While t
 The manuscript would benefit from a brief overview of the study area's geographic and demographic context. Information such as total population, road network length, composition of road types, and key topographic features would help readers better interpret the simulation results. This could be added to the study area description.
 
 **Response:**
-[Response to be completed.]
+Thank you for this suggestion. The revised Study Area and Data Sources section now describes Kumamoto's geographic setting, the 2020 population baseline, and the length and road-type composition of the eligible modeled network to provide context for interpreting the simulations.
 
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+"Located in central Kyushu, the prefecture includes mountainous terrain to the east and south, the Aso caldera, and western coastal and island areas facing the Ariake and Yatsushiro seas. The study's 2020 population baseline comprises 1,738,301 residents in 62,945 populated 125 m meshes. The eligible modeled road network spans 42,949 km across 343,844 junction-to-junction sections. By represented road length, municipal roads or equivalent roads account for 88.9%, prefectural roads for 7.1%, national highways for 3.0%, national expressways or equivalent roads for 0.6%, and other roads for 0.4%."
+(Pages 9–10, Lines 168–175)
 
 # Reviewer 2
 

@@ -344,3 +344,41 @@ Differences in bridge and elevated-road fragility are not represented by the len
      - Before: ""
      - After: " Bridge and elevated-road inventories linked to structural-condition, shaking-intensity, and fragility data would support this refinement."
 
+## reviewer-1/comment-5
+
+### part-01
+
+- Location: Methods / Study Area and Data Sources, first sentence.
+- Reason: Provide verified geographic, population and modeled road network context requested by reviewer.
+- Kila decisions: KILA-D-20260930-009
+- Mode: `replace`
+- Revises prior parts: none
+- Timestamp: 2026-09-30T08:09:21Z
+- Author: Kila
+- Markup SHA-256 before: `8a05924b5be2a69a059113776c986a5846dcd4628101ba08e4b09f0a177f9aa0`
+- Markup SHA-256 after: `ba355fe3c302ec1c4869fb63cd8d4c332cafc817fa84c68a53cd46eae7d6e229`
+- Revision IDs: `12`
+- Backup: `Rev/revision/.kila-backups/KE01b.rev.markup.20260930T170921319768.reviewer-1-comment-5.part-01.docx`
+- Paragraph properties preserved: `true`
+- Run style source SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Formula verification: not applicable
+- Endnote hyperlinks preserved: `true`
+- Endnote hyperlink count: `0`
+- Endnote hyperlink XML SHA-256: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- Endnote relationships SHA-256: `absent`
+- Before:
+
+~~~~text
+The study covers Kumamoto Prefecture and represents emergency access as a cross-sectional network simulation.
+~~~~
+
+- After:
+
+~~~~text
+The study covers Kumamoto Prefecture and represents emergency access as a cross-sectional network simulation. Located in central Kyushu, the prefecture includes mountainous terrain to the east and south, the Aso caldera, and western coastal and island areas facing the Ariake and Yatsushiro seas. The study's 2020 population baseline comprises 1,738,301 residents in 62,945 populated 125 m meshes. The eligible modeled road network spans 42,949 km across 343,844 junction-to-junction sections. By represented road length, municipal roads or equivalent roads account for 88.9%, prefectural roads for 7.1%, national highways for 3.0%, national expressways or equivalent roads for 0.6%, and other roads for 0.4%.
+~~~~
+
+- Minimal tracked fragments:
+  1. `insert`
+     - Before: ""
+     - After: " Located in central Kyushu, the prefecture includes mountainous terrain to the east and south, the Aso caldera, and western coastal and island areas facing the Ariake and Yatsushiro seas. The study's 2020 population baseline comprises 1,738,301 residents in 62,945 populated 125 m meshes. The eligible modeled road network spans 42,949 km across 343,844 junction-to-junction sections. By represented road length, municipal roads or equivalent roads account for 88.9%, prefectural roads for 7.1%, national highways for 3.0%, national expressways or equivalent roads for 0.6%, and other roads for 0.4%."
