@@ -1,0 +1,162 @@
+# Response to reviewers and editors of manuscript number [MANUSCRIPT ID]
+
+# Revision Summary
+
+Thank you for the editor’s and reviewers’ careful review of our manuscript, “Length-Dependent Road Failure and Two-Stage Emergency Medical Access in Kumamoto Prefecture.”
+
+[The revision summary will be completed after the revisions and detailed responses are finalized.]
+
+# Editor
+
+Thank you for submitting your manuscript to International Journal of Disaster Risk Reduction.
+
+The referees have reviewed your paper, as listed above. Their comments, reproduced  indicate that it would benefit from substantial revision. Hence, I invite you to revise and resubmit your manuscript. Please carefully address the issues raised in the comments.
+
+To view your reviewer feedback, please log in as an author at https://www.editorialmanager.com/ijdrr/ and navigate to your manuscript in the " Submissions Needing Revision " folder under the Author Main Menu. 
+ 
+When revising your manuscript, please consider all issues mentioned in the reviewers' comments carefully. Please note that your revised submission may need to be re-reviewed.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+# Reviewer 1
+
+## Overall Comment
+
+The manuscript presents a well-structured and timely analysis of post-earthquake emergency medical access in Kumamoto Prefecture. The framework is logical and the simulation design is clearly described. However, several issues, primarily related to modeling assumptions and presentation details, should be addressed before publication. My specific comments are as follows:
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 1
+
+The authors state that standard road centerlines were used as input. However, for roads with a central median, a single centerline may not accurately represent the two separate carriageways. In such cases, the left and right road sections should be modeled separately to reflect realistic routing constraints. Please clarify how this was handled, or discuss it as a limitation.
+
+**Response:** Thank you for highlighting this issue. The revised “Emergency-Care Network and Analysis Units” section clarifies that the network follows the supplied centerlines, does not construct separate carriageways where the source contains a single line, and represents each road connection as bidirectional. The “Limitations and Future Research” section explains how omitted carriageway directions and median restrictions can affect travel times, timely-access coverage, and road-section rankings, and identifies the data needed to assess these effects.
+
+"The network follows the supplied road-centerline geometry and does not construct separate carriageways where the source represents a divided road with a single line. Each road connection is traversable in both directions with the same travel time; carriageway-specific directions, median-crossing restrictions, and turn restrictions are not explicitly modeled."
+(Pages 10–11, Lines 193–197)
+
+"On divided roads, the bidirectional centerline representation can admit movements that require a detour in practice because of carriageway direction or median restrictions, potentially understating travel times and overstating timely-access coverage. These constraints may also change section-level consequence rankings. Carriageway-specific geometry and directional and turn-restriction data are needed to assess these effects."
+(Pages 26–27, Lines 546–551)
+
+"The estimates do not include ambulance availability, dispatch processing, on-scene treatment, congestion, hospital clinical capacity, engineering fragility, repair duration, or restoration cost."
+(Page 27, Lines 551–553)
+
+## Comment 2
+
+The assumed travel speeds for different road types should be more explicitly differentiated. Emergency vehicles, especially ambulances, may have different operational speeds on expressways, national highways, and municipal roads. The uniform speed assumption or the current classification may not fully capture this variation. Please either justify the chosen speed values with empirical evidence or discuss the potential impact of this simplification.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 3
+
+The resolution of several figures, particularly the maps, could be improved for readability. Important details, such as road networks and grid-level probabilities, are not clearly visible in the current version. Please provide higher-resolution versions.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 4
+
+The Monte Carlo simulation uses a length-dependent random failure model. While this is a transparent approach, it does not account for the fact that certain road types (e.g., bridges, elevated sections) are inherently more vulnerable to earthquake damage. This omission should be explicitly acknowledged and discussed in the limitations section.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 5
+
+The manuscript would benefit from a brief overview of the study area's geographic and demographic context. Information such as total population, road network length, composition of road types, and key topographic features would help readers better interpret the simulation results. This could be added to the study area description.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+# Reviewer 2
+
+## Overall Comment
+
+Following comments are supplied in order to improve the paper.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 1
+
+Lines 92-108: It is not clear on the research gap and contribution of this paper, please rephrase.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 2
+
+In the Literature Review section, each statement is supported by one or more references. While it is nice to attribute credit to prior work, the authors do not offer critical commentary on these studies. Considering that the objective of a literature review is to evaluate existing research and identify unresolved research gaps, this reviewer suggests the authors to provide critical assessment in order to pinpoint the limitations of current studies.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 3
+
+In the Materials and Methods section, the authors provide a detailed description of the methods. However, an overview of the overall methodological workflow is missing, making it difficult for readers to follow the procedures. To further improve the readability and systematicity of the paper, we suggest that the authors refine the current method descriptions and develop a complete methodological flowchart to serve as a guide for the subsequent method presentation
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 4
+
+In the Results section, the authors present abundant analytical findings. However, these results are not clearly or explicitly linked to the primary objective of this study, i.e, "to determine which road sections must be kept open, and, once damaged, restored first, in order to preserve continuous emergency medical access from dispatch base to patient to hospital", which is stated in the Introduction. Therefore, this reviewer recommends that the authors further interpret the results against this core research objective.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 5
+
+Lines 524-537: In the Discussion section, the authors restate the contributions of this work. I suggest that these claims be further aligned with the contributions presented earlier in the manuscript to ensure consistency.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
+
+## Comment 6
+
+Finally, is the proposed method only applicable to the Kumamoto Prefecture, or is it a generalizable approach? If the method is intended to be generalizable, the description of the methodology and the core positioning of this paper may be revised to frame it as a general method, with the Kumamoto Prefecture serving merely as a case study.
+
+**Response:**
+[Response to be completed.]
+
+"[Exact revised manuscript text, where applicable.]"
+(Page XX, Lines XX–XX)
