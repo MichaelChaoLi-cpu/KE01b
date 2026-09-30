@@ -1,6 +1,9 @@
 # MiliFrame local agent/runtime files
 .codex/
 .claude/
+.frame-control/
+/docs/frame-version.md
+/docs/stage-control.md
 .env
 CLAUDE.md
 AGENTS.md
@@ -12,3 +15,14 @@ __pycache__/
 
 # macOS Finder metadata
 .DS_Store
+
+# BEGIN manuscript revision workspace
+.codex/skills/
+Rev/*
+!Rev/docs/
+Rev/docs/*
+!Rev/docs/revisionchanges.md
+!Rev/revision/
+Rev/revision/*
+!Rev/revision/response-draft.md
+# END manuscript revision workspace
