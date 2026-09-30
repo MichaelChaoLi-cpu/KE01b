@@ -28,11 +28,7 @@ When revising your manuscript, please consider all issues mentioned in the revie
 
 The manuscript presents a well-structured and timely analysis of post-earthquake emergency medical access in Kumamoto Prefecture. The framework is logical and the simulation design is clearly described. However, several issues, primarily related to modeling assumptions and presentation details, should be addressed before publication. My specific comments are as follows:
 
-**Response:**
-[Response to be completed.]
-
-"[Exact revised manuscript text, where applicable.]"
-(Page XX, Lines XX–XX)
+**Response:** Thank you for your positive assessment and constructive comments. The revised manuscript clarifies the road-network representation and its limitations, explains the road-type speed assumptions and adds category-specific speed sensitivity analysis, improves map readability, discusses the omitted vulnerability of bridges and elevated roads, and expands the geographic and demographic context. Detailed responses to each comment follow below.
 
 ## Comment 1
 
