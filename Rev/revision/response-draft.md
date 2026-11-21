@@ -49,10 +49,10 @@ Thank you for highlighting this issue. The revised “Emergency-Care Network and
 (Page 12, Lines 244–248)
 
 "On divided roads, the bidirectional centerline representation can admit movements that require a detour in practice because of carriageway direction or median restrictions, potentially understating travel times and overstating timely-access coverage. These constraints may also change section-level consequence rankings. Carriageway-specific geometry and directional and turn-restriction data are needed to assess these effects."
-(Pages 29–30, Lines 636–641)
+(Pages 29–30, Lines 635–640)
 
 "The estimates do not include ambulance availability, dispatch processing, on-scene treatment, congestion, hospital clinical capacity, engineering fragility, repair duration, or restoration cost."
-(Page 30, Lines 641–643)
+(Page 30, Lines 640–642)
 
 ## Comment 2
 
@@ -65,13 +65,13 @@ Thank you for highlighting the importance of road-type speed differences. The re
 (Page 12, Lines 252–259)
 
 "Two additional scenarios reduce effective, width-capped speeds by 20% on either national expressways and national highways (A) or prefectural and municipal roads (B), leaving other categories unchanged. Connector speeds follow their referenced access edges. Both routing stages are recomputed for each scenario using the same 1,000 failure draws at each expected failed-road-length share of 1%, 3%, 5%, and 10%. Paired comparisons assess 30-minute population coverage, grid access probabilities, and hospital reassignment among residents with a reachable complete emergency chain. The perturbation magnitude is a sensitivity setting, not an estimated speed error."
-(Page 20, Lines 426–434)
+(Page 20, Lines 425–433)
 
 "Under category-specific speed reductions, mean 30-minute coverage decreases relative to original speeds in the same failed networks by 18,955–25,788 residents in scenario A and 31,494–39,449 in scenario B across the four failure severities. The corresponding population-weighted probability reductions are 1.09–1.48 and 1.81–2.27 percentage points. Hospital assignments change for an average of 3.60–3.85% and 2.76–2.87% of reachable residents, respectively, while network disconnection remains unchanged. Grid-level effects are more concentrated: the 95th percentile of absolute access-probability reductions across grids ranges from 3.0 to 13.9 percentage points in A and 13.2 to 35.0 in B. These comparisons show sensitivity of timely coverage and hospital allocation to relative road-type speeds, which uniform speed scaling does not capture."
-(Page 26, Lines 553–562)
+(Page 26, Lines 552–561)
 
 "Ambulance movement records could calibrate category-specific speeds and refine dispatch and destination behavior, and complete hospital capacity data could support explicitly weighted alternatives to minimum-time assignment."
-(Page 30, Lines 652–655)
+(Page 30, Lines 651–654)
 
 ## Comment 3
 
@@ -106,7 +106,7 @@ Thank you for this comment. The revised “Length-Dependent Road-Failure Experim
 (Page 14, Lines 297–299)
 
 "Differences in bridge and elevated-road fragility are not represented by the length-only failure model. Such heterogeneity could change the spatial pattern of road disruption and the resulting probability-weighted emergency-access losses, even at the same expected failed-road-length share. Future work can replace scenario probabilities with verified engineering fragility or observed closure data while retaining the routing and outcome framework. Bridge and elevated-road inventories linked to structural-condition, shaking-intensity, and fragility data would support this refinement."
-(Page 30, Lines 646–652)
+(Page 30, Lines 645–651)
 
 ## Comment 5
 
@@ -140,7 +140,7 @@ Thank you for this comment. The revised Introduction defines the research gap as
 "The resulting prefecture-wide maps are accordingly intended as a screening layer for road inspection, continuity protection, and restoration planning, to be updated as field-verified damage information becomes available."
 (Page 5, Lines 89–91)
 
-"These approaches establish tools for disruption assessment, but they answer different questions about operations, network vulnerability, and link criticality. The specific problem addressed here is how to connect reliability of the complete dispatch-to-patient-to-hospital chain under multiple road failures with the accessibility consequence of each road section, using a common network and population baseline. We address this problem with a reproducible, paired network experiment in which continuous junction-to-junction sections fail with probabilities that increase with their lengths. The study makes three linked contributions. First, every simulated state is fully rerouted through both emergency-care stages, linking grid access, population and municipal coverage, and hospital catchment stability within the same disrupted networks. Second, a separate single-section-removal analysis maps potential access loss for every eligible section and distinguishes this consequence from its probability-weighted expected risk under each declared scenario. Third, these complementary outputs connect the locations and populations exposed to unreliable emergency access with road-section evidence for continuity protection and restoration screening. Kumamoto demonstrates this reusable framework with locally specified inputs and failure scenarios."
+"These approaches establish tools for disruption assessment, but they answer different questions about operations, network vulnerability, and link criticality. The specific problem addressed here is how to connect reliability of the complete dispatch-to-patient-to-hospital chain under multiple road failures with the accessibility consequence of each road section, using a common network and population baseline. We address this problem with a reproducible, paired network experiment in which continuous junction-to-junction sections fail with probabilities that increase with their lengths. The study makes three linked contributions. First, every simulated state is fully rerouted through both emergency-care stages, linking grid access, population and municipal coverage, and hospital catchment stability within the same disrupted networks. Second, a separate single-section-removal analysis maps potential access loss for every eligible section and distinguishes this consequence from its probability-weighted expected risk under each declared scenario. Third, these complementary outputs connect the locations and populations exposed to unreliable emergency access with road-section evidence for continuity protection and restoration screening. Kumamoto earthquake case analysis demonstrates this reusable framework with locally specified inputs and failure scenarios."
 (Pages 5–6, Lines 102–117)
 
 ## Comment 2
@@ -206,19 +206,19 @@ In the Results section, the authors present abundant analytical findings. Howeve
 Thank you for this comment. The revised Results explicitly connects grid and population reliability, hospital catchment changes, and individual road-section consequences to the road-continuity objective, while the Discussion explains their combined use for continuity protection and restoration screening. Potential loss provides the direct section-level measure of timely coverage supported by keeping a road available, and expected risk weights this consequence by the declared failure probability. The Conclusion now uses the same screening scope as the revised Introduction; an operational repair sequence additionally requires verified damage and resource constraints. The revised passages read as follows.
 
 "For the road-continuity objective, these grid patterns locate demand exposed to unreliable access, while population and municipal summaries quantify the associated burden; the section-level analysis below identifies the consequence of individual road interruptions."
-(Page 22, Lines 477–480)
+(Page 22, Lines 476–479)
 
 "For continuity planning, the joint pattern of catchment gains, losses, and intermittent zero assignments identifies receiving facilities whose road-supported service areas merit closer examination alongside the section-consequence maps."
-(Page 24, Lines 512–515)
+(Page 24, Lines 511–514)
 
 "These section-level results directly address the continuity objective: potential loss measures the timely population coverage preserved by keeping an individual section available when the rest of the network remains intact, while expected risk weights that consequence by the section's scenario-specific failure probability."
-(Page 25, Lines 534–538)
+(Page 25, Lines 533–537)
 
 "Read together, the demand and hospital results indicate where service continuity is fragile, and the road-section surfaces show which individual interruptions have the largest modeled coverage consequences. This combination supports screening candidate corridors for continuity protection and field inspection; restoration sequencing then uses verified conditions and operational constraints."
-(Page 28, Lines 612–616)
+(Page 28, Lines 611–615)
 
 "The combined evidence identifies road sections with high modeled accessibility consequences for continuity protection and restoration screening."
-(Page 31, Lines 671–672)
+(Page 31, Lines 670–671)
 
 ## Comment 5
 
@@ -228,7 +228,7 @@ Lines 524-537: In the Discussion section, the authors restate the contributions 
 Thank you for this suggestion. The revised “Contributions to Network-Reliability Assessment” subsection now follows the same three contributions as the Introduction: complete-chain, multi-level reliability; separate road-section consequence and scenario-dependent expected risk; and their complementary use for continuity protection and restoration screening. It also explicitly distinguishes the repeated road-failure experiment from the separate leave-one-section-out analysis. The revised paragraph reads as follows.
 
 "The framework makes three linked contributions, consistent with the Introduction. First, complete two-stage rerouting connects grid access, population and municipal coverage, and hospital catchment stability within the same paired road-failure experiment. Grid estimates locate fragile demand, population and municipal summaries describe distribution, and hospital catchments show destination substitution. These outcomes are derived from the feasible network in each replicate. Second, a separate leave-one-section-out analysis identifies road-section accessibility consequence when other roads remain available, and probability weighting expresses that consequence as scenario-dependent expected risk. This separation distinguishes repeated simultaneous-failure reliability from individual-section consequence. Third, the complementary demand, hospital, and road-section outputs connect service fragility with evidence for continuity protection and restoration screening. This distinction clarifies which output answers each planning question."
-(Page 29, Lines 619–631)
+(Page 29, Lines 618–630)
 
 ## Comment 6
 
@@ -244,7 +244,7 @@ Thank you for this comment. We also revised the title to “Length-Dependent Roa
 (Page 10, Lines 206–212)
 
 "The present network experiment provides the baseline quantities required for those extensions. Application elsewhere follows the same routing and outcome calculations after replacing the spatial inputs and specifying local service and failure assumptions. Dispatch bases can represent the locally responsible ambulance service rather than necessarily fire stations. Local validation of road connectivity, travel times, and facility eligibility supports that transfer; coverage estimates and section priorities must be recalculated for each study area."
-(Page 30, Lines 656–662)
+(Page 30, Lines 655–661)
 
 "The same framework also provides a reusable basis for future emergency preparedness in Kumamoto and for assessments in other regions using locally specified network, demand, facility, and failure-scenario inputs."
-(Page 31, Lines 677–679)
+(Page 31, Lines 676–678)
