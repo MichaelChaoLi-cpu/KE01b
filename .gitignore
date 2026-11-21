@@ -25,4 +25,7 @@ Rev/docs/*
 !Rev/revision/
 Rev/revision/*
 !Rev/revision/response-draft.md
+!Rev/revision/KE01b.rev.clean.docx.dvc
+!Rev/revision/response-draft.docx.dvc
+!Rev/revision/response.rev.docx.dvc
 # END manuscript revision workspace

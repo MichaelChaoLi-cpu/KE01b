@@ -1,0 +1,5 @@
+outs:
+- md5: 52a8f330a2a49f7f355216d757f017cb
+  size: 35444
+  hash: md5
+  path: response-draft.docx
